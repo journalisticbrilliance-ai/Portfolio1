@@ -18,7 +18,7 @@ html{scroll-behavior:smooth;}
 body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text-primary);-webkit-font-smoothing:antialiased;}
 
 /* NAV */
-nav{position:sticky;top:0;z-index:100;background:rgba(247,245,240,0.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:60px;}
+nav{position:sticky;top:0;z-index:100;background:rgba(247,245,240,0.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:64px;}
 .nav-logo{font-weight:600;font-size:16px;color:var(--navy);text-decoration:none;}
 .nav-links{display:flex;gap:24px;list-style:none;}
 .nav-links a{font-size:13px;color:var(--text-secondary);text-decoration:none;transition:color .2s;}
@@ -36,11 +36,11 @@ h1.hero-headline em{font-family:"Playfair Display",serif;font-style:italic;color
 .hero-actions{display:flex;gap:10px;flex-wrap:wrap;}
 .btn-primary{display:inline-flex;align-items:center;gap:7px;background:var(--navy);color:var(--white);font-size:13px;font-weight:500;padding:12px 22px;border-radius:100px;text-decoration:none;transition:background .2s;}
 .btn-primary:hover{background:var(--navy-mid);}
-.btn-secondary{display:inline-flex;align-items:center;gap:7px;background:transparent;color:var(--navy);font-size:13px;font-weight:500;padding:12px 22px;border-radius:100px;border:1px solid var(--border);text-decoration:none;transition:border .2s;}
+.btn-secondary{display:inline-flex;align-items:center;gap:7px;background:transparent;color:var(--navy);font-size:13px;font-weight:500;padding:12px 22px;border-radius:100px;border:1px solid var(--border);text-decoration:none;transition:border-color .2s;}
 .btn-secondary:hover{border-color:var(--navy);}
 .hero-photo-wrap{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/5;background:var(--cream-dark);}
 .hero-photo-wrap img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
-.avail-badge{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);background:white;border-radius:100px;padding:7px 14px;font-size:12px;font-weight:500;display:flex;align-items:center;gap:6px;}
+.avail-badge{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);background:white;border-radius:100px;padding:7px 14px;font-size:12px;font-weight:500;display:flex;align-items:center;gap:7px;box-shadow:0 4px 12px rgba(26,31,46,0.1);}
 .avail-dot{width:7px;height:7px;border-radius:50%;background:#22C55E;flex-shrink:0;}
 
 /* STATS */
@@ -92,7 +92,7 @@ p.ss{font-size:14px;color:var(--text-secondary);max-width:540px;line-height:1.65
 .lifecycle-flow{display:flex;align-items:flex-start;gap:0;overflow-x:auto;padding-bottom:8px;}
 .lifecycle-step{flex:1;min-width:140px;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;}
 .lifecycle-step:not(:last-child)::after{content:"→";position:absolute;right:-16px;top:20px;font-size:20px;color:var(--amber);z-index:1;}
-.lc-icon{width:44px;height:44px;border-radius:12px;background:rgba(200,150,58,0.15);border:1px solid rgba(200,150,58,0.3);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:8px;}
+.lc-icon{width:44px;height:44px;border-radius:12px;background:rgba(200,150,58,0.15);border:1px solid rgba(200,150,58,0.3);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:10px;}
 .lc-title{font-size:13px;font-weight:600;color:var(--white);margin-bottom:5px;line-height:1.3;}
 .lc-desc{font-size:11px;color:rgba(255,255,255,0.45);line-height:1.5;max-width:120px;}
 .lifecycle-frameworks{display:flex;gap:8px;flex-wrap:wrap;margin-top:36px;padding-top:36px;border-top:1px solid rgba(255,255,255,0.1);}
@@ -185,7 +185,7 @@ p.ss{font-size:14px;color:var(--text-secondary);max-width:540px;line-height:1.65
 .ai-questions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:28px;}
 .ai-q{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:12px 14px;font-size:13px;color:rgba(255,255,255,0.7);cursor:default;}
 .ai-q::before{content:"→";margin-right:8px;color:var(--amber);}
-.ai-coming{display:inline-flex;align-items:center;gap:8px;background:rgba(200,150,58,0.15);border:1px solid rgba(200,150,58,0.3);border-radius:100px;padding:8px 16px;font-size:12px;font-weight:500;color:rgba(255,255,255,0.7);}
+.ai-coming{display:inline-flex;align-items:center;gap:8px;background:rgba(200,150,58,0.15);border:1px solid rgba(200,150,58,0.3);border-radius:100px;padding:8px 16px;font-size:12px;font-weight:500;color:rgba(255,255,255,0.8);}
 
 /* CONTACT */
 .contact-section{background:var(--navy);padding:72px 48px;text-align:center;}
@@ -245,9 +245,9 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,0.08);paddin
   <div class="hero-left">
     <div class="spec-pill">Enterprise AI &nbsp;&middot;&nbsp; On-Prem Deployments &nbsp;&middot;&nbsp; Complex Enterprise Implementations</div>
     <h1 class="hero-headline">Enterprise <em>Implementation</em><br>&amp; AI Delivery<br>Leadership.</h1>
-    <p class="hero-sub">Building the structure, governance, stakeholder alignment, and execution systems that enable successful enterprise transformations — from contract signature through long-term value realization.</p>
+    <p class="hero-sub">Building the structure, governance, stakeholder alignment, and execution systems that enable successful enterprise transformations — from contract signature through long-term partnership and scaled adoption.</p>
     <div class="hero-actions">
-      <a href="#" class="btn-primary">
+      <a href="resume.pdf" class="btn-primary" download>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
         Download Resume
       </a>
@@ -272,15 +272,15 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,0.08);paddin
 <div class="stats-bar">
 <div class="stats-inner">
   <div class="stat-item">
-    <div class="stat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
+    <div class="stat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="4" r="1"></circle><circle cx="5" cy="20" r="1"></circle><path d="M12 13v8M6.3 6.3l5.4 5.4M17.7 6.3l-5.4 5.4"></path></svg></div>
     <div class="stat-num">15+</div><div class="stat-label">Years Enterprise Experience</div>
   </div>
   <div class="stat-item">
-    <div class="stat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13 16 8 11 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></div>
+    <div class="stat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></div>
     <div class="stat-num">$2M–$7M</div><div class="stat-label">ARR Portfolio Managed</div>
   </div>
   <div class="stat-item">
-    <div class="stat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg></div>
+    <div class="stat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><path d="M2 17h20"></path><circle cx="6" cy="17" r="1"></circle><circle cx="18" cy="17" r="1"></circle></svg></div>
     <div class="stat-num">13–114</div><div class="stat-label">Enterprise Accounts Managed</div>
   </div>
   <div class="stat-item">
@@ -306,10 +306,10 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,0.08);paddin
     <h2 class="sh" style="margin-bottom:0;">A strategic partner for enterprise outcomes.</h2>
   </div>
   <div>
-    <p class="about-body">Enterprise Implementation, Customer Transformation, and AI Delivery leader with <strong>15+ years</strong> leading complex software deployments, AI adoption programs, and operational transformation across B2B SaaS, healthcare IT, legal tech, and conversational AI platforms.</p>
-    <p class="about-body">Proven record partnering across <strong>Product, Engineering, Customer Success, Support, and Executive Leadership</strong> to build scalable delivery systems that accelerate time to value and drive customer transformation outcomes.</p>
+    <p class="about-body">Enterprise Implementation, Customer Transformation, and AI Delivery leader with <strong>15+ years</strong> leading complex software deployments, AI adoption programs, and multi-stakeholder enterprise transformations. Known for building organizational and technical foundations that last — implementing governance structures, operating models, and delivery systems that accelerate customer success at scale.</p>
+    <p class="about-body">Proven record partnering across <strong>Product, Engineering, Customer Success, Support, and Executive Leadership</strong> to build scalable delivery systems that accelerate customer transformation, strengthen stakeholder alignment, and improve retention metrics through structured, outcome-focused implementation programs.</p>
     <div class="tag-row">
-      <span class="tag">Enterprise Implementations</span><span class="tag">AI Adoption</span><span class="tag">Customer Transformation</span><span class="tag">Operational Excellence</span><span class="tag">Executive Governance</span>
+      <span class="tag">Enterprise Implementations</span><span class="tag">AI Adoption</span><span class="tag">Customer Transformation</span><span class="tag">Operational Excellence</span><span class="tag">Leadership</span><span class="tag">AI Platform Strategy</span>
     </div>
     <div class="cert-grid">
       <div class="cert-item"><div class="cert-badge">PMP</div>Project Management Professional</div>
@@ -333,24 +333,24 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,0.08);paddin
     <div class="hiw-card featured">
       <div class="hiw-num">01</div>
       <div class="hiw-title">Process sets the foundation. Relationships are built on trust.</div>
-      <div class="hiw-body">Strong customer relationships don&rsquo;t come from being easy to work with — they come from doing what you said you would do. I lead with structure: clear scope, defined success criteria, and transparent communication.</div>
+      <div class="hiw-body">Strong customer relationships don&rsquo;t come from being easy to work with — they come from doing what you said you would do. I lead with structure: clear scope, defined milestones, and honest status updates build customer confidence and predictability.</div>
       <div class="hiw-philosophy">Leadership philosophy</div>
     </div>
     <div class="hiw-card">
       <div class="hiw-num">02</div>
       <div class="hiw-title">Clarity upfront protects the customer relationship later.</div>
-      <div class="hiw-body">The most damaging thing you can do to a customer relationship is overpromise and underdeliver. Locking scope before anything moves isn&rsquo;t a bureaucratic exercise — it protects the relationship.</div>
+      <div class="hiw-body">The most damaging thing you can do to a customer relationship is overpromise and underdeliver. Locking scope before anything moves isn&rsquo;t a bureaucratic exercise — it&rsquo;s how you protect the customer and yourself.</div>
     </div>
     <div class="hiw-card featured">
       <div class="hiw-num">03</div>
       <div class="hiw-title">Honest conversations early protect customer satisfaction later.</div>
-      <div class="hiw-body">Customers don&rsquo;t lose trust because problems exist — they lose trust because problems were hidden. I keep a live risk register from day one and surface issues early, with options for mitigation.</div>
+      <div class="hiw-body">Customers don&rsquo;t lose trust because problems exist — they lose trust because problems were hidden. I keep a live risk register from day one and surface issues early, with mitigation plans ready before they escalate.</div>
       <div class="hiw-philosophy">Leadership philosophy</div>
     </div>
     <div class="hiw-card featured">
       <div class="hiw-num">04</div>
       <div class="hiw-title">Speed to value is how you earn the right to the relationship.</div>
-      <div class="hiw-body">Customer satisfaction isn&rsquo;t built in kickoff meetings — it&rsquo;s built when the customer can show their leadership something real. My first question in any engagement is: What can we deliver in 30 days?</div>
+      <div class="hiw-body">Customer satisfaction isn&rsquo;t built in kickoff meetings — it&rsquo;s built when the customer can show their leadership something real. My first question in any engagement is: &quot;What does success look like in 30 days?&quot;</div>
       <div class="hiw-philosophy">Leadership philosophy</div>
     </div>
   </div>
@@ -420,37 +420,37 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,0.08);paddin
 
     <div class="fw-card">
       <div class="fw-card-top">
-        <div class="fw-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></div>
+        <div class="fw-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></div>
         <span class="fw-badge live">Live</span>
       </div>
       <div class="fw-title">Enterprise Implementation Kickoff Framework</div>
       <div class="fw-problem">Business problem: Implementations failing in the first 30 days due to misaligned scope and stakeholders.</div>
       <div class="fw-desc">Milestone-based onboarding built around scope lock and speed to first value. Covers stakeholder mapping, relationship tiers, go/no-go gates, and adoption metrics.</div>
-      <div class="fw-deliverables"><span class="fw-del">Stakeholder map</span><span class="fw-del">Scope document</span><span class="fw-del">Risk register</span><span class="fw-del">RACI</span><span class="fw-del">Milestone plan</span></div>
+      <div class="fw-deliverables"><span class="fw-del">Stakeholder map</span><span class="fw-del">Scope document</span><span class="fw-del">Risk register</span><span class="fw-del">RACI</span><span class="fw-del">Go/no-go gates</span></div>
       <div class="fw-footer"><a href="framework-implementation-kickoff.html" class="fw-link">✦ View interactive framework &rarr;</a></div>
     </div>
 
     <div class="fw-card">
       <div class="fw-card-top">
-        <div class="fw-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="9"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg></div>
+        <div class="fw-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg></div>
         <span class="fw-badge live">Live</span>
       </div>
       <div class="fw-title">Executive Customer Governance Framework</div>
       <div class="fw-problem">Business problem: Executive reviews becoming status meetings with no decisions or accountability.</div>
       <div class="fw-desc">7-stage model that transforms executive reviews into strategic decision forums. Every session ends with a decision, an owner, and a due date.</div>
-      <div class="fw-deliverables"><span class="fw-del">Business outcomes review</span><span class="fw-del">Platform health</span><span class="fw-del">Risk register</span><span class="fw-del">Action list</span></div>
+      <div class="fw-deliverables"><span class="fw-del">Business outcomes review</span><span class="fw-del">Platform health</span><span class="fw-del">Risk register</span><span class="fw-del">Action register</span></div>
       <div class="fw-footer"><a href="framework-governance.html" class="fw-link">✦ View interactive framework &rarr;</a></div>
     </div>
 
     <div class="fw-card">
       <div class="fw-card-top">
-        <div class="fw-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="7"></line></svg></div>
+        <div class="fw-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></div>
         <span class="fw-badge live">Live</span>
       </div>
       <div class="fw-title">Strategic Roadmap Alignment Framework</div>
       <div class="fw-problem">Business problem: Customer investment strategy drifting away from product direction without detection.</div>
       <div class="fw-desc">5-step framework aligning customer priorities with product direction — from discovery through joint planning and structured progress measurement.</div>
-      <div class="fw-deliverables"><span class="fw-del">Gap analysis</span><span class="fw-del">Shared success plan</span><span class="fw-del">Joint roadmap</span><span class="fw-del">Quarterly milestones</span></div>
+      <div class="fw-deliverables"><span class="fw-del">Gap analysis</span><span class="fw-del">Shared success plan</span><span class="fw-del">Joint roadmap</span><span class="fw-del">Quarterly metrics</span></div>
       <div class="fw-footer"><a href="framework-roadmap-alignment.html" class="fw-link">✦ View interactive framework &rarr;</a></div>
     </div>
 
@@ -462,19 +462,19 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,0.08);paddin
       <div class="fw-title">Customer Advisory Board Framework</div>
       <div class="fw-problem">Business problem: Top customers disengaging from product direction after initial implementation.</div>
       <div class="fw-desc">Structured executive community that influences product strategy and deepens partnerships. Invite-only membership, annual cadence, outputs that compound over time.</div>
-      <div class="fw-deliverables"><span class="fw-del">Membership criteria</span><span class="fw-del">Annual program</span><span class="fw-del">Beta pipeline</span><span class="fw-del">Reference network</span></div>
+      <div class="fw-deliverables"><span class="fw-del">Membership criteria</span><span class="fw-del">Annual program</span><span class="fw-del">Beta pipeline</span><span class="fw-del">Reference program</span></div>
       <div class="fw-footer"><a href="framework-cab.html" class="fw-link">✦ View interactive framework &rarr;</a></div>
     </div>
 
     <div class="fw-card" style="grid-column:1/-1;">
       <div class="fw-card-top">
-        <div class="fw-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 16v2a2 2 0 0 1-2 2h-2.5a2.5 2.5 0 0 1 0-5H2"></path></svg></div>
+        <div class="fw-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 16v2a2 2 0 0 1-2 2h-2"></path><path d="M5 16v2a2 2 0 0 0 2 2h2"></path></svg></div>
         <span class="fw-badge live">Live</span>
       </div>
       <div class="fw-title">Voice AI Delivery Framework</div>
       <div class="fw-problem">Business problem: Enterprise voice AI projects failing in production due to poor discovery, architectural gaps, and insufficient testing.</div>
-      <div class="fw-desc" style="max-width:680px;">A structured 5-phase framework for deploying conversational and voice AI solutions from concept through production. Covers business discovery, conversation design, architecture, testing, and production deployment with measured KPIs.</div>
-      <div class="fw-deliverables"><span class="fw-del">Discovery &amp; KPIs</span><span class="fw-del">Conversation design</span><span class="fw-del">Architecture stack</span><span class="fw-del">Testing playbook</span><span class="fw-del">Go-live readiness</span></div>
+      <div class="fw-desc" style="max-width:680px;">A structured 5-phase framework for deploying conversational and voice AI solutions from concept through production. Covers business discovery, conversation design, architecture, testing, and production deployment — with built-in governance and escalation paths.</div>
+      <div class="fw-deliverables"><span class="fw-del">Discovery &amp; KPIs</span><span class="fw-del">Conversation design</span><span class="fw-del">Architecture stack</span><span class="fw-del">Test scenarios</span><span class="fw-del">Production launch</span></div>
       <div class="fw-footer"><a href="framework-voice-ai.html" class="fw-link">✦ View interactive framework &rarr;</a></div>
     </div>
 
@@ -497,13 +497,13 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,0.08);paddin
         <div class="case-eyebrow">Competitive renewal &middot; Enterprise retail &middot; Conversational AI</div>
         <div class="case-title">$323K renewal retained against major cloud and SI alternatives</div>
         <div class="case-grid-inner">
-          <div class="case-block"><label>Challenge</label><p>A Fortune 500 grocery retailer running 6 aging AI agents faced a competitive renewal — major cloud and SI vendors aggressively pushing consolidation and migration.</p></div>
-          <div class="case-block"><label>Approach</label><p>Built multi-tier stakeholder credibility over four years. Established clear technical vision for agent consolidation. Maintained consistent platform value delivery.</p></div>
-          <div class="case-block"><label>Outcome</label><p>Account retained. Renewal and expansion secured. Customer committed to migrating 6 agents into a single multi-brand assistant — a cornerstone expansion.</p></div>
-          <div class="case-block"><label>Business impact</label><p>Competitive retention against Microsoft and SI alternatives. 1.5M conversations handled. $323K renewal plus $42K expansion, with $94K projected pipeline.</p></div>
+          <div class="case-block"><label>Challenge</label><p>A Fortune 500 grocery retailer running 6 aging AI agents faced a competitive renewal — major cloud and SI vendors aggressively pushing for displacement.</p></div>
+          <div class="case-block"><label>Approach</label><p>Built multi-tier stakeholder credibility over four years. Established clear technical vision for agent consolidation. Maintained consistent delivery cadence with executive governance.</p></div>
+          <div class="case-block"><label>Outcome</label><p>Account retained. Renewal and expansion secured. Customer committed to migrating 6 agents into a single multi-brand assistant — a cornerstone deal that became a reference.</p></div>
+          <div class="case-block"><label>Business impact</label><p>Competitive retention against Microsoft and SI alternatives. 1.5M conversations handled. $323K renewal plus $42K expansion, with 100% executive stakeholder alignment.</p></div>
         </div>
         <div class="case-impact">✦ Win credited directly to stakeholder foundations and project management built during implementation</div>
-        <div class="case-tags"><span class="case-tag">Executive stakeholder management</span><span class="case-tag">Competitive retention</span><span class="case-tag">AI deployment</span><span class="case-tag">Strategic expansion</span></div>
+        <div class="case-tags"><span class="case-tag">Executive stakeholder management</span><span class="case-tag">Competitive retention</span><span class="case-tag">AI deployment</span><span class="case-tag">Large-scale automation</span></div>
       </div>
       <div class="case-metrics">
         <div class="case-metric"><div class="case-metric-num">$323K</div><div class="case-metric-label">Renewal + expansion</div></div>
@@ -517,13 +517,13 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,0.08);paddin
         <div class="case-eyebrow">Long-term retention &middot; Healthcare revenue cycle &middot; AI automation</div>
         <div class="case-title">7-year consecutive renewal — healthcare revenue cycle automation</div>
         <div class="case-grid-inner">
-          <div class="case-block"><label>Challenge</label><p>Sustaining enterprise retention across a highly complex, compliance-sensitive revenue cycle automation deployment over multiple platform generations.</p></div>
-          <div class="case-block"><label>Approach</label><p>Maintained consistent CS relationship that kept pace with evolving requirements. Established reliable support cadence, proactive escalation management, and outcome tracking.</p></div>
-          <div class="case-block"><label>Outcome</label><p>Seven consecutive renewals. Named in company-wide win announcement for sustained account leadership. Most recent cycle included renewal plus significant upsell.</p></div>
+          <div class="case-block"><label>Challenge</label><p>Sustaining enterprise retention across a highly complex, compliance-sensitive revenue cycle automation deployment over multiple platforms and regulatory environments.</p></div>
+          <div class="case-block"><label>Approach</label><p>Maintained consistent CS relationship that kept pace with evolving requirements. Established reliable support cadence, proactive escalation processes, and quarterly business reviews.</p></div>
+          <div class="case-block"><label>Outcome</label><p>Seven consecutive renewals. Named in company-wide win announcement for sustained account leadership. Most recent cycle included renewal plus $12K expansion to new department.</p></div>
           <div class="case-block"><label>Business impact</label><p>Sustained 7-year enterprise relationship in a high-churn, compliance-sensitive sector. $103K most recent renewal and upsell.</p></div>
         </div>
         <div class="case-impact">✦ Long-term retention at this scale requires consistent delivery, not relationship management alone</div>
-        <div class="case-tags"><span class="case-tag">Long-term retention</span><span class="case-tag">Healthcare IT</span><span class="case-tag">Revenue cycle automation</span><span class="case-tag">Strategic expansion</span></div>
+        <div class="case-tags"><span class="case-tag">Long-term retention</span><span class="case-tag">Healthcare IT</span><span class="case-tag">Revenue cycle automation</span><span class="case-tag">Compliance</span></div>
       </div>
       <div class="case-metrics">
         <div class="case-metric"><div class="case-metric-num" style="color:var(--navy);">7 yrs</div><div class="case-metric-label">Consecutive renewals</div></div>
@@ -536,8 +536,8 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,0.08);paddin
         <div class="case-eyebrow">Competitive evaluation &middot; Regional healthcare &middot; LMS &amp; eLearning</div>
         <div class="case-title">Full-day competitive vendor evaluation — zero questions unanswered</div>
         <div class="case-grid-inner">
-          <div class="case-block"><label>Challenge</label><p>High-stakes full-day vendor evaluation for a major LMS and eLearning opportunity at a regional healthcare system, with multiple vendors competing.</p></div>
-          <div class="case-block"><label>Approach</label><p>Served as primary technical and product resource throughout the evaluation. Fielded detailed customer questions across all functional areas — LMS, content, integrations, compliance.</p></div>
+          <div class="case-block"><label>Challenge</label><p>High-stakes full-day vendor evaluation for a major LMS and eLearning opportunity at a regional healthcare system, with multiple vendor candidates competing.</p></div>
+          <div class="case-block"><label>Approach</label><p>Served as primary technical and product resource throughout the evaluation. Fielded detailed customer questions across all functional areas — never deferred a question.</p></div>
           <div class="case-block"><label>Outcome</label><p>Not a single question went unanswered. Team lead noted it publicly. Platform strengths demonstrated effectively across all evaluation dimensions.</p></div>
           <div class="case-block"><label>Business impact</label><p>Named as key contributor to the pitch outcome. Recognition cited for technical depth and client-facing presence under competitive pressure.</p></div>
         </div>
@@ -562,12 +562,12 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,0.08);paddin
   <h2 class="sh">Where I operate best.</h2>
   <p class="ss">Built across B2B SaaS, healthcare IT, legal tech, and AI platforms — with a track record in on-premises enterprise environments where implementation complexity is highest.</p>
   <div class="comp-grid">
-    <div class="comp-card"><div class="comp-title">Enterprise Implementation</div><div class="comp-desc">End-to-end deployment of complex enterprise software in on-premises and hybrid environments across healthcare, legal tech, and SaaS platforms.</div></div>
-    <div class="comp-card"><div class="comp-title">Executive Stakeholder Management</div><div class="comp-desc">C-suite engagement, QBR design, governance frameworks, and strategic alignment across board-level relationships and executive teams.</div></div>
-    <div class="comp-card"><div class="comp-title">AI Platform Deployment</div><div class="comp-desc">Hands-on experience deploying conversational AI in on-premises enterprise environments — a recognized gap in most vendor delivery models.</div></div>
-    <div class="comp-card"><div class="comp-title">Customer Transformation</div><div class="comp-desc">Leading organizational and operational change through platform adoption, process redesign, and strategic alignment initiatives.</div></div>
-    <div class="comp-card"><div class="comp-title">Program &amp; Project Management</div><div class="comp-desc">PMP-certified program management across cross-functional teams — scope, risk, timeline, and stakeholder orchestration.</div></div>
-    <div class="comp-card"><div class="comp-title">Technical Fluency &amp; CS Bridge</div><div class="comp-desc">Comfortable in rooms with Engineering, Product, and Executives simultaneously — translating between technical depth and business outcomes.</div></div>
+    <div class="comp-card"><div class="comp-title">Enterprise Implementation</div><div class="comp-desc">End-to-end deployment of complex enterprise software in on-premises and hybrid environments with multi-stakeholder alignment.</div></div>
+    <div class="comp-card"><div class="comp-title">Executive Stakeholder Management</div><div class="comp-desc">C-suite engagement, QBR design, governance frameworks, and strategic alignment across organizational silos.</div></div>
+    <div class="comp-card"><div class="comp-title">AI Platform Deployment</div><div class="comp-desc">Hands-on experience deploying conversational AI in on-premises enterprise environments — architecture, voice integration, and production scaling.</div></div>
+    <div class="comp-card"><div class="comp-title">Customer Transformation</div><div class="comp-desc">Leading organizational and operational change through platform adoption, process redesign, and capability building.</div></div>
+    <div class="comp-card"><div class="comp-title">Program &amp; Project Management</div><div class="comp-desc">PMP-certified program management across cross-functional teams — scope, risk, timeline, and resource planning.</div></div>
+    <div class="comp-card"><div class="comp-title">Technical Fluency &amp; CS Bridge</div><div class="comp-desc">Comfortable in rooms with Engineering, Product, and Executives simultaneously — translating technical constraints into business outcomes.</div></div>
   </div>
 </div>
 </section>
@@ -579,7 +579,7 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,0.08);paddin
 <div class="section-wrap">
   <div class="impact-callout">
     <div class="impact-eyebrow">Leadership impact</div>
-    <div class="impact-quote">"The work ahead became significantly easier because of the foundations Alana put in place. Her ability to build stakeholder trust, create alignment, and establish clear execution frameworks sets teams up to succeed."</div>
+    <div class="impact-quote">"The work ahead became significantly easier because of the foundations Alana put in place. Her ability to build stakeholder trust, create alignment, and establish clear execution frameworks elevates the entire engagement."</div>
     <div class="impact-attr">— Enterprise AI Leadership Team</div>
     <div class="impact-tags">
       <span class="impact-tag">Stakeholder Alignment</span>
@@ -604,7 +604,7 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,0.08);paddin
       <div class="rec-theme-label">Building executive trust</div>
       <div class="rec-excerpts">
         <div>
-          <div class="rec-excerpt">"Lana has done an incredible job building credibility with key stakeholders within the account and at the same time conducting the Rasa orchestra to make sure we're delivering on what matters."</div>
+          <div class="rec-excerpt">"Lana has done an incredible job building credibility with key stakeholders within the account and at the same time conducting the Rasa orchestra to make sure we deliver."</div>
           <div class="rec-source">Enterprise Account Executive &middot; Conversational AI platform <span class="rec-badge green">$323K renewal win</span></div>
         </div>
         <div>
@@ -650,7 +650,7 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,0.08);paddin
           <div class="rec-source">Cross-functional leader &middot; Healthcare vendor evaluation</div>
         </div>
         <div>
-          <div class="rec-excerpt">"I am extremely impressed with how well you were able to train me on so many different tasks in such a short time. I have shared with my colleagues and the V.P. how valuable this has been."</div>
+          <div class="rec-excerpt">"I am extremely impressed with how well you were able to train me on so many different tasks in such a short time. I have shared with my colleagues and the V.P."</div>
           <div class="rec-source">Healthcare customer &middot; Education Program Coordinator</div>
         </div>
       </div>
@@ -668,7 +668,7 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,0.08);paddin
   <div class="ai-section">
     <div class="ai-eyebrow">Ask my portfolio</div>
     <div class="ai-title">Explore my experience interactively.</div>
-    <div class="ai-sub">Ask about my implementation background, frameworks, leadership philosophy, AI delivery experience, and what makes my approach different from a traditional Customer Success model.</div>
+    <div class="ai-sub">Ask about my implementation background, frameworks, leadership philosophy, AI delivery experience, and what makes my approach different from a traditional Customer Success Manager.</div>
     <div class="ai-questions">
       <div class="ai-q">What implementation experience does Alana have?</div>
       <div class="ai-q">What industries has she worked in?</div>
