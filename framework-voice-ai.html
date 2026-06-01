@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voice AI Delivery Framework — Alana Williams</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#F7F5F0;color:#1A1F2E;-webkit-font-smoothing:antialiased;}
+.top-bar{background:#1A1F2E;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;}
+.top-bar-name{color:#fff;font-size:14px;font-weight:500;text-decoration:none;}
+.top-bar-back{color:#C8963A;font-size:13px;text-decoration:none;}
+.top-bar-back:hover{color:#E8B060;}
+.fw-label{background:#2C3347;color:#9DA5BF;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:4px 12px;border-radius:100px;}
+.hero{background:#1A1F2E;padding:48px 32px 40px;}
+.hero-inner{max-width:860px;margin:0 auto;}
+.hero-eyebrow{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#C8963A;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.hero-eyebrow::before{content:'';width:24px;height:2px;background:#C8963A;}
+.hero-title{font-size:clamp(26px,4vw,40px);font-weight:700;color:#fff;line-height:1.15;letter-spacing:-0.02em;margin-bottom:14px;}
+.hero-sub{font-size:15px;color:#9DA5BF;line-height:1.7;max-width:620px;margin-bottom:24px;}
+.hero-rule{display:inline-flex;align-items:center;gap:8px;background:#2C3347;border:1px solid #3C4560;border-radius:100px;padding:7px 16px;font-size:13px;color:#C8963A;font-weight:500;}
+.fw-wrap{max-width:860px;margin:0 auto;padding:32px 32px 48px;}
+
+/* Phase track */
+.phase-track{display:flex;gap:0;margin-bottom:1.25rem;border:0.5px solid #E2DDD4;border-radius:8px;overflow:hidden;background:#fff;}
+.phase-step{flex:1;padding:10px 6px;text-align:center;cursor:pointer;transition:background .15s;border-right:0.5px solid #E2DDD4;position:relative;}
+.phase-step:last-child{border-right:none;}
+.phase-step:hover,.phase-step.active{background:#F7F5F0;}
+.phase-num{font-size:9px;color:#8A8F9E;margin-bottom:2px;}
+.phase-lbl{font-size:10px;font-weight:500;color:#5A5F72;line-height:1.3;}
+.phase-step.active .phase-lbl{color:#1A1F2E;}
+
+.nav-strip{display:flex;gap:6px;margin-bottom:1.25rem;flex-wrap:wrap;}
+.nav-btn{display:flex;align-items:center;gap:6px;padding:6px 14px;border-radius:8px;border:0.5px solid #E2DDD4;background:#fff;font-size:12px;color:#5A5F72;cursor:pointer;transition:all .15s;font-family:inherit;}
+.nav-btn:hover{border-color:rgba(26,31,46,.3);color:#1A1F2E;}
+.nav-btn.active{border-color:rgba(26,31,46,.4);color:#1A1F2E;background:#F7F5F0;font-weight:500;}
+.nav-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+
+.panel-card{background:#fff;border:0.5px solid #E2DDD4;border-radius:12px;padding:1rem 1.25rem;margin-bottom:12px;}
+.card-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:#8A8F9E;margin-bottom:10px;}
+.items{list-style:none;}
+.items li{font-size:13px;color:#5A5F72;padding:5px 0;border-bottom:0.5px solid #E2DDD4;display:flex;align-items:flex-start;gap:8px;line-height:1.5;}
+.items li:last-child{border-bottom:none;}
+
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+
+.voice-card{border-left:3px solid;border-radius:0 12px 12px 0;padding:1rem 1.25rem;margin-bottom:12px;background:#fff;border-top:0.5px solid #E2DDD4;border-right:0.5px solid #E2DDD4;border-bottom:0.5px solid #E2DDD4;}
+.voice-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px;}
+.voice-text{font-size:13px;color:#5A5F72;line-height:1.65;}
+
+.sec-header{display:flex;align-items:flex-start;gap:12px;margin-bottom:14px;}
+.sec-badge{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;margin-top:2px;}
+.sec-title{font-size:16px;font-weight:600;color:#1A1F2E;}
+.sec-desc{font-size:12px;color:#5A5F72;margin-top:2px;line-height:1.5;}
+
+/* Architecture stack */
+.arch-stack{display:flex;flex-direction:column;align-items:center;gap:0;margin-bottom:12px;}
+.arch-node{background:#fff;border:0.5px solid #E2DDD4;border-radius:10px;padding:12px 20px;width:100%;max-width:360px;text-align:center;position:relative;}
+.arch-node.highlight{background:#1A1F2E;border-color:#1A1F2E;}
+.arch-label{font-size:13px;font-weight:600;color:#1A1F2E;}
+.arch-node.highlight .arch-label{color:#fff;}
+.arch-sub{font-size:11px;color:#5A5F72;margin-top:3px;}
+.arch-node.highlight .arch-sub{color:rgba(255,255,255,0.6);}
+.arch-arrow{font-size:16px;color:#C8963A;margin:4px 0;line-height:1;}
+
+/* Metrics */
+.metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px;}
+.metric-tile{background:#F7F5F0;border-radius:8px;padding:12px 10px;text-align:center;}
+.metric-icon{font-size:20px;margin-bottom:5px;}
+.metric-name{font-size:11px;color:#5A5F72;line-height:1.35;}
+
+.page-footer{background:#1A1F2E;padding:24px 32px;text-align:center;}
+.page-footer p{font-size:13px;color:#4A5270;}
+.page-footer a{color:#C8963A;text-decoration:none;}
+
+@media(max-width:640px){
+  .two-col{grid-template-columns:1fr;}
+  .metrics-grid{grid-template-columns:repeat(2,1fr);}
+  .hero,.fw-wrap{padding-left:20px;padding-right:20px;}
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <a href="alana-williams-portfolio.html" class="top-bar-name">Alana Williams</a>
+  <span class="fw-label">Framework</span>
+  <a href="alana-williams-portfolio.html#frameworks" class="top-bar-back">← Back to portfolio</a>
+</div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Voice AI Delivery Framework</div>
+    <h1 class="hero-title">Voice AI Delivery Framework</h1>
+    <p class="hero-sub">Bridging Rasa, Deepgram, and enterprise AI — a repeatable 5-phase framework for deploying conversational and voice AI solutions from concept through production.</p>
+    <div class="hero-rule">🎙 Enterprise voice AI · End-to-end delivery · On-premises &amp; cloud</div>
+  </div>
+</div>
+
+<div class="fw-wrap">
+  <div class="phase-track" id="track"></div>
+  <div class="nav-strip" id="nav"></div>
+  <div id="panels"></div>
+</div>
+
+<div class="page-footer">
+  <p>Alana Williams · <a href="alana-williams-portfolio.html">View full portfolio</a> · alana.williams@rasa.com</p>
+</div>
+
+<script>
+const COLOR = "#185FA5";
+const BG = "#E6F1FB";
+
+const phases = [
+  {
+    id:"discovery", label:"Business Discovery", short:"Discovery", icon:"🔍",
+    desc:"Before a single intent is defined or a telephony vendor is chosen, I establish why voice — and whether it's the right channel for the problem being solved.",
+    voice:"The 'why voice?' question is the most important one I ask. Voice is expensive to build, hard to test, and highly visible when it fails. If the customer can't articulate deflection targets, containment goals, or CSAT baselines, the project isn't ready to start.",
+    content:"discovery"
+  },
+  {
+    id:"design", label:"Conversation Design", short:"Design", icon:"✏️",
+    desc:"Define the intents, flows, escalation paths, and compliance rules before a single line of code is written.",
+    voice:"Most voice AI projects fail in production because conversation design happened after architecture. I do it first. A flow diagram on a whiteboard is cheaper to change than a deployed intent model.",
+    content:"design"
+  },
+  {
+    id:"arch", label:"Technical Architecture", short:"Architecture", icon:"⚙️",
+    desc:"The five-layer stack from telephony to text-to-speech. Each layer has an owner, a latency budget, and a fallback path.",
+    voice:"The integration between speech-to-text and the conversation engine is where most projects introduce latency they never recover from. I define the latency budget at the architecture stage — not after the first user test.",
+    content:"arch"
+  },
+  {
+    id:"testing", label:"Testing", short:"Testing", icon:"✓",
+    desc:"Four validation dimensions before anything goes near a production call path. No exceptions.",
+    voice:"Latency testing is the one most teams skip because it requires production-like load. I don't skip it. A voice experience that's 800ms too slow is a voice experience that gets turned off by week three.",
+    content:"testing"
+  },
+  {
+    id:"launch", label:"Production Launch", short:"Launch", icon:"🚀",
+    desc:"Launch is day one of monitoring, not the finish line. Five metrics tracked from the first call.",
+    voice:"Voice AI that launches without a monitoring plan isn't live — it's deployed and forgotten. I set up the adoption and failure point dashboards before go-live, not after the first incident.",
+    content:"launch"
+  },
+];
+
+function li(t){return`<li><span style="color:#8A8F9E;flex-shrink:0">›</span>${t}</li>`;}
+
+function buildPhase(p){
+  const hdr=`<div class="sec-header"><div class="sec-badge" style="background:${BG}">${p.icon}</div><div><div class="sec-title">Phase ${phases.indexOf(p)+1}: ${p.label}</div><div class="sec-desc">${p.desc}</div></div></div>`;
+  const voice=`<div class="voice-card" style="border-left-color:${COLOR}"><div class="voice-label" style="color:${COLOR}">How I approach this</div><div class="voice-text">${p.voice}</div></div>`;
+
+  if(p.content==='discovery'){
+    return hdr+voice+`
+    <div class="two-col">
+      <div class="panel-card">
+        <div class="card-label">Questions I need answered first</div>
+        <ul class="items">
+          ${li('Why voice — and why now?')}
+          ${li('What channels does this touch? (IVR, web, mobile?)')}
+          ${li('What KPIs define success?')}
+          ${li('What does the current call path look like?')}
+          ${li('What are the compliance and regulatory constraints?')}
+        </ul>
+      </div>
+      <div class="panel-card">
+        <div class="card-label">Baseline metrics I establish</div>
+        <ul class="items">
+          ${li('Deflection rate — current vs. target')}
+          ${li('Containment rate — what stays in the bot')}
+          ${li('CSAT — current baseline and target')}
+          ${li('Cost reduction — per-call cost today')}
+        </ul>
+      </div>
+    </div>`;
+  }
+
+  if(p.content==='design'){
+    return hdr+voice+`
+    <div class="two-col">
+      <div class="panel-card">
+        <div class="card-label">What gets defined</div>
+        <ul class="items">
+          ${li('Intent taxonomy — what the user can say')}
+          ${li('Conversation flows — the full happy path')}
+          ${li('Escalation paths — when and how to hand off')}
+          ${li('Compliance rules — what the bot cannot say')}
+        </ul>
+      </div>
+      <div class="panel-card">
+        <div class="card-label">Design principles</div>
+        <ul class="items">
+          ${li('Flows are diagrammed before any training data is created')}
+          ${li('Every intent has a fallback — no dead ends')}
+          ${li('Escalation is a first-class experience, not an afterthought')}
+          ${li('Compliance review happens before not after design')}
+        </ul>
+      </div>
+    </div>`;
+  }
+
+  if(p.content==='arch'){
+    return hdr+voice+`
+    <div class="arch-stack">
+      <div class="arch-node highlight">
+        <div class="arch-label">Telephony</div>
+        <div class="arch-sub">IVR / SIP / WebRTC — inbound call routing</div>
+      </div>
+      <div class="arch-arrow">↓</div>
+      <div class="arch-node">
+        <div class="arch-label">Speech-to-Text</div>
+        <div class="arch-sub">Deepgram / Google STT — transcription with latency budget</div>
+      </div>
+      <div class="arch-arrow">↓</div>
+      <div class="arch-node highlight">
+        <div class="arch-label">Conversation Engine</div>
+        <div class="arch-sub">Rasa — intent classification, dialogue management, action execution</div>
+      </div>
+      <div class="arch-arrow">↓</div>
+      <div class="arch-node">
+        <div class="arch-label">Business Systems</div>
+        <div class="arch-sub">CRM / EHR / ticketing — custom actions and data retrieval</div>
+      </div>
+      <div class="arch-arrow">↓</div>
+      <div class="arch-node">
+        <div class="arch-label">Text-to-Speech</div>
+        <div class="arch-sub">Synthesis and audio delivery — voice persona and prosody</div>
+      </div>
+    </div>
+    <div class="panel-card">
+      <div class="card-label">Architecture decisions I make early</div>
+      <ul class="items">
+        ${li('On-premises vs. cloud — regulatory and latency implications')}
+        ${li('Latency budget per layer — defined before build, not after testing')}
+        ${li('Fallback path for each layer failure')}
+        ${li('Authentication and PII handling at each integration point')}
+      </ul>
+    </div>`;
+  }
+
+  if(p.content==='testing'){
+    return hdr+voice+`
+    <div class="metrics-grid">
+      <div class="metric-tile"><div class="metric-icon">🎯</div><div class="metric-name">Intent accuracy</div></div>
+      <div class="metric-tile"><div class="metric-icon">⏱</div><div class="metric-name">End-to-end latency</div></div>
+      <div class="metric-tile"><div class="metric-icon">📊</div><div class="metric-name">Containment rate</div></div>
+      <div class="metric-tile"><div class="metric-icon">↗</div><div class="metric-name">Escalation quality</div></div>
+    </div>
+    <div class="two-col">
+      <div class="panel-card">
+        <div class="card-label">What each test validates</div>
+        <ul class="items">
+          ${li('Accuracy — does the bot understand what was said?')}
+          ${li('Latency — is the response fast enough for a natural conversation?')}
+          ${li('Containment — are users completing tasks without agent transfer?')}
+          ${li('Escalation quality — is the handoff clean and contextful?')}
+        </ul>
+      </div>
+      <div class="panel-card">
+        <div class="card-label">Go / no-go gates</div>
+        <ul class="items">
+          ${li('Intent accuracy ≥ defined threshold before production')}
+          ${li('P95 latency within budget — not just average')}
+          ${li('Escalation tested with real agent queue, not mock')}
+          ${li('Compliance review signed off before any live traffic')}
+        </ul>
+      </div>
+    </div>`;
+  }
+
+  if(p.content==='launch'){
+    return hdr+voice+`
+    <div class="metrics-grid">
+      <div class="metric-tile"><div class="metric-icon">📈</div><div class="metric-name">Adoption velocity</div></div>
+      <div class="metric-tile"><div class="metric-icon">✅</div><div class="metric-name">Task success rate</div></div>
+      <div class="metric-tile"><div class="metric-icon">⚠️</div><div class="metric-name">Failure point tracking</div></div>
+      <div class="metric-tile"><div class="metric-icon">🎯</div><div class="metric-name">Business outcomes</div></div>
+    </div>
+    <div class="panel-card" style="margin-bottom:12px">
+      <div class="card-label">Post-launch monitoring cadence</div>
+      <ul class="items">
+        ${li('Daily — failure points and escalation rate during first 2 weeks')}
+        ${li('Weekly — containment and CSAT vs. baseline during first 30 days')}
+        ${li('Monthly — full business outcome review vs. discovery KPIs')}
+      </ul>
+    </div>
+    <div class="voice-card" style="border-left-color:#1A1F2E">
+      <div class="voice-label" style="color:#1A1F2E">The outcome</div>
+      <div class="voice-text">A repeatable framework for deploying conversational and voice AI solutions in enterprise environments — from the first 'why voice?' conversation through a live, monitored production system. Built from hands-on experience bridging Rasa, Deepgram, and enterprise business systems.</div>
+    </div>`;
+  }
+  return hdr;
+}
+
+const trackEl=document.getElementById('track');
+const navEl=document.getElementById('nav');
+const panelsEl=document.getElementById('panels');
+
+phases.forEach((p,i)=>{
+  const ts=document.createElement('div');
+  ts.className='phase-step'+(i===0?' active':'');
+  ts.innerHTML=`<div class="phase-num">Phase ${i+1}</div><div class="phase-lbl">${p.short}</div>`;
+  ts.onclick=()=>activate(i);
+  trackEl.appendChild(ts);
+
+  const btn=document.createElement('button');
+  btn.className='nav-btn'+(i===0?' active':'');
+  btn.innerHTML=`<span class="nav-dot" style="background:${COLOR}"></span>${p.icon} ${p.label}`;
+  btn.onclick=()=>activate(i);
+  navEl.appendChild(btn);
+
+  const panel=document.createElement('div');
+  panel.className='tab-panel'+(i===0?' active':'');
+  panel.innerHTML=buildPhase(p);
+  panelsEl.appendChild(panel);
+});
+
+function activate(i){
+  document.querySelectorAll('.phase-step').forEach((el,j)=>el.classList.toggle('active',j===i));
+  document.querySelectorAll('.nav-btn').forEach((el,j)=>el.classList.toggle('active',j===i));
+  document.querySelectorAll('.tab-panel').forEach((el,j)=>el.classList.toggle('active',j===i));
+}
+</script>
+</body>
+</html>

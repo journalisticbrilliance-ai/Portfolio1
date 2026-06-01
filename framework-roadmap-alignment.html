@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strategic Roadmap Alignment Framework — Alana Williams</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#F7F5F0;color:#1A1F2E;-webkit-font-smoothing:antialiased;}
+.top-bar{background:#1A1F2E;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;}
+.top-bar-name{color:#fff;font-size:14px;font-weight:500;text-decoration:none;}
+.top-bar-back{color:#C8963A;font-size:13px;text-decoration:none;}
+.top-bar-back:hover{color:#E8B060;}
+.fw-label{background:#2C3347;color:#9DA5BF;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:4px 12px;border-radius:100px;}
+.hero{background:#1A1F2E;padding:48px 32px 40px;}
+.hero-inner{max-width:860px;margin:0 auto;}
+.hero-eyebrow{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#C8963A;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.hero-eyebrow::before{content:'';width:24px;height:2px;background:#C8963A;}
+.hero-title{font-size:clamp(26px,4vw,40px);font-weight:700;color:#fff;line-height:1.15;letter-spacing:-0.02em;margin-bottom:14px;}
+.hero-sub{font-size:15px;color:#9DA5BF;line-height:1.7;max-width:620px;margin-bottom:24px;}
+.hero-rule{display:inline-flex;align-items:center;gap:8px;background:#2C3347;border:1px solid #3C4560;border-radius:100px;padding:7px 16px;font-size:13px;color:#C8963A;font-weight:500;}
+.fw-wrap{max-width:860px;margin:0 auto;padding:32px 32px 48px;}
+
+.step-track{display:flex;gap:0;margin-bottom:1.25rem;border:0.5px solid #E2DDD4;border-radius:8px;overflow:hidden;background:#fff;}
+.step-node{flex:1;padding:10px 6px;text-align:center;cursor:pointer;transition:background .15s;border-right:0.5px solid #E2DDD4;}
+.step-node:last-child{border-right:none;}
+.step-node:hover,.step-node.active{background:#F7F5F0;}
+.step-num{font-size:9px;color:#8A8F9E;margin-bottom:2px;}
+.step-lbl{font-size:10px;font-weight:500;color:#5A5F72;line-height:1.3;}
+.step-node.active .step-lbl{color:#1A1F2E;}
+
+.step-nav{display:flex;gap:6px;margin-bottom:1.25rem;flex-wrap:wrap;}
+.step-btn{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:8px;border:0.5px solid #E2DDD4;background:#fff;font-size:12px;color:#5A5F72;cursor:pointer;transition:all .15s;font-family:inherit;}
+.step-btn:hover{border-color:rgba(26,31,46,.3);color:#1A1F2E;}
+.step-btn.active{border-color:rgba(26,31,46,.4);color:#1A1F2E;background:#F7F5F0;font-weight:500;}
+.step-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+
+.step-panel{display:none;}
+.step-panel.active{display:block;}
+
+.step-header{display:flex;align-items:flex-start;gap:12px;margin-bottom:14px;}
+.step-badge{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;margin-top:2px;}
+.step-title{font-size:16px;font-weight:600;color:#1A1F2E;}
+.step-desc{font-size:12px;color:#5A5F72;margin-top:2px;line-height:1.5;}
+
+.voice-card{border-left:3px solid;border-radius:0 12px 12px 0;padding:1rem 1.25rem;margin-bottom:12px;background:#fff;border-top:0.5px solid #E2DDD4;border-right:0.5px solid #E2DDD4;border-bottom:0.5px solid #E2DDD4;}
+.voice-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px;}
+.voice-text{font-size:13px;color:#5A5F72;line-height:1.65;}
+
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.panel-card{background:#fff;border:0.5px solid #E2DDD4;border-radius:12px;padding:1rem 1.25rem;}
+.card-label{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;color:#8A8F9E;margin-bottom:10px;}
+.items{list-style:none;}
+.items li{font-size:13px;color:#5A5F72;padding:5px 0;border-bottom:0.5px solid #E2DDD4;display:flex;align-items:flex-start;gap:8px;line-height:1.5;}
+.items li:last-child{border-bottom:none;}
+
+.q-item{padding:7px 0;border-bottom:0.5px solid #E2DDD4;display:flex;align-items:flex-start;gap:8px;font-size:13px;color:#5A5F72;line-height:1.5;}
+.q-item:last-child{border-bottom:none;}
+
+.equation-card{border:0.5px solid #E2DDD4;border-radius:12px;padding:1.25rem;margin-bottom:12px;background:#fff;display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;}
+.eq-block{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 16px;flex:1;min-width:140px;}
+.eq-label{font-size:13px;font-weight:600;color:#1A1F2E;text-align:center;}
+.eq-sub{font-size:11px;color:#5A5F72;text-align:center;line-height:1.4;}
+.eq-plus{font-size:20px;color:#8A8F9E;padding:0 4px;align-self:center;flex-shrink:0;}
+.eq-equals{width:100%;text-align:center;padding:10px 0 4px;color:#8A8F9E;font-size:13px;}
+.eq-result{width:100%;}
+.eq-result-inner{background:#F7F5F0;border-radius:8px;padding:12px 16px;text-align:center;}
+.eq-result-label{font-size:14px;font-weight:600;color:#1A1F2E;margin-bottom:3px;}
+.eq-result-sub{font-size:12px;color:#5A5F72;}
+
+.focus-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px;}
+.focus-tile{background:#F7F5F0;border-radius:8px;padding:12px 10px;display:flex;align-items:center;gap:8px;}
+.focus-name{font-size:12px;font-weight:500;color:#1A1F2E;}
+
+.measure-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px;}
+.measure-tile{background:#F7F5F0;border-radius:8px;padding:12px 10px;text-align:center;}
+.measure-name{font-size:11px;color:#5A5F72;line-height:1.35;margin-top:5px;}
+
+.ms-row{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:0.5px solid #E2DDD4;}
+.ms-row:last-child{border-bottom:none;}
+.ms-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:3px;}
+.ms-label{font-size:13px;font-weight:600;color:#1A1F2E;}
+.ms-sub{font-size:12px;color:#5A5F72;margin-top:1px;}
+
+.outcome-card{border-left:3px solid;border-radius:0 12px 12px 0;padding:1rem 1.25rem;background:#fff;border-top:0.5px solid #E2DDD4;border-right:0.5px solid #E2DDD4;border-bottom:0.5px solid #E2DDD4;margin-top:12px;}
+
+.page-footer{background:#1A1F2E;padding:24px 32px;text-align:center;}
+.page-footer p{font-size:13px;color:#4A5270;}
+.page-footer a{color:#C8963A;text-decoration:none;}
+
+@media(max-width:640px){
+  .two-col{grid-template-columns:1fr;}
+  .measure-grid,.focus-grid{grid-template-columns:repeat(2,1fr);}
+  .hero{padding:32px 20px;}
+  .fw-wrap{padding:20px 16px 40px;}
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <a href="alana-williams-portfolio.html" class="top-bar-name">Alana Williams</a>
+  <span class="fw-label">Framework</span>
+  <a href="alana-williams-portfolio.html#frameworks" class="top-bar-back">← Back to portfolio</a>
+</div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Roadmap Framework</div>
+    <h1 class="hero-title">Strategic Roadmap Alignment Framework</h1>
+    <p class="hero-sub">The strongest enterprise partnerships happen when customer priorities and product strategy evolve together — not when one chases the other.</p>
+    <div class="hero-rule">↔ Alignment is not a meeting — it's a process with defined outputs at every step</div>
+  </div>
+</div>
+
+<div class="fw-wrap">
+  <div class="step-track" id="track"></div>
+  <div class="step-nav" id="nav"></div>
+  <div id="panels"></div>
+</div>
+
+<div class="page-footer">
+  <p>Alana Williams · <a href="alana-williams-portfolio.html">View full portfolio</a> · alana.williams@rasa.com</p>
+</div>
+
+<script>
+const steps=[
+  {id:1,name:"Customer Priorities",short:"Priorities",color:"#185FA5",bg:"#E6F1FB",icon:"👂",
+   desc:"Before I talk about what the platform does, I need to understand what the customer is actually trying to accomplish. Their language, their goals, their blockers — not mine.",
+   voice:"I don't open with a product pitch. I open with questions. What is this organization trying to do in the next 12 months, and where is the platform supposed to fit into that? If I can't answer that, I'm not ready to align anything.",
+   questions:["What is the organization trying to achieve — at the board level, not the team level?","What outcomes matter most, and who is accountable for them?","Where are the current limitations and what's already been tried?"],
+   cols:[
+     {label:"What I identify",items:["Strategic initiatives — the ones with executive sponsorship","Business objectives tied to measurable outcomes","Transformation goals — what they're moving away from","Investment areas — where budget is already committed"]},
+     {label:"What I listen for",items:["Priorities that have shifted since the last conversation","Tensions between what leadership wants and what teams can execute","Constraints that haven't been named yet","The gap between stated goals and funded initiatives"]}
+   ]},
+  {id:2,name:"Strategic Fit",short:"Fit",color:"#533489",bg:"#EEEDFE",icon:"🧩",
+   desc:"Evaluate where the platform genuinely fits, where the gaps are, and what the risk looks like if those gaps aren't closed. This is not a sales exercise.",
+   voice:"Strategic fit has to be honest. If there's a gap between what the customer needs and what the platform does, I name it — and I bring a mitigation plan, not a workaround dressed up as a feature.",
+   cols:[
+     {label:"What I evaluate",items:["Product capabilities against current and future customer needs","Customer readiness — technical, organizational, operational","Competitive alternatives they're already considering","Technical requirements — on-prem constraints, integration dependencies"]},
+     {label:"What gets produced",items:["Gap analysis — honest, not minimized","Opportunity assessment — where the platform can go further","Risk review — what could derail alignment before it starts"]}
+   ]},
+  {id:3,name:"Align Future Vision",short:"Vision",color:"#854F0B",bg:"#FAEEDA",icon:"🔭",
+   desc:"Customer vision, product vision, and technical roadmap — all three have to point at the same thing. If they don't, this is where it becomes visible.",
+   voice:"Vision alignment is where the work either holds together or falls apart. I use this step to surface misalignment before it becomes a relationship problem. A shared success plan is only as strong as the assumptions underneath it.",
+   type:"vision"},
+  {id:4,name:"Joint Planning",short:"Planning",color:"#3B6D11",bg:"#EAF3DE",icon:"📅",
+   desc:"Shared milestones, investment timing, dependencies, and ownership — agreed in writing, reviewed at every executive checkpoint.",
+   voice:"Joint planning is only useful if both sides are actually accountable to it. I don't create a roadmap document that lives in a shared drive. I create a cadence that forces both sides to show up to the same commitments.",
+   cols:[
+     {label:"What goes into the plan",items:["Quarterly milestones — specific, measurable, owned","Investment timing — when money moves and what triggers it","Dependencies — what each side needs to deliver for the other","Ownership — one name per commitment, no shared accountability"]},
+     {label:"What keeps it alive",items:["Executive checkpoints at every quarter — not optional","Success metrics agreed before work starts, not after","A standing escalation path for when the plan needs to change","A defined process for scope changes — not ad hoc adjustments"]}
+   ]},
+  {id:5,name:"Measure Progress",short:"Measure",color:"#993556",bg:"#FBEAF0",icon:"📊",
+   desc:"Adoption, business outcomes, roadmap execution, and customer satisfaction — measured on a schedule, not when someone asks for an update.",
+   voice:"Progress measurement is not a reporting exercise. If the numbers are moving in the wrong direction, I want to know three weeks before the executive review — not during it. The measure step is designed to surface problems while there's still time to do something.",
+   type:"measure"},
+];
+
+const focusAreas=[
+  {icon:"🤖",name:"AI adoption",color:"#185FA5"},
+  {icon:"🔀",name:"Agent orchestration",color:"#533489"},
+  {icon:"🛡",name:"Governance",color:"#854F0B"},
+  {icon:"↗",name:"Scalability",color:"#3B6D11"},
+  {icon:"📡",name:"Reliability",color:"#993556"},
+  {icon:"⚙️",name:"Automation",color:"#185FA5"},
+];
+
+function li(t){return`<li><span style="color:#8A8F9E;flex-shrink:0">›</span>${t}</li>`;}
+
+function buildPanel(s){
+  const hdr=`<div class="step-header"><div class="step-badge" style="background:${s.bg}">${s.icon}</div><div><div class="step-title">Step ${s.id}: ${s.name}</div><div class="step-desc">${s.desc}</div></div></div>`;
+  const voice=`<div class="voice-card" style="border-left-color:${s.color}"><div class="voice-label" style="color:${s.color}">How I approach this</div><div class="voice-text">${s.voice}</div></div>`;
+
+  if(s.type==='vision'){
+    return hdr+voice+`<div class="equation-card">
+      <div class="eq-block"><div style="font-size:22px">🏢</div><div class="eq-label">Customer vision</div><div class="eq-sub">Where they're trying to go and why it matters now</div></div>
+      <div class="eq-plus">+</div>
+      <div class="eq-block"><div style="font-size:22px">🚀</div><div class="eq-label">Product vision</div><div class="eq-sub">Where the platform is headed and what it's built to do</div></div>
+      <div class="eq-plus">+</div>
+      <div class="eq-block"><div style="font-size:22px">🛣</div><div class="eq-label">Technical roadmap</div><div class="eq-sub">What gets built, in what order, with what dependencies</div></div>
+      <div class="eq-equals">when these three are pointed at the same thing</div>
+      <div class="eq-result"><div class="eq-result-inner"><div class="eq-result-label">Shared success plan</div><div class="eq-result-sub">A single document both sides are accountable to — not a slide deck, not a summary email</div></div></div>
+    </div>
+    <div class="panel-card"><div class="card-label">Focus areas for this engagement</div><div class="focus-grid">${focusAreas.map(f=>`<div class="focus-tile"><span style="font-size:16px">${f.icon}</span><div class="focus-name">${f.name}</div></div>`).join('')}</div></div>`;
+  }
+
+  if(s.type==='measure'){
+    return hdr+voice+`<div class="measure-grid">${[['📈','Adoption velocity'],['🎯','Business outcomes'],['🗺','Roadmap execution'],['❤️','Customer satisfaction']].map(m=>`<div class="measure-tile"><div style="font-size:22px">${m[0]}</div><div class="measure-name">${m[1]}</div></div>`).join('')}</div>
+    <div class="panel-card" style="margin-bottom:12px"><div class="card-label">How I structure measurement</div>
+      <div class="ms-row"><div class="ms-dot" style="background:${s.color}"></div><div><div class="ms-label">Monthly pulse check</div><div class="ms-sub">Leading indicators — adoption velocity, open blockers, upcoming dependencies</div></div></div>
+      <div class="ms-row"><div class="ms-dot" style="background:${s.color}"></div><div><div class="ms-label">Quarterly business review</div><div class="ms-sub">Business outcomes against commitments, roadmap execution, health score</div></div></div>
+      <div class="ms-row"><div class="ms-dot" style="background:${s.color}"></div><div><div class="ms-label">Annual strategic review</div><div class="ms-sub">Full roadmap re-alignment, investment decisions, shared success plan refresh</div></div></div>
+    </div>
+    <div class="outcome-card" style="border-left-color:${s.color}"><div class="voice-label" style="color:${s.color}">The outcome</div><div class="voice-text">Creates stronger executive partnerships, improves long-term retention, and ensures customer investment stays aligned with future business objectives — not just where the platform was when they signed.</div></div>`;
+  }
+
+  if(s.questions){
+    const qH=`<div class="panel-card" style="margin-bottom:12px"><div class="card-label">Questions I need answered first</div>${s.questions.map(q=>`<div class="q-item"><span style="color:#8A8F9E">?</span>${q}</div>`).join('')}</div>`;
+    const cols=s.cols.map(c=>`<div class="panel-card"><div class="card-label">${c.label}</div><ul class="items">${c.items.map(li).join('')}</ul></div>`).join('');
+    return hdr+voice+qH+`<div class="two-col">${cols}</div>`;
+  }
+
+  const cols=s.cols.map(c=>`<div class="panel-card"><div class="card-label">${c.label}</div><ul class="items">${c.items.map(li).join('')}</ul></div>`).join('');
+  return hdr+voice+`<div class="two-col">${cols}</div>`;
+}
+
+const trackEl=document.getElementById('track');
+const navEl=document.getElementById('nav');
+const panelsEl=document.getElementById('panels');
+
+steps.forEach((s,i)=>{
+  const t=document.createElement('div');
+  t.className='step-node'+(i===0?' active':'');
+  t.innerHTML=`<div class="step-num">Step ${s.id}</div><div class="step-lbl">${s.short}</div>`;
+  t.onclick=()=>activate(i);
+  trackEl.appendChild(t);
+
+  const btn=document.createElement('button');
+  btn.className='step-btn'+(i===0?' active':'');
+  btn.innerHTML=`<span class="step-dot" style="background:${s.color}"></span>${s.name}`;
+  btn.onclick=()=>activate(i);
+  navEl.appendChild(btn);
+
+  const panel=document.createElement('div');
+  panel.className='step-panel'+(i===0?' active':'');
+  panel.innerHTML=buildPanel(s);
+  panelsEl.appendChild(panel);
+});
+
+function activate(i){
+  document.querySelectorAll('.step-node').forEach((el,j)=>el.classList.toggle('active',j===i));
+  document.querySelectorAll('.step-btn').forEach((el,j)=>el.classList.toggle('active',j===i));
+  document.querySelectorAll('.step-panel').forEach((el,j)=>el.classList.toggle('active',j===i));
+}
+</script>
+</body>
+</html>
