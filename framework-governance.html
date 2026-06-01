@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Executive Customer Governance Framework — Alana Williams</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#F7F5F0;color:#1A1F2E;-webkit-font-smoothing:antialiased;}
+.top-bar{background:#1A1F2E;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;}
+.top-bar-name{color:#fff;font-size:14px;font-weight:500;text-decoration:none;}
+.top-bar-back{color:#C8963A;font-size:13px;text-decoration:none;display:flex;align-items:center;gap:6px;}
+.top-bar-back:hover{color:#E8B060;}
+.fw-label{background:#2C3347;color:#9DA5BF;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:4px 12px;border-radius:100px;}
+.hero{background:#1A1F2E;padding:48px 32px 40px;}
+.hero-inner{max-width:860px;margin:0 auto;}
+.hero-eyebrow{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#C8963A;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.hero-eyebrow::before{content:'';width:24px;height:2px;background:#C8963A;}
+.hero-title{font-size:clamp(26px,4vw,40px);font-weight:700;color:#fff;line-height:1.15;letter-spacing:-0.02em;margin-bottom:14px;}
+.hero-sub{font-size:15px;color:#9DA5BF;line-height:1.7;max-width:620px;margin-bottom:24px;}
+.hero-rule{display:inline-flex;align-items:center;gap:8px;background:#2C3347;border:1px solid #3C4560;border-radius:100px;padding:7px 16px;font-size:13px;color:#C8963A;font-weight:500;}
+.fw-wrap{max-width:860px;margin:0 auto;padding:32px 32px 48px;}
+
+.cycle-strip{display:flex;gap:0;margin-bottom:1.25rem;border:0.5px solid #E2DDD4;border-radius:8px;overflow:hidden;background:#fff;}
+.cycle-step{flex:1;padding:9px 6px;text-align:center;cursor:pointer;transition:background .15s;border-right:0.5px solid #E2DDD4;}
+.cycle-step:last-child{border-right:none;}
+.cycle-step:hover,.cycle-step.active{background:#F7F5F0;}
+.cycle-num{font-size:9px;color:#8A8F9E;margin-bottom:2px;}
+.cycle-name{font-size:10px;font-weight:500;color:#5A5F72;line-height:1.3;}
+.cycle-step.active .cycle-name{color:#1A1F2E;}
+
+.sec-nav{display:flex;gap:6px;margin-bottom:1.25rem;flex-wrap:wrap;}
+.sec-btn{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:8px;border:0.5px solid #E2DDD4;background:#fff;font-size:12px;color:#5A5F72;cursor:pointer;transition:all .15s;font-family:inherit;}
+.sec-btn:hover{border-color:rgba(26,31,46,.3);color:#1A1F2E;}
+.sec-btn.active{border-color:rgba(26,31,46,.4);color:#1A1F2E;background:#F7F5F0;font-weight:500;}
+.sec-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+
+.sec-panel{display:none;}
+.sec-panel.active{display:block;}
+
+.sec-header{display:flex;align-items:flex-start;gap:12px;margin-bottom:14px;}
+.sec-badge{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;margin-top:2px;}
+.sec-title{font-size:16px;font-weight:600;color:#1A1F2E;}
+.sec-desc{font-size:12px;color:#5A5F72;margin-top:2px;line-height:1.5;}
+
+.voice-card{border-left:3px solid;border-radius:0 12px 12px 0;padding:1rem 1.25rem;margin-bottom:12px;background:#fff;border-top:0.5px solid #E2DDD4;border-right:0.5px solid #E2DDD4;border-bottom:0.5px solid #E2DDD4;}
+.voice-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px;}
+.voice-text{font-size:13px;color:#5A5F72;line-height:1.65;}
+
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.panel-card{background:#fff;border:0.5px solid #E2DDD4;border-radius:12px;padding:1rem 1.25rem;}
+.card-label{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;color:#8A8F9E;margin-bottom:10px;}
+.items{list-style:none;}
+.items li{font-size:13px;color:#5A5F72;padding:5px 0;border-bottom:0.5px solid #E2DDD4;display:flex;align-items:flex-start;gap:8px;line-height:1.5;}
+.items li:last-child{border-bottom:none;}
+
+.metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px;}
+.metric-tile{background:#F7F5F0;border-radius:8px;padding:12px 10px;text-align:center;}
+.metric-name{font-size:11px;color:#5A5F72;line-height:1.35;margin-top:5px;}
+
+.risk-hdr{background:#F7F5F0;display:grid;grid-template-columns:140px 1fr 100px;border-radius:8px 8px 0 0;border:0.5px solid #E2DDD4;border-bottom:none;}
+.risk-row{display:grid;grid-template-columns:140px 1fr 100px;border:0.5px solid #E2DDD4;border-radius:8px;margin-top:6px;overflow:hidden;}
+.risk-cell{padding:8px 12px;font-size:12px;border-right:0.5px solid #E2DDD4;}
+.risk-cell:last-child{border-right:none;}
+.risk-hdr .risk-cell{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:#8A8F9E;}
+.risk-type{font-weight:600;color:#1A1F2E;}
+.risk-mit{color:#5A5F72;}
+.risk-own{color:#5A5F72;font-size:11px;}
+
+.action-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.action-card{border:0.5px solid #E2DDD4;border-radius:12px;padding:1rem 1.25rem;display:flex;gap:12px;background:#fff;}
+.action-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.action-label{font-size:13px;font-weight:600;color:#1A1F2E;margin-bottom:3px;}
+.action-sub{font-size:12px;color:#5A5F72;line-height:1.4;}
+
+.roadmap-row{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:0.5px solid #E2DDD4;}
+.roadmap-row:last-child{border-bottom:none;}
+.roadmap-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:3px;}
+.roadmap-label{font-size:13px;font-weight:600;color:#1A1F2E;}
+.roadmap-sub{font-size:12px;color:#5A5F72;}
+
+.q-item{padding:7px 0;border-bottom:0.5px solid #E2DDD4;display:flex;align-items:flex-start;gap:8px;font-size:13px;color:#5A5F72;line-height:1.5;}
+.q-item:last-child{border-bottom:none;}
+
+.page-footer{background:#1A1F2E;padding:24px 32px;text-align:center;}
+.page-footer p{font-size:13px;color:#4A5270;}
+.page-footer a{color:#C8963A;text-decoration:none;}
+
+@media(max-width:640px){
+  .two-col,.action-grid{grid-template-columns:1fr;}
+  .metric-grid{grid-template-columns:repeat(2,1fr);}
+  .risk-hdr,.risk-row{grid-template-columns:1fr;}
+  .hero{padding:32px 20px;}
+  .fw-wrap{padding:20px 16px 40px;}
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <a href="alana-williams-portfolio.html" class="top-bar-name">Alana Williams</a>
+  <span class="fw-label">Framework</span>
+  <a href="alana-williams-portfolio.html#frameworks" class="top-bar-back">← Back to portfolio</a>
+</div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Governance Framework</div>
+    <h1 class="hero-title">Executive Customer Governance Framework</h1>
+    <p class="hero-sub">Executive reviews should not be status meetings. They should drive decisions around business outcomes, platform performance, and future investment.</p>
+    <div class="hero-rule">🛡 Every review ends with a decision, an owner, and a due date</div>
+  </div>
+</div>
+
+<div class="fw-wrap">
+  <div class="cycle-strip" id="cycle"></div>
+  <div class="sec-nav" id="nav"></div>
+  <div id="panels"></div>
+</div>
+
+<div class="page-footer">
+  <p>Alana Williams · <a href="alana-williams-portfolio.html">View full portfolio</a> · alana.williams@rasa.com</p>
+</div>
+
+<script>
+const sections=[
+  {id:1,name:"Executive Summary",short:"Summary",color:"#533489",bg:"#EEEDFE",icon:"📊",
+   desc:"Set the stage before anything else is discussed. Accomplishments, strategic wins, and partnership health — stated plainly, without spin.",
+   voice:"I don't use the opening to recap what everyone already knows. I use it to establish what matters most going into this conversation and what I need the room to decide before we leave.",
+   cols:[
+     {label:"What gets covered",items:["Key accomplishments since last review","Strategic wins worth naming at this level","Current priorities — what's in focus right now","Partnership health — honest, not diplomatic"]},
+     {label:"What I need from the room",items:["Alignment on whether priorities have shifted","Any executive context I don't have yet","Confirmation we're measuring the right things"]}
+   ]},
+  {id:2,name:"Business Outcomes",short:"Outcomes",color:"#0F6E56",bg:"#E1F5EE",icon:"📈",
+   desc:"Adoption progress, ROI realization, and operational impact — measured against what was actually committed, not what's easy to report.",
+   voice:"If I can't answer 'what value has been delivered' in concrete terms, this review is not ready to happen. I don't show up without that number.",
+   questions:["Are we achieving the outcomes we committed to?","What value has been delivered — and can we quantify it?","Where are the adoption gaps and who owns closing them?"],
+   cols:[
+     {label:"What I evaluate",items:["Adoption progress against target","Customer objectives — original vs. current","ROI realization — what was promised vs. delivered","Operational impact across affected teams"]},
+     {label:"What triggers a conversation",items:["Adoption below threshold with no clear owner","Objectives that have shifted without being restated","ROI gaps that haven't been escalated","Operational friction that's become normalized"]}
+   ]},
+  {id:3,name:"Platform Health",short:"Health",color:"#185FA5",bg:"#E6F1FB",icon:"📡",
+   desc:"Stability, security, support performance, and usage trends. Facts only — no narrative cleanup.",
+   voice:"Platform health is either green or it needs a conversation. I don't present it as 'trending positively' when the SLA numbers say otherwise.",
+   metrics:[{i:"🎫",n:"Ticket volume"},{i:"⏱",n:"Resolution rates"},{i:"🛡",n:"SLA compliance"},{i:"🖥",n:"Platform availability"}],
+   cols:[
+     {label:"What I review",items:["Stability — incidents, patterns, open items","Security — posture, findings, remediations","Support performance — volume and resolution","Usage trends — adoption signals in the data"]},
+     {label:"What flags a risk",items:["SLA attainment declining quarter over quarter","Ticket volume increasing without resolution improvement","Usage trends that don't match adoption claims","Security findings without a remediation owner"]}
+   ]},
+  {id:4,name:"Risk Assessment",short:"Risk",color:"#D85A30",bg:"#FAECE7",icon:"⚠️",
+   desc:"Every risk gets an impact rating, a mitigation strategy, and an owner. Risks without owners are not risks — they're guarantees.",
+   voice:"I surface risk early and directly. An executive review is not the place to soften what's real. If there's a capacity risk or an organizational blocker, it gets named here.",
+   risks:[
+     {type:"Adoption risk",mit:"Identify gap owners, define recovery plan",owner:"CSM + Exec sponsor"},
+     {type:"Technical risk",mit:"Escalate to engineering, set resolution SLA",owner:"CTO + CSE"},
+     {type:"Organizational risk",mit:"Stakeholder re-alignment session",owner:"Executive sponsor"},
+     {type:"Capacity risk",mit:"Resource plan review, scope adjustment if needed",owner:"PM + CRO"},
+   ]},
+  {id:5,name:"Roadmap Alignment",short:"Roadmap",color:"#854F0B",bg:"#FAEEDA",icon:"🗺",
+   desc:"Customer investment strategy aligned to platform capabilities. If their roadmap and our roadmap aren't pointed at the same thing, that's the conversation.",
+   voice:"Roadmap alignment is where I find out if the client is still bought in to the direction. If their priorities have shifted and nobody told us, it surfaces here.",
+   roadmap:[
+     {label:"Customer priorities",sub:"What are they trying to do in the next 6–12 months?"},
+     {label:"Product roadmap",sub:"What's coming — and when — that's relevant to them?"},
+     {label:"Upcoming initiatives",sub:"What do they have planned that we need to know about?"},
+     {label:"Innovation opportunities",sub:"Where can the platform do more than they're currently using?"},
+   ]},
+  {id:6,name:"Expansion Opportunities",short:"Expansion",color:"#3B6D11",bg:"#EAF3DE",icon:"↗",
+   desc:"Expansion isn't a sales conversation — it's a natural output of a healthy implementation. If the platform is delivering, the conversation should happen on its own.",
+   voice:"I don't bring expansion into a review unless the foundation is solid. If there are open risks or unmet outcomes, expansion is the wrong conversation to be having right now.",
+   cols:[
+     {label:"When expansion is the right conversation",items:["Adoption is at or above target","ROI has been realized and documented","Platform health is stable — no open critical risks","Stakeholder alignment is strong at all tiers"]},
+     {label:"What the conversation covers",items:["Additional use cases aligned to their roadmap","Teams or departments not yet on the platform","Capabilities they're underutilizing","Future investment tied to demonstrable outcomes"]}
+   ]},
+  {id:7,name:"Executive Actions",short:"Actions",color:"#A32D2D",bg:"#FCEBEB",icon:"✅",
+   desc:"Every review ends the same way. Decisions made, owners named, due dates set, success measures defined. No exceptions.",
+   voice:"If someone leaves this room not knowing what they own and when it's due, the meeting didn't happen. I close every executive review with a read-back of every open action before anyone walks out.",
+   actions:[
+     {icon:"⚖️",label:"Decisions",sub:"What was agreed in this room that changes how we operate",bg:"#FCEBEB"},
+     {icon:"👤",label:"Owners",sub:"Every decision has exactly one name next to it",bg:"#FCEBEB"},
+     {icon:"📅",label:"Due dates",sub:"No open-ended commitments — a date or it doesn't count",bg:"#FCEBEB"},
+     {icon:"🎯",label:"Success measures",sub:"How we know the action was completed and it worked",bg:"#FCEBEB"},
+   ]},
+];
+
+function li(t){return`<li><span style="color:#8A8F9E;flex-shrink:0">›</span>${t}</li>`;}
+
+function buildPanel(s){
+  const hdr=`<div class="sec-header"><div class="sec-badge" style="background:${s.bg}">${s.icon}</div><div><div class="sec-title">${s.id}. ${s.name}</div><div class="sec-desc">${s.desc}</div></div></div>`;
+  const voice=`<div class="voice-card" style="border-left-color:${s.color}"><div class="voice-label" style="color:${s.color}">How I approach this</div><div class="voice-text">${s.voice}</div></div>`;
+
+  if(s.metrics){
+    const mH=`<div class="metric-grid">${s.metrics.map(m=>`<div class="metric-tile"><div style="font-size:22px">${m.i}</div><div class="metric-name">${m.n}</div></div>`).join('')}</div>`;
+    const cols=s.cols.map(c=>`<div class="panel-card"><div class="card-label">${c.label}</div><ul class="items">${c.items.map(li).join('')}</ul></div>`).join('');
+    return hdr+voice+mH+`<div class="two-col">${cols}</div>`;
+  }
+  if(s.questions){
+    const qH=`<div class="panel-card" style="margin-bottom:12px"><div class="card-label">Questions I need answered</div>${s.questions.map(q=>`<div class="q-item"><span style="color:#8A8F9E">?</span>${q}</div>`).join('')}</div>`;
+    const cols=s.cols.map(c=>`<div class="panel-card"><div class="card-label">${c.label}</div><ul class="items">${c.items.map(li).join('')}</ul></div>`).join('');
+    return hdr+voice+qH+`<div class="two-col">${cols}</div>`;
+  }
+  if(s.risks){
+    return hdr+voice+`<div style="margin-bottom:12px"><div class="risk-hdr"><div class="risk-cell">Risk type</div><div class="risk-cell">Mitigation</div><div class="risk-cell">Owner</div></div>${s.risks.map(r=>`<div class="risk-row"><div class="risk-cell risk-type">${r.type}</div><div class="risk-cell risk-mit">${r.mit}</div><div class="risk-cell risk-own">${r.owner}</div></div>`).join('')}</div>`;
+  }
+  if(s.roadmap){
+    return hdr+voice+`<div class="panel-card"><div class="card-label">Alignment areas</div>${s.roadmap.map(r=>`<div class="roadmap-row"><div class="roadmap-dot" style="background:#BA7517"></div><div><div class="roadmap-label">${r.label}</div><div class="roadmap-sub">${r.sub}</div></div></div>`).join('')}</div>`;
+  }
+  if(s.actions){
+    return hdr+voice+`<div class="action-grid">${s.actions.map(a=>`<div class="action-card"><div class="action-icon" style="background:${a.bg};color:${s.color}">${a.icon}</div><div><div class="action-label">${a.label}</div><div class="action-sub">${a.sub}</div></div></div>`).join('')}</div><div class="voice-card" style="border-left-color:${s.color};margin-top:0"><div class="voice-label" style="color:${s.color}">The outcome</div><div class="voice-text">Creates executive visibility, improves stakeholder alignment, and transforms customer reviews from operational updates into strategic governance discussions.</div></div>`;
+  }
+  const cols=s.cols.map(c=>`<div class="panel-card"><div class="card-label">${c.label}</div><ul class="items">${c.items.map(li).join('')}</ul></div>`).join('');
+  return hdr+voice+`<div class="two-col">${cols}</div>`;
+}
+
+const cycleEl=document.getElementById('cycle');
+const navEl=document.getElementById('nav');
+const panelsEl=document.getElementById('panels');
+
+sections.forEach((s,i)=>{
+  const cs=document.createElement('div');
+  cs.className='cycle-step'+(i===0?' active':'');
+  cs.innerHTML=`<div class="cycle-num">${s.id}</div><div class="cycle-name">${s.short}</div>`;
+  cs.onclick=()=>activate(i);
+  cycleEl.appendChild(cs);
+
+  const btn=document.createElement('button');
+  btn.className='sec-btn'+(i===0?' active':'');
+  btn.innerHTML=`<span class="sec-dot" style="background:${s.color}"></span>${s.name}`;
+  btn.onclick=()=>activate(i);
+  navEl.appendChild(btn);
+
+  const panel=document.createElement('div');
+  panel.className='sec-panel'+(i===0?' active':'');
+  panel.innerHTML=buildPanel(s);
+  panelsEl.appendChild(panel);
+});
+
+function activate(i){
+  document.querySelectorAll('.cycle-step').forEach((el,j)=>el.classList.toggle('active',j===i));
+  document.querySelectorAll('.sec-btn').forEach((el,j)=>el.classList.toggle('active',j===i));
+  document.querySelectorAll('.sec-panel').forEach((el,j)=>el.classList.toggle('active',j===i));
+}
+</script>
+</body>
+</html>

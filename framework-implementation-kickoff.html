@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enterprise Implementation Kickoff Framework — Alana Williams</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #F7F5F0; color: #1A1F2E; -webkit-font-smoothing: antialiased; }
+
+/* NAV */
+.top-bar { background: #1A1F2E; padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; }
+.top-bar-name { color: #fff; font-size: 14px; font-weight: 500; text-decoration: none; }
+.top-bar-back { color: #C8963A; font-size: 13px; text-decoration: none; display: flex; align-items: center; gap: 6px; }
+.top-bar-back:hover { color: #E8B060; }
+.fw-label { background: #2C3347; color: #9DA5BF; font-size: 11px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; padding: 4px 12px; border-radius: 100px; }
+
+/* HERO */
+.hero { background: #1A1F2E; padding: 48px 32px 40px; }
+.hero-inner { max-width: 860px; margin: 0 auto; }
+.hero-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: #C8963A; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+.hero-eyebrow::before { content: ''; width: 24px; height: 2px; background: #C8963A; }
+.hero-title { font-size: clamp(26px, 4vw, 40px); font-weight: 700; color: #fff; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 14px; }
+.hero-sub { font-size: 15px; color: #9DA5BF; line-height: 1.7; max-width: 620px; margin-bottom: 24px; }
+.hero-rule { display: inline-flex; align-items: center; gap: 8px; background: #2C3347; border: 1px solid #3C4560; border-radius: 100px; padding: 7px 16px; font-size: 13px; color: #C8963A; font-weight: 500; }
+
+/* FRAMEWORK WIDGET WRAPPER */
+.fw-wrap { max-width: 860px; margin: 0 auto; padding: 32px 0 48px; }
+
+/* ── COPY OF WIDGET STYLES ── */
+.ms-track { display: flex; gap: 0; margin-bottom: 1.25rem; border: 0.5px solid #E2DDD4; border-radius: 8px; overflow: hidden; background: #fff; }
+.ms-step { flex: 1; padding: 10px 6px; text-align: center; cursor: pointer; transition: background .15s; border-right: 0.5px solid #E2DDD4; }
+.ms-step:last-child { border-right: none; }
+.ms-step:hover { background: #F7F5F0; }
+.ms-step.active { background: #F7F5F0; }
+.ms-num { font-size: 9px; color: #8A8F9E; margin-bottom: 2px; }
+.ms-name { font-size: 10px; font-weight: 500; color: #5A5F72; line-height: 1.3; }
+.ms-step.active .ms-name { color: #1A1F2E; }
+.ms-step.critical::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: #185FA5; }
+.ms-step { position: relative; }
+
+.ms-nav { display: flex; gap: 6px; margin-bottom: 1.25rem; flex-wrap: wrap; }
+.ms-btn { display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 8px; border: 0.5px solid #E2DDD4; background: #fff; font-size: 12px; color: #5A5F72; cursor: pointer; transition: all .15s; font-family: inherit; }
+.ms-btn:hover { border-color: rgba(26,31,46,.3); color: #1A1F2E; }
+.ms-btn.active { border-color: rgba(26,31,46,.4); color: #1A1F2E; background: #F7F5F0; font-weight: 500; }
+.ms-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+.ms-panel { display: none; }
+.ms-panel.active { display: block; }
+
+.ms-header { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
+.ms-badge { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; margin-top: 2px; }
+.ms-title { font-size: 16px; font-weight: 600; color: #1A1F2E; }
+.ms-desc { font-size: 12px; color: #5A5F72; margin-top: 2px; line-height: 1.5; }
+.critical-pill { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 500; color: #0C447C; background: #E6F1FB; padding: 2px 8px; border-radius: 8px; margin-top: 5px; }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+.panel-card { background: #fff; border: 0.5px solid #E2DDD4; border-radius: 12px; padding: 1rem 1.25rem; }
+.card-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: .04em; color: #8A8F9E; margin-bottom: 10px; }
+.items { list-style: none; }
+.items li { font-size: 13px; color: #5A5F72; padding: 5px 0; border-bottom: 0.5px solid #E2DDD4; display: flex; align-items: flex-start; gap: 8px; line-height: 1.5; }
+.items li:last-child { border-bottom: none; }
+
+.win-card { border-left: 3px solid; border-radius: 0 12px 12px 0; padding: 1rem 1.25rem; margin-bottom: 12px; background: #fff; border-top: 0.5px solid #E2DDD4; border-right: 0.5px solid #E2DDD4; border-bottom: 0.5px solid #E2DDD4; }
+.win-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 6px; }
+.win-text { font-size: 13px; color: #5A5F72; line-height: 1.65; }
+
+.map-header { display: flex; padding: 8px 14px; background: #F7F5F0; border-radius: 12px 12px 0 0; border: 0.5px solid #E2DDD4; border-bottom: none; }
+.map-header span { flex: 1; font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: .05em; color: #8A8F9E; }
+.map-row { display: flex; align-items: center; border-bottom: 0.5px solid #E2DDD4; }
+.map-row:last-child { border-bottom: none; }
+.map-cell { padding: 9px 14px; font-size: 13px; flex: 1; color: #5A5F72; }
+.map-cell.bold { font-weight: 500; color: #1A1F2E; }
+.map-cell.blue { color: #185FA5; font-weight: 500; }
+.map-arrow { width: 36px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.arr-box { width: 26px; height: 26px; border-radius: 8px; background: #BA7517; display: flex; align-items: center; justify-content: center; color: #FAEEDA; font-size: 13px; }
+
+.tier-wrap { display: flex; flex-direction: column; gap: 10px; }
+.tier-card { border: 0.5px solid #E2DDD4; border-radius: 12px; overflow: hidden; }
+.tier-hdr { padding: 10px 14px; }
+.tier-name { font-size: 13px; font-weight: 600; margin-bottom: 1px; }
+.tier-desc { font-size: 11px; opacity: .75; }
+.tier-body { display: grid; grid-template-columns: 1fr 36px 1fr; border-top: 0.5px solid #E2DDD4; }
+.tier-col { padding: 10px 14px; }
+.tier-col-lbl { font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: .04em; color: #8A8F9E; margin-bottom: 7px; }
+.tier-person { font-size: 12px; color: #5A5F72; padding: 3px 0; }
+.tier-person.blue { color: #185FA5; }
+.tier-arr { display: flex; align-items: center; justify-content: center; border-left: 0.5px solid #E2DDD4; border-right: 0.5px solid #E2DDD4; }
+
+.journey-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.j-card { border: 0.5px solid #E2DDD4; border-radius: 12px; padding: 12px 14px; display: flex; gap: 10px; background: #fff; }
+.j-num { width: 28px; height: 28px; border-radius: 50%; background: #1B3A5C; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: #B5D4F4; flex-shrink: 0; }
+.j-stage { font-size: 13px; font-weight: 600; color: #1A1F2E; margin-bottom: 3px; }
+.j-al { font-size: 11px; color: #5A5F72; margin-bottom: 2px; }
+.j-rasa { font-size: 11px; color: #185FA5; }
+
+.contacts-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+.c-card { border: 0.5px solid #E2DDD4; border-radius: 12px; overflow: hidden; background: #fff; }
+.c-bar { height: 3px; background: #BA7517; }
+.c-body { padding: 12px 14px; }
+.c-role { font-size: 13px; font-weight: 600; color: #185FA5; margin-bottom: 4px; }
+.c-email { font-size: 11px; color: #5A5F72; margin-bottom: 6px; }
+.c-desc { font-size: 11px; color: #5A5F72; font-style: italic; line-height: 1.4; }
+
+.check-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+.check-lbl { font-size: 12px; font-weight: 600; color: #1A1F2E; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+.check-items { list-style: none; }
+.check-items li { font-size: 12px; color: #5A5F72; padding: 4px 0; display: flex; align-items: flex-start; gap: 6px; line-height: 1.4; }
+
+.metrics-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 8px; }
+.m-card { background: #F7F5F0; border-radius: 8px; padding: 12px 10px; text-align: center; }
+.m-name { font-size: 11px; color: #5A5F72; line-height: 1.35; margin-top: 6px; }
+
+/* FOOTER */
+.page-footer { background: #1A1F2E; padding: 24px 32px; text-align: center; }
+.page-footer p { font-size: 13px; color: #4A5270; }
+.page-footer a { color: #C8963A; text-decoration: none; }
+
+@media (max-width: 640px) {
+  .two-col, .check-grid, .contacts-grid { grid-template-columns: 1fr; }
+  .journey-grid { grid-template-columns: 1fr; }
+  .metrics-grid { grid-template-columns: repeat(3,1fr); }
+  .hero { padding: 32px 20px; }
+  .fw-wrap { padding: 20px 16px 40px; }
+  .top-bar { padding: 12px 20px; }
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <a href="alana-williams-portfolio.html" class="top-bar-name">Alana Williams</a>
+  <span class="fw-label">Framework</span>
+  <a href="alana-williams-portfolio.html#frameworks" class="top-bar-back">← Back to portfolio</a>
+</div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Implementation Framework</div>
+    <h1 class="hero-title">Enterprise Implementation Kickoff Framework</h1>
+    <p class="hero-sub">Process sets the foundation. Relationships follow execution. Speed to value is the measure of both.</p>
+    <div class="hero-rule">🔒 First 30 days: lock scope, then get a win on the board</div>
+  </div>
+</div>
+
+<div style="max-width:860px;margin:0 auto;padding:0 32px;">
+
+<div style="padding-top:32px;">
+  <div class="ms-track" id="track"></div>
+  <div class="ms-nav" id="nav"></div>
+  <div id="panels"></div>
+</div>
+
+</div>
+
+<div class="page-footer">
+  <p>Alana Williams · <a href="alana-williams-portfolio.html">View full portfolio</a> · alana.williams@rasa.com</p>
+</div>
+
+<script>
+const BLUE="#185FA5",AMBER="#BA7517";
+const milestones=[
+  {id:1,name:"Scope Lock",short:"Scope Lock",color:"#185FA5",bg:"#E6F1FB",icon:"🔒",critical:true,
+   desc:"Before anything else gets built, agreed, or communicated — scope is locked. Every delay I've seen traces back to this not happening fast enough.",
+   win:"The win here isn't a document. It's a room full of stakeholders who all say the same thing when asked what success looks like.",
+   cols:[
+     {label:"What I establish first",items:[{t:"The exact business problem being solved"},{t:"Who has authority to change scope — and who doesn't"},{t:"What 'done' looks like at 30, 60, 90 days"},{t:"Every dependency that could block delivery"},{t:"Where the real risk is hiding"}]},
+     {label:"What gets produced",items:[{t:"Signed scope document"},{t:"Stakeholder map with decision rights"},{t:"Risk register — live from day one"},{t:"Measurable success criteria"},{t:"Communication cadence, agreed upfront"}]}
+   ]},
+  {id:2,name:"Quick Win",short:"Quick Win",color:"#0F6E56",bg:"#E1F5EE",icon:"🚀",critical:true,
+   desc:"The fastest path to a healthy implementation is proof of forward motion. I find the smallest high-visibility deliverable and get it done.",
+   win:"A quick win isn't about being impressive — it's about changing the client's internal narrative from 'this is complex' to 'this is moving.'",
+   cols:[
+     {label:"How I find the quick win",items:[{t:"What is the client already anxious about?"},{t:"What can be delivered in the first two weeks?"},{t:"What would make the executive sponsor look good internally?"},{t:"Where is the technical team blocked right now?"}]},
+     {label:"What gets built",items:[{t:"KPI framework with baseline"},{t:"Implementation timeline — visible to all"},{t:"Confirmed deployment model"},{t:"RACI with no ambiguity"}]}
+   ]},
+  {id:3,name:"Build",short:"Build",color:"#854F0B",bg:"#FAEEDA",icon:"🔨",critical:false,
+   desc:"Weekly cadence, tracked against scope. Every meeting has a purpose. Every risk has an owner. Nothing waits until it becomes a problem.",
+   cols:[
+     {label:"How I run delivery",items:[{t:"Weekly standups — progress, blockers, next actions"},{t:"Technical reviews stay separate from status updates"},{t:"Risk register reviewed every week, not just at kickoff"},{t:"Escalation path defined before it's ever needed"}]},
+     {label:"What I watch for",items:[{t:"Scope creep disguised as 'small asks'"},{t:"Stakeholder drift — contacts who go quiet"},{t:"Technical blockers that don't surface until too late"},{t:"Timeline compression without scope reduction"}]}
+   ]},
+  {id:4,name:"Go / No-Go",short:"Go / No-Go",color:"#D85A30",bg:"#FAECE7",icon:"✓",critical:false,
+   desc:"Go-live is a decision, not a date. I run a structured readiness check across three dimensions before anything moves to production.",
+   type:"checklist"},
+  {id:5,name:"Launch",short:"Launch",color:"#993556",bg:"#FBEAF0",icon:"▶",critical:false,
+   desc:"Launch is the beginning of the value story, not the end of the project. I measure what matters and make sure the client can see it.",
+   type:"metrics"},
+  {id:6,name:"Stakeholder Map",short:"Contacts",color:"#185FA5",bg:"#E6F1FB",icon:"⬡",critical:false,
+   desc:"The right contact at the right moment. Every engagement level mapped and owned.",type:"stakeholder"},
+  {id:7,name:"Relationship Tiers",short:"Tiers",color:"#993C1D",bg:"#FAECE7",icon:"⬡",critical:false,
+   desc:"Three tiers. Each one has a different job. I don't mix them.",type:"hierarchy"},
+  {id:8,name:"Communication Journey",short:"Journey",color:"#3B6D11",bg:"#EAF3DE",icon:"→",critical:false,
+   desc:"Who I contact at each stage. No gaps, no overlaps.",type:"journey"},
+  {id:9,name:"Key Contacts",short:"Key Contacts",color:"#533489",bg:"#EEEDFE",icon:"⊡",critical:false,
+   desc:"Primary points of contact with role and area of ownership.",type:"contacts"},
+];
+
+const contactMap=[
+  {cust:"President / Founder",rasa:"CEO"},{cust:"Chief Operating Officer",rasa:"CPO"},
+  {cust:"Chief Technology Officer",rasa:"CTO / Co-Founder"},{cust:"Chief Revenue Officer",rasa:"CRO"},
+  {cust:"Technical Lead",rasa:"CSM / CSE"},{cust:"Lead Software Engineer",rasa:"CSM / CSE"},
+  {cust:"Software Engineer",rasa:"CSE"},{cust:"Software Developer",rasa:"CSE"},
+];
+const tiers=[
+  {name:"Executive tier",desc:"Contract, scope, outcomes & program ownership",bg:"#FAEEDA",color:AMBER,tc:"#633806",
+   al:["President / Founder","Chief Operating Officer","Chief Technology Officer","Chief Revenue Officer"],
+   rasa:["CEO","CPO","CTO / Co-Founder","CRO"]},
+  {name:"Technical lead tier",desc:"Day-to-day implementation leadership",bg:"#E6F1FB",color:BLUE,tc:"#0C447C",
+   al:["Technical Lead","Lead Software Engineer"],rasa:["Customer Success Manager","Customer Success Engineer"]},
+  {name:"Influencer tier",desc:"Implementation feedback & adoption",bg:"#F1EFE8",color:"#5F5E5A",tc:"#444441",
+   al:["Software Engineer","Software Developer"],rasa:["Customer Success Manager","Customer Success Engineer"]},
+];
+const journey=[
+  {n:1,stage:"Contract & sign-off",al:"President / Founder",rasa:"CEO"},
+  {n:2,stage:"Project kickoff",al:"Chief Technology Officer",rasa:"CTO + CRO"},
+  {n:3,stage:"Product planning",al:"Chief Operating Officer",rasa:"CPO"},
+  {n:4,stage:"Revenue alignment",al:"Chief Revenue Officer",rasa:"CRO"},
+  {n:5,stage:"Implementation",al:"Technical Lead + Lead Engineer",rasa:"CSM + CSE"},
+  {n:6,stage:"Testing & QA",al:"Software Engineer + Developer",rasa:"CSE"},
+  {n:7,stage:"Escalation",al:"Chief Technology Officer",rasa:"CTO + CSM"},
+  {n:8,stage:"Ongoing success",al:"Chief Revenue Officer",rasa:"CRO + CSM"},
+];
+const keyContacts=[
+  {role:"CEO",email:"melissa.gordon@rasa.com",desc:"Contract signer — final executive authority"},
+  {role:"CPO",email:"bjorn.minkmar@rasa.com",desc:"Product accuracy, scope & roadmap decisions"},
+  {role:"CTO / Co-Founder",email:"alan.nichol@rasa.com",desc:"Program ownership & technical escalation"},
+  {role:"CRO",email:"vikas.bhambri@rasa.com",desc:"Project outcomes, KPIs & revenue alignment"},
+  {role:"Customer Success Manager",email:"alana.williams@rasa.com",desc:"Day-to-day lead for technical contacts"},
+  {role:"Customer Success Engineer",email:"s.kalaiselvan@rasa.com",desc:"Technical implementation support & QA"},
+];
+
+function li(text){return`<li><span style="color:#8A8F9E;flex-shrink:0">›</span>${text}</li>`;}
+
+function buildPanel(p){
+  const critPill=p.critical?`<div class="critical-pill">🔒 Critical — first 30 days</div>`:'';
+  const hdr=`<div class="ms-header"><div class="ms-badge" style="background:${p.bg};font-size:18px">${p.icon}</div><div><div class="ms-title">Milestone ${p.id}: ${p.name}</div><div class="ms-desc">${p.desc}</div>${critPill}</div></div>`;
+  const win=p.win?`<div class="win-card" style="border-left-color:${p.color}"><div class="win-label" style="color:${p.color}">How I think about this milestone</div><div class="win-text">${p.win}</div></div>`:'';
+
+  if(p.type==='checklist') return hdr+`<div class="panel-card"><div class="card-label">Go / no-go gates</div><div class="check-grid"><div><div class="check-lbl">🏢 Business</div><ul class="check-items"><li>✓ Executive sponsor confirmed</li><li>✓ Success metrics signed off</li><li>✓ Adoption plan in place</li></ul></div><div><div class="check-lbl">🖥 Technical</div><ul class="check-items"><li>✓ Infrastructure validated</li><li>✓ Integrations confirmed</li><li>✓ Security review done</li></ul></div><div><div class="check-lbl">⚙️ Operational</div><ul class="check-items"><li>✓ Support process built</li><li>✓ Training complete</li><li>✓ Escalation paths documented</li></ul></div></div></div>`;
+
+  if(p.type==='metrics') return hdr+`<div class="panel-card" style="margin-bottom:12px"><div class="card-label">What I measure</div><div class="metrics-grid">${[['⏱','Time to first value'],['📈','Adoption rate'],['📊','User engagement'],['🎯','Business outcomes'],['❤️','Customer health']].map(m=>`<div class="m-card"><div style="font-size:22px">${m[0]}</div><div class="m-name">${m[1]}</div></div>`).join('')}</div></div><div class="win-card" style="border-left-color:${p.color}"><div class="win-label" style="color:${p.color}">How I think about launch</div><div class="win-text">Launch is the beginning of the value story. If the client can't see progress in the first two weeks post-launch, something was missed earlier. I make sure the metrics are visible before go-live — not after.</div></div>`;
+
+  if(p.type==='stakeholder') return hdr+`<div style="border:0.5px solid #E2DDD4;border-radius:12px;overflow:hidden;background:#fff"><div class="map-header"><span>Customer</span><span style="width:36px;flex-shrink:0"></span><span style="color:${BLUE}">Rasa contact</span></div>${contactMap.map(r=>`<div class="map-row"><div class="map-cell bold">${r.cust}</div><div class="map-arrow"><div class="arr-box">→</div></div><div class="map-cell blue">${r.rasa}</div></div>`).join('')}</div>`;
+
+  if(p.type==='hierarchy') return hdr+`<div class="tier-wrap">${tiers.map(t=>`<div class="tier-card"><div class="tier-hdr" style="background:${t.bg}"><div class="tier-name" style="color:${t.tc}">${t.name}</div><div class="tier-desc" style="color:${t.tc}">${t.desc}</div></div><div class="tier-body"><div class="tier-col"><div class="tier-col-lbl">Customer</div>${t.al.map(r=>`<div class="tier-person">${r}</div>`).join('')}</div><div class="tier-arr" style="color:${AMBER};font-size:18px">→</div><div class="tier-col"><div class="tier-col-lbl" style="color:${BLUE}">Rasa</div>${t.rasa.map(r=>`<div class="tier-person blue">${r}</div>`).join('')}</div></div></div>`).join('')}</div>`;
+
+  if(p.type==='journey') return hdr+`<div class="journey-grid">${journey.map(j=>`<div class="j-card"><div class="j-num">${j.n}</div><div><div class="j-stage">${j.stage}</div><div class="j-al">Customer: ${j.al}</div><div class="j-rasa">Rasa: ${j.rasa}</div></div></div>`).join('')}</div>`;
+
+  if(p.type==='contacts') return hdr+`<div class="contacts-grid">${keyContacts.map(c=>`<div class="c-card"><div class="c-bar"></div><div class="c-body"><div class="c-role">${c.role}</div><div class="c-email">${c.email}</div><div class="c-desc">${c.desc}</div></div></div>`).join('')}</div>`;
+
+  const cols=p.cols.map(col=>`<div class="panel-card"><div class="card-label">${col.label}</div><ul class="items">${col.items.map(it=>li(it.t)).join('')}</ul></div>`).join('');
+  return hdr+win+`<div class="two-col">${cols}</div>`;
+}
+
+const trackEl=document.getElementById('track');
+const navEl=document.getElementById('nav');
+const panelsEl=document.getElementById('panels');
+
+milestones.forEach((p,i)=>{
+  const t=document.createElement('div');
+  t.className='ms-step'+(i===0?' active':'')+(p.critical?' critical':'');
+  t.innerHTML=`<div class="ms-num">M${p.id}</div><div class="ms-name">${p.short}</div>`;
+  t.onclick=()=>activate(i);
+  trackEl.appendChild(t);
+
+  const btn=document.createElement('button');
+  btn.className='ms-btn'+(i===0?' active':'');
+  btn.innerHTML=`<span class="ms-dot" style="background:${p.color}"></span>${p.name}`;
+  btn.onclick=()=>activate(i);
+  navEl.appendChild(btn);
+
+  const panel=document.createElement('div');
+  panel.className='ms-panel'+(i===0?' active':'');
+  panel.innerHTML=buildPanel(p);
+  panelsEl.appendChild(panel);
+});
+
+function activate(i){
+  document.querySelectorAll('.ms-step').forEach((el,j)=>el.classList.toggle('active',j===i));
+  document.querySelectorAll('.ms-btn').forEach((el,j)=>el.classList.toggle('active',j===i));
+  document.querySelectorAll('.ms-panel').forEach((el,j)=>el.classList.toggle('active',j===i));
+}
+</script>
+</body>
+</html>

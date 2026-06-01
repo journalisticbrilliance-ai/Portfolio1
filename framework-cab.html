@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Customer Advisory Board Framework — Alana Williams</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#F7F5F0;color:#1A1F2E;-webkit-font-smoothing:antialiased;}
+.top-bar{background:#1A1F2E;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;}
+.top-bar-name{color:#fff;font-size:14px;font-weight:500;text-decoration:none;}
+.top-bar-back{color:#C8963A;font-size:13px;text-decoration:none;}
+.top-bar-back:hover{color:#E8B060;}
+.fw-label{background:#2C3347;color:#9DA5BF;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:4px 12px;border-radius:100px;}
+.hero{background:#1A1F2E;padding:48px 32px 40px;}
+.hero-inner{max-width:860px;margin:0 auto;}
+.hero-eyebrow{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#C8963A;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.hero-eyebrow::before{content:'';width:24px;height:2px;background:#C8963A;}
+.hero-title{font-size:clamp(26px,4vw,40px);font-weight:700;color:#fff;line-height:1.15;letter-spacing:-0.02em;margin-bottom:14px;}
+.hero-sub{font-size:15px;color:#9DA5BF;line-height:1.7;max-width:620px;margin-bottom:24px;}
+.hero-rule{display:inline-flex;align-items:center;gap:8px;background:#2C3347;border:1px solid #3C4560;border-radius:100px;padding:7px 16px;font-size:13px;color:#C8963A;font-weight:500;}
+.fw-wrap{max-width:860px;margin:0 auto;padding:32px 32px 48px;}
+
+.nav-strip{display:flex;gap:6px;margin-bottom:1.25rem;flex-wrap:wrap;}
+.nav-btn{display:flex;align-items:center;gap:6px;padding:6px 14px;border-radius:8px;border:0.5px solid #E2DDD4;background:#fff;font-size:12px;color:#5A5F72;cursor:pointer;transition:all .15s;font-family:inherit;}
+.nav-btn:hover{border-color:rgba(26,31,46,.3);color:#1A1F2E;}
+.nav-btn.active{border-color:rgba(26,31,46,.4);color:#1A1F2E;background:#F7F5F0;font-weight:500;}
+.nav-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+
+.panel-card{background:#fff;border:0.5px solid #E2DDD4;border-radius:12px;padding:1rem 1.25rem;margin-bottom:12px;}
+.card-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:#8A8F9E;margin-bottom:10px;}
+.items{list-style:none;}
+.items li{font-size:13px;color:#5A5F72;padding:5px 0;border-bottom:0.5px solid #E2DDD4;display:flex;align-items:flex-start;gap:8px;line-height:1.5;}
+.items li:last-child{border-bottom:none;}
+
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px;}
+
+.voice-card{border-left:3px solid;border-radius:0 12px 12px 0;padding:1rem 1.25rem;margin-bottom:12px;background:#fff;border-top:0.5px solid #E2DDD4;border-right:0.5px solid #E2DDD4;border-bottom:0.5px solid #E2DDD4;}
+.voice-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px;}
+.voice-text{font-size:13px;color:#5A5F72;line-height:1.65;}
+
+.sec-header{display:flex;align-items:flex-start;gap:12px;margin-bottom:14px;}
+.sec-badge{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;margin-top:2px;}
+.sec-title{font-size:16px;font-weight:600;color:#1A1F2E;}
+.sec-desc{font-size:12px;color:#5A5F72;margin-top:2px;line-height:1.5;}
+
+/* Membership criteria cards */
+.criteria-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:12px;}
+.criteria-card{background:#fff;border:0.5px solid #E2DDD4;border-radius:12px;padding:16px 18px;border-top:3px solid #C8963A;}
+.criteria-title{font-size:13px;font-weight:600;color:#1A1F2E;margin-bottom:5px;}
+.criteria-desc{font-size:12px;color:#5A5F72;line-height:1.5;}
+
+/* Annual program */
+.quarters-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px;}
+.quarter-card{background:#fff;border:0.5px solid #E2DDD4;border-radius:12px;padding:14px;text-align:center;}
+.quarter-label{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#C8963A;margin-bottom:8px;}
+.quarter-theme{font-size:13px;font-weight:600;color:#1A1F2E;line-height:1.3;}
+.quarter-dot{width:6px;height:6px;border-radius:50%;background:#C8963A;margin:8px auto 0;}
+
+/* Outputs */
+.outputs-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+.output-pill{background:#F7F5F0;border:0.5px solid #E2DDD4;border-radius:100px;padding:6px 14px;font-size:12px;font-weight:500;color:#1A1F2E;}
+
+/* Metrics */
+.metrics-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:12px;}
+.metric-tile{background:#F7F5F0;border-radius:8px;padding:12px 10px;text-align:center;}
+.metric-icon{font-size:20px;margin-bottom:5px;}
+.metric-name{font-size:11px;color:#5A5F72;line-height:1.35;}
+
+.page-footer{background:#1A1F2E;padding:24px 32px;text-align:center;}
+.page-footer p{font-size:13px;color:#4A5270;}
+.page-footer a{color:#C8963A;text-decoration:none;}
+
+@media(max-width:640px){
+  .two-col,.three-col,.criteria-grid{grid-template-columns:1fr;}
+  .quarters-grid{grid-template-columns:1fr 1fr;}
+  .metrics-grid{grid-template-columns:repeat(3,1fr);}
+  .hero,.fw-wrap{padding-left:20px;padding-right:20px;}
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <a href="alana-williams-portfolio.html" class="top-bar-name">Alana Williams</a>
+  <span class="fw-label">Framework</span>
+  <a href="alana-williams-portfolio.html#frameworks" class="top-bar-back">← Back to portfolio</a>
+</div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Customer Advisory Board Framework</div>
+    <h1 class="hero-title">Customer Advisory Board Framework</h1>
+    <p class="hero-sub">Most candidates don't have this. A structured executive community that influences product strategy and deepens customer partnerships — built to convert your highest-value customers into strategic allies.</p>
+    <div class="hero-rule">⭐ Unique differentiator — executive community, not just a feedback loop</div>
+  </div>
+</div>
+
+<div class="fw-wrap">
+  <div class="nav-strip" id="nav"></div>
+  <div id="panels"></div>
+</div>
+
+<div class="page-footer">
+  <p>Alana Williams · <a href="alana-williams-portfolio.html">View full portfolio</a> · alana.williams@rasa.com</p>
+</div>
+
+<script>
+const COLOR = "#533489";
+const BG = "#EEEDFE";
+
+const tabs = [
+  {
+    id:"overview", label:"Overview", icon:"⭐",
+    title:"Purpose & positioning",
+    desc:"Create a structured executive community that influences product strategy and strengthens customer partnerships.",
+    voice:"Most CAB programs fail because they're treated as customer appreciation events. This framework treats them as a strategic governance mechanism — the customer influences what gets built, and that influence is what keeps them. When executives have a seat at the product table, retention takes care of itself.",
+    content:"purpose"
+  },
+  {
+    id:"membership", label:"Membership", icon:"👥",
+    title:"Membership criteria",
+    desc:"Not every customer belongs in the CAB. Membership is earned, not offered. Four criteria determine fit.",
+    voice:"Criteria aren't gatekeeping — they're a signal to the customer that membership means something. An invite-only community is worth more than an open one. Executives respond to exclusivity when it's tied to genuine influence.",
+    content:"membership"
+  },
+  {
+    id:"program", label:"Annual Program", icon:"📅",
+    title:"Annual program cadence",
+    desc:"Four quarterly engagements, each with a distinct purpose. Not a recurring check-in — a structured progression.",
+    voice:"The Q3 Innovation Workshop is the most important session. That's where the customer stops being a buyer and starts being a co-creator. When they leave that session with their fingerprints on the product roadmap, the next renewal conversation is already won.",
+    content:"program"
+  },
+  {
+    id:"outputs", label:"Outputs", icon:"📤",
+    title:"What the program produces",
+    desc:"Five tangible outputs that create value for both the customer and the business.",
+    voice:"Reference customers and beta programs are the outputs that compound. One reference customer accelerates three new deals. One beta participant shapes the product in a direction that retains five more. The CAB ROI isn't measured in attendance — it's measured in what those relationships unlock.",
+    content:"outputs"
+  },
+  {
+    id:"metrics", label:"Success Metrics", icon:"📊",
+    title:"How success is measured",
+    desc:"Five metrics that prove the program is creating value — not just activity.",
+    content:"metrics"
+  },
+];
+
+function li(t){return`<li><span style="color:#8A8F9E;flex-shrink:0">›</span>${t}</li>`;}
+
+function buildTab(t){
+  const hdr=`<div class="sec-header"><div class="sec-badge" style="background:${BG}">${t.icon}</div><div><div class="sec-title">${t.title}</div><div class="sec-desc">${t.desc}</div></div></div>`;
+  const voice=t.voice?`<div class="voice-card" style="border-left-color:${COLOR}"><div class="voice-label" style="color:${COLOR}">How I think about this</div><div class="voice-text">${t.voice}</div></div>`:'';
+
+  if(t.content==='purpose'){
+    return hdr+voice+`
+    <div class="two-col">
+      <div class="panel-card">
+        <div class="card-label">Program purpose</div>
+        <ul class="items">
+          ${li('Create a structured executive community')}
+          ${li('Influence product strategy through customer voice')}
+          ${li('Strengthen partnerships at the C-suite level')}
+          ${li('Accelerate reference and expansion pipelines')}
+        </ul>
+      </div>
+      <div class="panel-card">
+        <div class="card-label">What makes this different</div>
+        <ul class="items">
+          ${li('Invite-only membership with defined criteria')}
+          ${li('Structured annual cadence — not ad hoc')}
+          ${li('Customer has genuine product influence')}
+          ${li('Outputs create mutual value, not just goodwill')}
+        </ul>
+      </div>
+    </div>`;
+  }
+
+  if(t.content==='membership'){
+    return hdr+voice+`
+    <div class="criteria-grid">
+      <div class="criteria-card">
+        <div class="criteria-title">Executive sponsor</div>
+        <div class="criteria-desc">A C-suite or VP-level champion who can make decisions, not just attend meetings. Without this, the feedback loop never closes.</div>
+      </div>
+      <div class="criteria-card">
+        <div class="criteria-title">Strategic deployment</div>
+        <div class="criteria-desc">The platform is central to a business-critical function — not a pilot, not a proof of concept. Skin in the game.</div>
+      </div>
+      <div class="criteria-card">
+        <div class="criteria-title">Product influence potential</div>
+        <div class="criteria-desc">The customer operates in a use case that represents a broader market segment. Their feedback shapes something that helps many.</div>
+      </div>
+      <div class="criteria-card">
+        <div class="criteria-title">Growth potential</div>
+        <div class="criteria-desc">Room to expand — whether in seats, use cases, or budget. CAB members are partners, not just accounts.</div>
+      </div>
+    </div>`;
+  }
+
+  if(t.content==='program'){
+    return hdr+voice+`
+    <div class="quarters-grid">
+      <div class="quarter-card">
+        <div class="quarter-label">Q1</div>
+        <div class="quarter-theme">Industry Trends</div>
+        <div style="font-size:11px;color:#5A5F72;margin-top:6px;line-height:1.4;">Set shared context. What's changing in their world and ours.</div>
+        <div class="quarter-dot"></div>
+      </div>
+      <div class="quarter-card">
+        <div class="quarter-label">Q2</div>
+        <div class="quarter-theme">Product Roadmap</div>
+        <div style="font-size:11px;color:#5A5F72;margin-top:6px;line-height:1.4;">Customer sees what's coming. Feedback shapes prioritization.</div>
+        <div class="quarter-dot"></div>
+      </div>
+      <div class="quarter-card" style="border-top-color:#1A1F2E;">
+        <div class="quarter-label" style="color:#1A1F2E;">Q3</div>
+        <div class="quarter-theme">Innovation Workshop</div>
+        <div style="font-size:11px;color:#5A5F72;margin-top:6px;line-height:1.4;">Co-creation session. Customer fingerprints on future product.</div>
+        <div class="quarter-dot" style="background:#1A1F2E;"></div>
+      </div>
+      <div class="quarter-card">
+        <div class="quarter-label">Q4</div>
+        <div class="quarter-theme">Executive Summit</div>
+        <div style="font-size:11px;color:#5A5F72;margin-top:6px;line-height:1.4;">Peer exchange. Members learn from each other, not just from us.</div>
+        <div class="quarter-dot"></div>
+      </div>
+    </div>
+    <div class="voice-card" style="border-left-color:#1A1F2E;margin-top:0">
+      <div class="voice-label" style="color:#1A1F2E;">Why Q3 is the most important</div>
+      <div class="voice-text">When a customer leaves the Innovation Workshop with their ideas reflected in the roadmap, the next renewal conversation is already won. Co-creation is the strongest retention mechanism in the program.</div>
+    </div>`;
+  }
+
+  if(t.content==='outputs'){
+    return hdr+voice+`
+    <div class="panel-card" style="margin-bottom:12px;">
+      <div class="card-label">Program outputs</div>
+      <div class="outputs-row">
+        <span class="output-pill">🗣 Voice of customer</span>
+        <span class="output-pill">📋 Product feedback</span>
+        <span class="output-pill">🧪 Beta programs</span>
+        <span class="output-pill">📣 Reference customers</span>
+        <span class="output-pill">🤝 Strategic partnerships</span>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="panel-card">
+        <div class="card-label">What compounds</div>
+        <ul class="items">
+          ${li('One reference customer accelerates multiple new deals')}
+          ${li('One beta participant shapes product direction for many')}
+          ${li('Strategic partnerships create mutual market presence')}
+        </ul>
+      </div>
+      <div class="panel-card">
+        <div class="card-label">What gets fed back to Product</div>
+        <ul class="items">
+          ${li('Prioritized feature requests with business context')}
+          ${li('Use case gaps that represent market segments')}
+          ${li('Competitive intelligence from the field')}
+        </ul>
+      </div>
+    </div>`;
+  }
+
+  if(t.content==='metrics'){
+    return hdr+`
+    <div class="metrics-grid">
+      <div class="metric-tile"><div class="metric-icon">👥</div><div class="metric-name">Attendance rate</div></div>
+      <div class="metric-tile"><div class="metric-icon">❤️</div><div class="metric-name">NPS score</div></div>
+      <div class="metric-tile"><div class="metric-icon">📋</div><div class="metric-name">Product feedback adoption</div></div>
+      <div class="metric-tile"><div class="metric-icon">📈</div><div class="metric-name">Expansion revenue</div></div>
+      <div class="metric-tile"><div class="metric-icon">🤝</div><div class="metric-name">Executive engagement</div></div>
+    </div>
+    <div class="voice-card" style="border-left-color:${COLOR}">
+      <div class="voice-label" style="color:${COLOR}">How I read these metrics</div>
+      <div class="voice-text">Attendance and NPS are lagging indicators — they tell you if the program is working. Product feedback adoption and expansion revenue are the leading indicators — they tell you if the program is compounding. A CAB with high attendance and flat expansion revenue isn't a success, it's a social club.</div>
+    </div>`;
+  }
+  return hdr;
+}
+
+const navEl=document.getElementById('nav');
+const panelsEl=document.getElementById('panels');
+
+tabs.forEach((t,i)=>{
+  const btn=document.createElement('button');
+  btn.className='nav-btn'+(i===0?' active':'');
+  btn.innerHTML=`<span class="nav-dot" style="background:${COLOR}"></span>${t.icon} ${t.label}`;
+  btn.onclick=()=>activate(i);
+  navEl.appendChild(btn);
+
+  const panel=document.createElement('div');
+  panel.className='tab-panel'+(i===0?' active':'');
+  panel.innerHTML=buildTab(t);
+  panelsEl.appendChild(panel);
+});
+
+function activate(i){
+  document.querySelectorAll('.nav-btn').forEach((el,j)=>el.classList.toggle('active',j===i));
+  document.querySelectorAll('.tab-panel').forEach((el,j)=>el.classList.toggle('active',j===i));
+}
+</script>
+</body>
+</html>
