@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Installed-Base Growth Operating Model — Alana Williams</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#F7F5F0;color:#1A1F2E;-webkit-font-smoothing:antialiased;}
+.top-bar{background:#1A1F2E;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.top-bar-name{color:#fff;font-size:14px;font-weight:500;text-decoration:none;}
+.top-bar-back{color:#C8963A;font-size:13px;text-decoration:none;}
+.top-bar-back:hover{color:#E8B060;}
+.fw-label{background:#2C3347;color:#9DA5BF;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:4px 12px;border-radius:100px;}
+.hero{background:#1A1F2E;padding:48px 32px 40px;}
+.hero-inner{max-width:860px;margin:0 auto;}
+.hero-eyebrow{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#C8963A;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.hero-eyebrow::before{content:'';width:24px;height:2px;background:#C8963A;}
+.hero-title{font-size:clamp(26px,4vw,40px);font-weight:700;color:#fff;line-height:1.15;letter-spacing:-0.02em;margin-bottom:14px;}
+.hero-sub{font-size:15px;color:#9DA5BF;line-height:1.7;max-width:640px;margin-bottom:24px;}
+.hero-rule{display:inline-flex;align-items:center;gap:8px;background:#2C3347;border:1px solid #3C4560;border-radius:100px;padding:7px 16px;font-size:13px;color:#C8963A;font-weight:500;}
+.fw-wrap{max-width:860px;margin:0 auto;padding:32px 32px 48px;}
+
+.proposed{display:inline-block;font-size:12px;color:#5A5F72;background:#fff;border:0.5px solid #E2DDD4;border-radius:100px;padding:5px 14px;margin-bottom:16px;}
+.nav-strip{display:flex;gap:6px;margin-bottom:1.25rem;flex-wrap:wrap;}
+.nav-btn{display:flex;align-items:center;gap:6px;padding:6px 14px;border-radius:8px;border:0.5px solid #E2DDD4;background:#fff;font-size:12px;color:#5A5F72;cursor:pointer;transition:all .15s;font-family:inherit;}
+.nav-btn:hover{border-color:rgba(26,31,46,.3);color:#1A1F2E;}
+.nav-btn:focus-visible{outline:2px solid #0F6E56;outline-offset:2px;}
+.nav-btn.active{border-color:rgba(26,31,46,.4);color:#1A1F2E;background:#F7F5F0;font-weight:500;}
+.nav-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;background:#0F6E56;}
+
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+
+.sec-header{display:flex;align-items:flex-start;gap:12px;margin-bottom:14px;}
+.sec-badge{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;margin-top:2px;background:#E1F5EE;}
+.sec-title{font-size:16px;font-weight:600;color:#1A1F2E;}
+.sec-desc{font-size:12px;color:#5A5F72;margin-top:2px;line-height:1.5;}
+
+.voice-card{border-left:3px solid #0F6E56;border-radius:0 12px 12px 0;padding:1rem 1.25rem;margin-bottom:12px;background:#fff;border-top:0.5px solid #E2DDD4;border-right:0.5px solid #E2DDD4;border-bottom:0.5px solid #E2DDD4;}
+.voice-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px;color:#0F6E56;}
+.voice-text{font-size:13px;color:#5A5F72;line-height:1.65;}
+
+.panel-card{background:#fff;border:0.5px solid #E2DDD4;border-radius:12px;padding:1rem 1.25rem;margin-bottom:12px;}
+.card-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:#6B7085;margin-bottom:10px;}
+.card-title{font-size:13px;font-weight:600;color:#1A1F2E;margin-bottom:5px;}
+.card-text{font-size:12px;color:#5A5F72;line-height:1.55;}
+.items{list-style:none;}
+.items li{font-size:13px;color:#5A5F72;padding:5px 0;border-bottom:0.5px solid #E2DDD4;display:flex;align-items:flex-start;gap:8px;line-height:1.5;}
+.items li:last-child{border-bottom:none;}
+.items li span.b{color:#6B7085;flex-shrink:0;}
+
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:12px;}
+.two-col > .panel-card{margin-bottom:12px;}
+
+.criteria-card{background:#fff;border:0.5px solid #E2DDD4;border-radius:12px;padding:16px 18px;border-top:3px solid #C8963A;}
+.criteria-num{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#8A5A0A;margin-bottom:6px;}
+.criteria-title{font-size:13px;font-weight:600;color:#1A1F2E;margin-bottom:5px;}
+.criteria-desc{font-size:12px;color:#5A5F72;line-height:1.5;}
+
+.map{background:#1A1F2E;border-radius:12px;padding:20px 22px 16px;margin-bottom:12px;}
+.legend{display:flex;flex-wrap:wrap;gap:10px 24px;margin:0 0 16px;font-size:12px;color:#C9CDDD;}
+.legend div{display:flex;align-items:center;gap:8px;}
+.scroll{overflow-x:auto;}
+.mgrid{min-width:620px;}
+.mrow{display:grid;grid-template-columns:70px 84px repeat(6,minmax(0,1fr));align-items:center;padding:12px 0;border-top:1px solid rgba(255,255,255,.12);}
+.mhead{border-top:0;align-items:end;padding:0 0 10px;font-size:11px;color:#9DA5BF;}
+.mhead .pc{text-align:center;padding:0 4px;line-height:1.3;}
+.lab{font-size:13px;font-weight:600;color:#fff;}
+.hl{display:flex;align-items:center;gap:7px;font-size:12px;color:#C9CDDD;}
+.hd{width:9px;height:9px;border-radius:50%;display:inline-block;flex-shrink:0;}
+.hd.green{background:#7FD1A8}.hd.yellow{background:#F2CB6B}.hd.red{background:#F28A8A}
+.cell{display:flex;justify-content:center;}
+.dot{position:relative;display:block;width:22px;height:22px;border-radius:50%;}
+.dot.ours{background:#fff;}
+.dot.else{border:3px solid #C8963A;}
+.dot.gap{border:2px dashed #6B7391;}
+.legend .dot{width:18px;height:18px;}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+.map-note{font-size:12px;color:#9DA5BF;margin-top:12px;}
+
+.plays{list-style:none;}
+.plays li{display:grid;grid-template-columns:28px 130px 1fr;gap:12px;align-items:baseline;padding:10px 0;border-bottom:0.5px solid #E2DDD4;font-size:13px;color:#5A5F72;line-height:1.55;}
+.plays li:last-child{border-bottom:none;}
+.plays .n{font-size:15px;font-weight:600;color:#8A5A0A;}
+.plays .pt{font-weight:600;color:#1A1F2E;}
+
+.gate-card{background:#fff;border:0.5px solid #E2DDD4;border-radius:12px;padding:16px 18px;}
+.gate-head{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#1A1F2E;margin-bottom:6px;}
+.gate-head span{width:10px;height:10px;border-radius:50%;display:inline-block;flex-shrink:0;}
+
+.sys{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:stretch;margin-bottom:12px;}
+.sys .panel-card{margin-bottom:0;}
+.sys-link{display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#8A5A0A;text-align:center;min-width:90px;gap:6px;}
+.sys-link i{display:block;width:100%;height:2px;background:#C8963A;}
+
+.metrics-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:12px;}
+.metric-tile{background:#fff;border:0.5px solid #E2DDD4;border-radius:8px;padding:12px 10px;text-align:center;}
+.metric-icon{font-size:20px;margin-bottom:5px;}
+.metric-name{font-size:11px;color:#5A5F72;line-height:1.35;}
+.days-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px;}
+.day-card{background:#fff;border:0.5px solid #E2DDD4;border-radius:12px;padding:14px;}
+.day-label{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#8A5A0A;margin-bottom:6px;}
+.day-text{font-size:12px;color:#5A5F72;line-height:1.5;}
+
+.page-footer{background:#1A1F2E;padding:24px 32px;text-align:center;}
+.page-footer p{font-size:13px;color:#8A93B0;}
+.page-footer a{color:#C8963A;text-decoration:none;}
+
+@media(max-width:700px){
+  .two-col,.three-col,.sys,.days-grid{grid-template-columns:1fr;}
+  .metrics-grid{grid-template-columns:repeat(2,1fr);}
+  .sys-link{flex-direction:row;min-width:0;padding:4px 0;}
+  .sys-link i{width:40px;}
+  .hero,.fw-wrap{padding-left:20px;padding-right:20px;}
+  .plays li{grid-template-columns:24px 1fr;}
+  .plays li span:last-child{grid-column:2;}
+  .map{padding:18px 14px 14px;}
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <a href="index.html" class="top-bar-name">Alana Williams</a>
+  <span class="fw-label">Framework</span>
+  <a href="index.html#frameworks" class="top-bar-back">← Back to portfolio</a>
+</div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Growth Operating Model</div>
+    <h1 class="hero-title">Installed-Base Growth Operating Model</h1>
+    <p class="hero-sub">How one customer success manager grows a medical equipment company's existing lab accounts across three states without hurting uptime. Built for a company that sells to Mohs surgery labs.</p>
+    <div class="hero-rule">Fix first, then grow</div>
+  </div>
+</div>
+
+<div class="fw-wrap">
+  <div class="proposed">Proposed model · built from public information · lab data is illustrative</div>
+
+  <div class="nav-strip" role="tablist" aria-label="Operating model sections">
+    <button class="nav-btn active" role="tab" id="t-overview" aria-controls="p-overview" aria-selected="true"><span class="nav-dot"></span><span aria-hidden="true">⭐</span> Overview</button>
+    <button class="nav-btn" role="tab" id="t-process" aria-controls="p-process" aria-selected="false" tabindex="-1"><span class="nav-dot"></span><span aria-hidden="true">🔁</span> Process</button>
+    <button class="nav-btn" role="tab" id="t-map" aria-controls="p-map" aria-selected="false" tabindex="-1"><span class="nav-dot"></span><span aria-hidden="true">🗺</span> White Space</button>
+    <button class="nav-btn" role="tab" id="t-plays" aria-controls="p-plays" aria-selected="false" tabindex="-1"><span class="nav-dot"></span><span aria-hidden="true">📈</span> Plays</button>
+    <button class="nav-btn" role="tab" id="t-gate" aria-controls="p-gate" aria-selected="false" tabindex="-1"><span class="nav-dot"></span><span aria-hidden="true">🚦</span> Health Gate</button>
+    <button class="nav-btn" role="tab" id="t-roles" aria-controls="p-roles" aria-selected="false" tabindex="-1"><span class="nav-dot"></span><span aria-hidden="true">👥</span> Roles</button>
+    <button class="nav-btn" role="tab" id="t-systems" aria-controls="p-systems" aria-selected="false" tabindex="-1"><span class="nav-dot"></span><span aria-hidden="true">🔗</span> Systems</button>
+    <button class="nav-btn" role="tab" id="t-measure" aria-controls="p-measure" aria-selected="false" tabindex="-1"><span class="nav-dot"></span><span aria-hidden="true">📊</span> Measures &amp; Launch</button>
+  </div>
+
+  <div class="tab-panel active" role="tabpanel" id="p-overview" aria-labelledby="t-overview">
+    <div class="sec-header"><div class="sec-badge" aria-hidden="true">⭐</div><div><div class="sec-title">Purpose &amp; positioning</div><div class="sec-desc">Grow revenue inside labs the company already serves, and keep every lab running while doing it.</div></div></div>
+    <div class="voice-card"><div class="voice-label">The rule</div><div class="voice-text">A Mohs lab runs on same-day surgery. If the cryostat is down or the blades run out, patients wait. So health comes first. Uptime earns the trust that expansion needs.</div></div>
+    <div class="two-col">
+      <div class="panel-card">
+        <div class="card-label">What it is</div>
+        <ul class="items">
+          <li><span class="b">›</span>A model for one CSM covering Florida, Georgia, and Tennessee</li>
+          <li><span class="b">›</span>Focused on growing existing accounts</li>
+          <li><span class="b">›</span>Runs on service data and sales data joined on one account ID</li>
+          <li><span class="b">›</span>Health decides what gets sold</li>
+        </ul>
+      </div>
+      <div class="panel-card">
+        <div class="card-label">What makes it different</div>
+        <ul class="items">
+          <li><span class="b">›</span>Uptime comes before any pitch</li>
+          <li><span class="b">›</span>Every play starts from evidence, not quota</li>
+          <li><span class="b">›</span>CSM sells small items, KAM sells capital</li>
+          <li><span class="b">›</span>Roles and credit are settled before launch</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-panel" role="tabpanel" id="p-process" aria-labelledby="t-process" hidden>
+    <div class="sec-header"><div class="sec-badge" aria-hidden="true">🔁</div><div><div class="sec-title">The process</div><div class="sec-desc">Six steps, run on repeat for every account.</div></div></div>
+    <div class="three-col">
+      <div class="criteria-card"><div class="criteria-num">Step 1</div><div class="criteria-title">Map accounts</div><div class="criteria-desc">Match sales and service records on one account ID. Pull current spend per lab.</div></div>
+      <div class="criteria-card"><div class="criteria-num">Step 2</div><div class="criteria-title">Score health</div><div class="criteria-desc">Green, yellow, or red from downtime, repeat tickets, reorders, and contract date.</div></div>
+      <div class="criteria-card"><div class="criteria-num">Step 3</div><div class="criteria-title">Find the gaps</div><div class="criteria-desc">White space map: what each lab buys from us, buys elsewhere, or doesn't have.</div></div>
+      <div class="criteria-card"><div class="criteria-num">Step 4</div><div class="criteria-title">Rank and plan</div><div class="criteria-desc">Gap size, health, and likelihood to buy. One-page plan for top accounts.</div></div>
+      <div class="criteria-card"><div class="criteria-num">Step 5</div><div class="criteria-title">Run the play</div><div class="criteria-desc">Consumables, then service plans, then training, then capital.</div></div>
+      <div class="criteria-card"><div class="criteria-num">Step 6</div><div class="criteria-title">Hand off and track</div><div class="criteria-desc">CSM logs the opportunity. KAM accepts or declines. Reviewed weekly.</div></div>
+    </div>
+  </div>
+
+  <div class="tab-panel" role="tabpanel" id="p-map" aria-labelledby="t-map" hidden>
+    <div class="sec-header"><div class="sec-badge" aria-hidden="true">🗺</div><div><div class="sec-title">Find the white space</div><div class="sec-desc">One row per lab. One column per product. Every ring and every dashed circle is a place to grow, once the lab is healthy.</div></div></div>
+    <div class="map">
+      <div class="legend">
+        <div><span class="dot ours"></span>Buys from us</div>
+        <div><span class="dot else"></span>Buys from someone else</div>
+        <div><span class="dot gap"></span>Not in the lab yet</div>
+      </div>
+      <div class="scroll"><div class="mgrid">
+        <div class="mrow mhead"><div>Lab</div><div>Health</div><div class="pc">Cryostat</div><div class="pc">Stainer</div><div class="pc">Embedding center</div><div class="pc">Consumables</div><div class="pc">Service plan</div><div class="pc">Training</div></div>
+        <div class="mrow"><div class="lab">Lab A</div><div class="hl"><span class="hd green" aria-hidden="true"></span>Green</div><div class="cell"><span class="dot ours"><span class="sr">Lab A, Cryostat: buys from us</span></span></div><div class="cell"><span class="dot else"><span class="sr">Lab A, Stainer: buys from someone else</span></span></div><div class="cell"><span class="dot ours"><span class="sr">Lab A, Embedding center: buys from us</span></span></div><div class="cell"><span class="dot else"><span class="sr">Lab A, Consumables: buys from someone else</span></span></div><div class="cell"><span class="dot gap"><span class="sr">Lab A, Service plan: not in the lab yet</span></span></div><div class="cell"><span class="dot gap"><span class="sr">Lab A, Training: not in the lab yet</span></span></div></div>
+        <div class="mrow"><div class="lab">Lab B</div><div class="hl"><span class="hd green" aria-hidden="true"></span>Green</div><div class="cell"><span class="dot ours"><span class="sr">Lab B, Cryostat: buys from us</span></span></div><div class="cell"><span class="dot ours"><span class="sr">Lab B, Stainer: buys from us</span></span></div><div class="cell"><span class="dot gap"><span class="sr">Lab B, Embedding center: not in the lab yet</span></span></div><div class="cell"><span class="dot ours"><span class="sr">Lab B, Consumables: buys from us</span></span></div><div class="cell"><span class="dot ours"><span class="sr">Lab B, Service plan: buys from us</span></span></div><div class="cell"><span class="dot gap"><span class="sr">Lab B, Training: not in the lab yet</span></span></div></div>
+        <div class="mrow"><div class="lab">Lab C</div><div class="hl"><span class="hd red" aria-hidden="true"></span>Red</div><div class="cell"><span class="dot ours"><span class="sr">Lab C, Cryostat: buys from us</span></span></div><div class="cell"><span class="dot gap"><span class="sr">Lab C, Stainer: not in the lab yet</span></span></div><div class="cell"><span class="dot gap"><span class="sr">Lab C, Embedding center: not in the lab yet</span></span></div><div class="cell"><span class="dot else"><span class="sr">Lab C, Consumables: buys from someone else</span></span></div><div class="cell"><span class="dot gap"><span class="sr">Lab C, Service plan: not in the lab yet</span></span></div><div class="cell"><span class="dot gap"><span class="sr">Lab C, Training: not in the lab yet</span></span></div></div>
+        <div class="mrow"><div class="lab">Lab D</div><div class="hl"><span class="hd yellow" aria-hidden="true"></span>Yellow</div><div class="cell"><span class="dot else"><span class="sr">Lab D, Cryostat: buys from someone else</span></span></div><div class="cell"><span class="dot else"><span class="sr">Lab D, Stainer: buys from someone else</span></span></div><div class="cell"><span class="dot else"><span class="sr">Lab D, Embedding center: buys from someone else</span></span></div><div class="cell"><span class="dot ours"><span class="sr">Lab D, Consumables: buys from us</span></span></div><div class="cell"><span class="dot gap"><span class="sr">Lab D, Service plan: not in the lab yet</span></span></div><div class="cell"><span class="dot gap"><span class="sr">Lab D, Training: not in the lab yet</span></span></div></div>
+        <div class="mrow"><div class="lab">Lab E</div><div class="hl"><span class="hd green" aria-hidden="true"></span>Green</div><div class="cell"><span class="dot ours"><span class="sr">Lab E, Cryostat: buys from us</span></span></div><div class="cell"><span class="dot ours"><span class="sr">Lab E, Stainer: buys from us</span></span></div><div class="cell"><span class="dot ours"><span class="sr">Lab E, Embedding center: buys from us</span></span></div><div class="cell"><span class="dot else"><span class="sr">Lab E, Consumables: buys from someone else</span></span></div><div class="cell"><span class="dot ours"><span class="sr">Lab E, Service plan: buys from us</span></span></div><div class="cell"><span class="dot gap"><span class="sr">Lab E, Training: not in the lab yet</span></span></div></div>
+      </div></div>
+      <div class="map-note">Illustration only. Sample labs, not real accounts. Lab C is red, so it gets fixed before anyone pitches.</div>
+    </div>
+    <div class="panel-card">
+      <div class="card-label">How targets get ranked</div>
+      <p class="card-text">Size of the gap × account health × likelihood to buy. A healthy lab with three gaps goes first. A red lab gets fixed before anyone pitches. Tier 1 and 2 labs get a one-page account plan: current spend, gaps, next play, buyer, and owner.</p>
+    </div>
+  </div>
+
+  <div class="tab-panel" role="tabpanel" id="p-plays" aria-labelledby="t-plays" hidden>
+    <div class="sec-header"><div class="sec-badge" aria-hidden="true">📈</div><div><div class="sec-title">Run the plays in this order</div><div class="sec-desc">Easiest first. Each play starts from evidence: a ticket pattern, a reorder drop, a change in the lab.</div></div></div>
+    <div class="panel-card">
+      <ol class="plays">
+        <li><span class="n">1</span><span class="pt">Consumables</span><span>Move labs buying blades and media elsewhere onto a supply program. Low risk and fast.</span></li>
+        <li><span class="n">2</span><span class="pt">Service plans</span><span>Offer fuller coverage to labs with uncovered instruments or repeat repairs.</span></li>
+        <li><span class="n">3</span><span class="pt">Training</span><span>Tie it to a new surgeon or histotech, or to sectioning quality issues.</span></li>
+        <li><span class="n">4</span><span class="pt">Capital</span><span>Stainer, embedding center, second cryostat, or replacement. Longer deals, so plan a year out.</span></li>
+      </ol>
+    </div>
+    <div class="panel-card">
+      <div class="card-label">Triggers that start a play</div>
+      <ul class="items">
+        <li><span class="b">›</span>Repeat repairs on the same instrument</li>
+        <li><span class="b">›</span>Reorders that slow down or stop</li>
+        <li><span class="b">›</span>A new surgeon or histotech joins the lab</li>
+        <li><span class="b">›</span>Stain quality complaints</li>
+        <li><span class="b">›</span>An aging cryostat with rising repair cost</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="tab-panel" role="tabpanel" id="p-gate" aria-labelledby="t-gate" hidden>
+    <div class="sec-header"><div class="sec-badge" aria-hidden="true">🚦</div><div><div class="sec-title">The health gate decides what gets sold</div><div class="sec-desc">Scored in Power BI, green, yellow, or red.</div></div></div>
+    <div class="three-col">
+      <div class="gate-card"><div class="gate-head"><span style="background:#2F7D5B"></span>Green</div><div class="card-text">Full expansion plan. Consumables, service, training, and capital are all on the table.</div></div>
+      <div class="gate-card"><div class="gate-head"><span style="background:#C8963A"></span>Yellow</div><div class="card-text">Sell carefully. Consumables and training only while the trend turns around.</div></div>
+      <div class="gate-card"><div class="gate-head"><span style="background:#B3372F"></span>Red</div><div class="card-text">Fix first. The CSM calls within a week. No selling until it's fixed.</div></div>
+    </div>
+    <div class="panel-card">
+      <div class="card-label">What goes into the score</div>
+      <ul class="items">
+        <li><span class="b">›</span>Downtime and repeat tickets</li>
+        <li><span class="b">›</span>Time to fix</li>
+        <li><span class="b">›</span>Preventive maintenance done on schedule</li>
+        <li><span class="b">›</span>Reorder trend</li>
+        <li><span class="b">›</span>Contract end date</li>
+        <li><span class="b">›</span>Training gaps or staff changes</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="tab-panel" role="tabpanel" id="p-roles" aria-labelledby="t-roles" hidden>
+    <div class="sec-header"><div class="sec-badge" aria-hidden="true">👥</div><div><div class="sec-title">Who does what</div><div class="sec-desc">The CSM finds the need. The KAM owns the big deals. The coordinators keep the labs running.</div></div></div>
+    <div class="three-col">
+      <div class="panel-card" style="margin-bottom:0;"><div class="card-title">Customer success manager</div><div class="card-text">Leads expansion in existing labs. Quotes consumables, service plans, and training. Owns account plans and the health view.</div></div>
+      <div class="panel-card" style="margin-bottom:0;"><div class="card-title">Key account manager</div><div class="card-text">Owns capital deals, pricing, contracts, and new labs. Accepts or declines CS-sourced opportunities within a few days and logs why.</div></div>
+      <div class="panel-card" style="margin-bottom:0;"><div class="card-title">Service and support coordinator</div><div class="card-text">Runs daily service: tickets, dispatch, parts, and loaners. Approves loaners and rush ships within set limits. Flags frustrated labs to the CSM.</div></div>
+    </div>
+    <div style="height:12px"></div>
+    <div class="two-col">
+      <div class="panel-card">
+        <div class="card-label">Working rhythm</div>
+        <ul class="items">
+          <li><span class="b">›</span>Daily: CSM and coordinators check open and aging tickets</li>
+          <li><span class="b">›</span>Weekly: CSM and KAMs review at-risk accounts and open opportunities</li>
+          <li><span class="b">›</span>Monthly: health score review and repeat issues</li>
+          <li><span class="b">›</span>Quarterly: on-site reviews for top accounts</li>
+        </ul>
+      </div>
+      <div class="panel-card">
+        <div class="card-label">Territory and travel (proposed)</div>
+        <ul class="items">
+          <li><span class="b">›</span>Florida gets about half of on-site visits</li>
+          <li><span class="b">›</span>Group trips by area: never fly for one lab if you can see three</li>
+          <li><span class="b">›</span>Georgia and Tennessee lean on video between visits</li>
+          <li><span class="b">›</span>Add a second CSM when Florida fills the calendar</li>
+        </ul>
+      </div>
+    </div>
+    <div class="voice-card"><div class="voice-label">One rule</div><div class="voice-text">No pitch to a lab with an open problem. The CSM checks health before any conversation about growth.</div></div>
+  </div>
+
+  <div class="tab-panel" role="tabpanel" id="p-systems" aria-labelledby="t-systems" hidden>
+    <div class="sec-header"><div class="sec-badge" aria-hidden="true">🔗</div><div><div class="sec-title">Two systems, one account ID</div><div class="sec-desc">Service data and sales data have to line up before anything else works.</div></div></div>
+    <div class="sys">
+      <div class="panel-card"><div class="card-title">Power BI</div><div class="card-text">Service data. Tickets, uptime, preventive maintenance, repairs, and the health score.</div></div>
+      <div class="sys-link"><span>One account ID</span><i aria-hidden="true"></i></div>
+      <div class="panel-card"><div class="card-title">Dynamics</div><div class="card-text">Sales data. Accounts, contracts, orders, and opportunities.</div></div>
+    </div>
+    <div class="panel-card">
+      <div class="card-label">How a need becomes a deal</div>
+      <ul class="items">
+        <li><span class="b">›</span>CSM spots a trigger and logs a CS-sourced opportunity in Dynamics with a source tag and a note</li>
+        <li><span class="b">›</span>KAM accepts or declines within a few days and logs why</li>
+        <li><span class="b">›</span>The health score shows in Dynamics so KAMs see it</li>
+        <li><span class="b">›</span>A link to the account shows in Power BI</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="tab-panel" role="tabpanel" id="p-measure" aria-labelledby="t-measure" hidden>
+    <div class="sec-header"><div class="sec-badge" aria-hidden="true">📊</div><div><div class="sec-title">How success is measured</div><div class="sec-desc">Five numbers. Baselines in the first quarter, targets after.</div></div></div>
+    <div class="metrics-grid">
+      <div class="metric-tile"><div class="metric-icon" aria-hidden="true">📦</div><div class="metric-name">Products per account</div></div>
+      <div class="metric-tile"><div class="metric-icon" aria-hidden="true">🧪</div><div class="metric-name">Consumables share of wallet</div></div>
+      <div class="metric-tile"><div class="metric-icon" aria-hidden="true">🛠</div><div class="metric-name">Service plan attach and renewal</div></div>
+      <div class="metric-tile"><div class="metric-icon" aria-hidden="true">💰</div><div class="metric-name">Expansion revenue and pipeline</div></div>
+      <div class="metric-tile"><div class="metric-icon" aria-hidden="true">⏱</div><div class="metric-name">Uptime and time to fix</div></div>
+    </div>
+    <div class="sec-header" style="margin-top:20px;"><div class="sec-badge" aria-hidden="true">🚀</div><div><div class="sec-title">The first 90 days</div></div></div>
+    <div class="days-grid">
+      <div class="day-card"><div class="day-label">Days 1 to 30</div><div class="day-text">Match accounts across both systems. Pull current spend per lab. Build the health score and tiers.</div></div>
+      <div class="day-card"><div class="day-label">Days 31 to 60</div><div class="day-text">Start daily and weekly rhythms. Visit Florida's top accounts. Write account plans.</div></div>
+      <div class="day-card"><div class="day-label">Days 61 to 90</div><div class="day-text">Launch the CS-sourced opportunity process. Run the first consumables and service plan plays. Fix the scoring.</div></div>
+    </div>
+    <div class="voice-card"><div class="voice-label">Settle before launch</div><div class="voice-text">How CSM-sourced deals are credited in comp. What the CSM can quote alone. How far coordinators can go on loaners and rush ships. Who covers a down lab while the CSM travels. Who owns the account ID match.</div></div>
+  </div>
+</div>
+
+<div class="page-footer">
+  <p><a href="index.html">Alana Williams</a> · Customer Success Leadership · lana_christiana@yahoo.com</p>
+</div>
+
+<script>
+const tabs=[...document.querySelectorAll('[role="tab"]')];
+function activate(i,focus){
+  tabs.forEach((t,j)=>{
+    const on=i===j;
+    t.classList.toggle('active',on);
+    t.setAttribute('aria-selected',on?'true':'false');
+    t.tabIndex=on?0:-1;
+    const p=document.getElementById(t.getAttribute('aria-controls'));
+    p.classList.toggle('active',on);
+    p.hidden=!on;
+  });
+  if(focus)tabs[i].focus();
+}
+tabs.forEach((t,i)=>{
+  t.addEventListener('click',()=>activate(i));
+  t.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'){e.preventDefault();activate((i+1)%tabs.length,true);}
+    else if(e.key==='ArrowLeft'){e.preventDefault();activate((i-1+tabs.length)%tabs.length,true);}
+    else if(e.key==='Home'){e.preventDefault();activate(0,true);}
+    else if(e.key==='End'){e.preventDefault();activate(tabs.length-1,true);}
+  });
+});
+</script>
+</body>
+</html>
