@@ -4,283 +4,203 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Enterprise Implementation Kickoff Framework — Alana Williams</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #F7F5F0; color: #1A1F2E; -webkit-font-smoothing: antialiased; }
-
-/* NAV */
-.top-bar { background: #1A1F2E; padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; }
-.top-bar-name { color: #fff; font-size: 14px; font-weight: 500; text-decoration: none; }
-.top-bar-back { color: #C8963A; font-size: 13px; text-decoration: none; display: flex; align-items: center; gap: 6px; }
-.top-bar-back:hover { color: #E8B060; }
-.fw-label { background: #2C3347; color: #9DA5BF; font-size: 11px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; padding: 4px 12px; border-radius: 100px; }
-
-/* HERO */
-.hero { background: #1A1F2E; padding: 48px 32px 40px; }
-.hero-inner { max-width: 860px; margin: 0 auto; }
-.hero-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: #C8963A; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
-.hero-eyebrow::before { content: ''; width: 24px; height: 2px; background: #C8963A; }
-.hero-title { font-size: clamp(26px, 4vw, 40px); font-weight: 700; color: #fff; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 14px; }
-.hero-sub { font-size: 15px; color: #9DA5BF; line-height: 1.7; max-width: 620px; margin-bottom: 24px; }
-.hero-rule { display: inline-flex; align-items: center; gap: 8px; background: #2C3347; border: 1px solid #3C4560; border-radius: 100px; padding: 7px 16px; font-size: 13px; color: #C8963A; font-weight: 500; }
-
-/* FRAMEWORK WIDGET WRAPPER */
-.fw-wrap { max-width: 860px; margin: 0 auto; padding: 32px 0 48px; }
-
-/* ── COPY OF WIDGET STYLES ── */
-.ms-track { display: flex; gap: 0; margin-bottom: 1.25rem; border: 0.5px solid #E2DDD4; border-radius: 8px; overflow: hidden; background: #fff; }
-.ms-step { flex: 1; padding: 10px 6px; text-align: center; cursor: pointer; transition: background .15s; border-right: 0.5px solid #E2DDD4; }
-.ms-step:last-child { border-right: none; }
-.ms-step:hover { background: #F7F5F0; }
-.ms-step.active { background: #F7F5F0; }
-.ms-num { font-size: 9px; color: #8A8F9E; margin-bottom: 2px; }
-.ms-name { font-size: 10px; font-weight: 500; color: #5A5F72; line-height: 1.3; }
-.ms-step.active .ms-name { color: #1A1F2E; }
-.ms-step.critical::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: #185FA5; }
-.ms-step { position: relative; }
-
-.ms-nav { display: flex; gap: 6px; margin-bottom: 1.25rem; flex-wrap: wrap; }
-.ms-btn { display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 8px; border: 0.5px solid #E2DDD4; background: #fff; font-size: 12px; color: #5A5F72; cursor: pointer; transition: all .15s; font-family: inherit; }
-.ms-btn:hover { border-color: rgba(26,31,46,.3); color: #1A1F2E; }
-.ms-btn.active { border-color: rgba(26,31,46,.4); color: #1A1F2E; background: #F7F5F0; font-weight: 500; }
-.ms-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-
-.ms-panel { display: none; }
-.ms-panel.active { display: block; }
-
-.ms-header { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
-.ms-badge { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; margin-top: 2px; }
-.ms-title { font-size: 16px; font-weight: 600; color: #1A1F2E; }
-.ms-desc { font-size: 12px; color: #5A5F72; margin-top: 2px; line-height: 1.5; }
-.critical-pill { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 500; color: #0C447C; background: #E6F1FB; padding: 2px 8px; border-radius: 8px; margin-top: 5px; }
-
-.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
-.panel-card { background: #fff; border: 0.5px solid #E2DDD4; border-radius: 12px; padding: 1rem 1.25rem; }
-.card-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: .04em; color: #8A8F9E; margin-bottom: 10px; }
-.items { list-style: none; }
-.items li { font-size: 13px; color: #5A5F72; padding: 5px 0; border-bottom: 0.5px solid #E2DDD4; display: flex; align-items: flex-start; gap: 8px; line-height: 1.5; }
-.items li:last-child { border-bottom: none; }
-
-.win-card { border-left: 3px solid; border-radius: 0 12px 12px 0; padding: 1rem 1.25rem; margin-bottom: 12px; background: #fff; border-top: 0.5px solid #E2DDD4; border-right: 0.5px solid #E2DDD4; border-bottom: 0.5px solid #E2DDD4; }
-.win-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 6px; }
-.win-text { font-size: 13px; color: #5A5F72; line-height: 1.65; }
-
-.map-header { display: flex; padding: 8px 14px; background: #F7F5F0; border-radius: 12px 12px 0 0; border: 0.5px solid #E2DDD4; border-bottom: none; }
-.map-header span { flex: 1; font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: .05em; color: #8A8F9E; }
-.map-row { display: flex; align-items: center; border-bottom: 0.5px solid #E2DDD4; }
-.map-row:last-child { border-bottom: none; }
-.map-cell { padding: 9px 14px; font-size: 13px; flex: 1; color: #5A5F72; }
-.map-cell.bold { font-weight: 500; color: #1A1F2E; }
-.map-cell.blue { color: #185FA5; font-weight: 500; }
-.map-arrow { width: 36px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
-.arr-box { width: 26px; height: 26px; border-radius: 8px; background: #BA7517; display: flex; align-items: center; justify-content: center; color: #FAEEDA; font-size: 13px; }
-
-.tier-wrap { display: flex; flex-direction: column; gap: 10px; }
-.tier-card { border: 0.5px solid #E2DDD4; border-radius: 12px; overflow: hidden; }
-.tier-hdr { padding: 10px 14px; }
-.tier-name { font-size: 13px; font-weight: 600; margin-bottom: 1px; }
-.tier-desc { font-size: 11px; opacity: .75; }
-.tier-body { display: grid; grid-template-columns: 1fr 36px 1fr; border-top: 0.5px solid #E2DDD4; }
-.tier-col { padding: 10px 14px; }
-.tier-col-lbl { font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: .04em; color: #8A8F9E; margin-bottom: 7px; }
-.tier-person { font-size: 12px; color: #5A5F72; padding: 3px 0; }
-.tier-person.blue { color: #185FA5; }
-.tier-arr { display: flex; align-items: center; justify-content: center; border-left: 0.5px solid #E2DDD4; border-right: 0.5px solid #E2DDD4; }
-
-.journey-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.j-card { border: 0.5px solid #E2DDD4; border-radius: 12px; padding: 12px 14px; display: flex; gap: 10px; background: #fff; }
-.j-num { width: 28px; height: 28px; border-radius: 50%; background: #1B3A5C; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: #B5D4F4; flex-shrink: 0; }
-.j-stage { font-size: 13px; font-weight: 600; color: #1A1F2E; margin-bottom: 3px; }
-.j-al { font-size: 11px; color: #5A5F72; margin-bottom: 2px; }
-.j-rasa { font-size: 11px; color: #185FA5; }
-
-.contacts-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
-.c-card { border: 0.5px solid #E2DDD4; border-radius: 12px; overflow: hidden; background: #fff; }
-.c-bar { height: 3px; background: #BA7517; }
-.c-body { padding: 12px 14px; }
-.c-role { font-size: 13px; font-weight: 600; color: #185FA5; margin-bottom: 4px; }
-.c-email { font-size: 11px; color: #5A5F72; margin-bottom: 6px; }
-.c-desc { font-size: 11px; color: #5A5F72; font-style: italic; line-height: 1.4; }
-
-.check-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
-.check-lbl { font-size: 12px; font-weight: 600; color: #1A1F2E; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
-.check-items { list-style: none; }
-.check-items li { font-size: 12px; color: #5A5F72; padding: 4px 0; display: flex; align-items: flex-start; gap: 6px; line-height: 1.4; }
-
-.metrics-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 8px; }
-.m-card { background: #F7F5F0; border-radius: 8px; padding: 12px 10px; text-align: center; }
-.m-name { font-size: 11px; color: #5A5F72; line-height: 1.35; margin-top: 6px; }
-
-/* FOOTER */
-.page-footer { background: #1A1F2E; padding: 24px 32px; text-align: center; }
-.page-footer p { font-size: 13px; color: #4A5270; }
-.page-footer a { color: #C8963A; text-decoration: none; }
-
-@media (max-width: 640px) {
-  .two-col, .check-grid, .contacts-grid { grid-template-columns: 1fr; }
-  .journey-grid { grid-template-columns: 1fr; }
-  .metrics-grid { grid-template-columns: repeat(3,1fr); }
-  .hero { padding: 32px 20px; }
-  .fw-wrap { padding: 20px 16px 40px; }
-  .top-bar { padding: 12px 20px; }
+:root{--cream:#F7F5F0;--cream-dark:#EDE9E1;--navy:#1A1F2E;--navy-mid:#2C3347;--amber:#C8963A;--amber-light:#F5E9D3;--border:#E2DDD4;--white:#FFFFFF;--ts:#5A5F72;--tm:#8A8F9E;--green:#3B6D11;--green-bg:#EAF3DE;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--navy);-webkit-font-smoothing:antialiased;}
+nav{position:sticky;top:0;z-index:100;background:rgba(247,245,240,0.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:60px;}
+nav a{font-size:13px;color:var(--ts);text-decoration:none;}
+nav a.logo{font-weight:600;font-size:16px;color:var(--navy);}
+.wrap{max-width:1080px;margin:0 auto;padding:0 48px;}
+header{padding:64px 0 40px;}
+.eyebrow{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--amber);margin-bottom:10px;}
+h1{font-size:clamp(30px,4vw,46px);font-weight:600;letter-spacing:-0.03em;line-height:1.1;margin-bottom:14px;}
+h1 em{font-family:"Playfair Display",serif;font-style:italic;color:var(--amber);}
+.lede{font-size:16px;color:var(--ts);line-height:1.7;max-width:680px;margin-bottom:22px;}
+.banner{display:inline-block;background:var(--navy);color:#fff;font-size:13px;font-weight:500;border-radius:100px;padding:9px 18px;}
+.source{margin-top:18px;font-size:12px;color:var(--tm);max-width:680px;line-height:1.6;}
+.flow{display:flex;gap:8px;flex-wrap:wrap;margin:36px 0 8px;}
+.flow a{flex:1 1 140px;text-decoration:none;background:var(--white);border:1px solid var(--border);border-radius:12px;padding:12px 14px;color:var(--navy);font-size:13px;font-weight:600;}
+.flow a span{display:block;font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--amber);margin-bottom:3px;}
+section.step{padding:48px 0;border-top:1px solid var(--border);}
+.step-head{display:flex;gap:16px;align-items:flex-start;margin-bottom:20px;}
+.num{width:38px;height:38px;flex-shrink:0;border-radius:50%;background:var(--white);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;color:var(--ts);}
+.step.key .num{background:var(--amber);border-color:var(--amber);color:#fff;}
+h2{font-size:clamp(21px,2.4vw,27px);font-weight:600;letter-spacing:-0.02em;line-height:1.2;}
+.when{font-size:12px;color:var(--tm);margin-top:4px;}
+.why{font-size:15px;color:var(--ts);line-height:1.7;max-width:720px;margin-bottom:22px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;}
+.grid.two{grid-template-columns:repeat(2,1fr);}
+@media(max-width:760px){.grid.two{grid-template-columns:1fr;}}
+.card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:18px 20px;}
+.card.dark{background:var(--navy);border-color:var(--navy);color:#fff;}
+.card h3{font-size:14px;font-weight:600;margin-bottom:8px;}
+.card p,.card li{font-size:13px;color:var(--ts);line-height:1.6;}
+.card.dark p,.card.dark li{color:rgba(255,255,255,.75);}
+.card ul{padding-left:18px;}
+.card .out{margin-top:10px;padding-top:10px;border-top:1px solid var(--border);font-size:12.5px;font-weight:500;color:var(--navy);}
+.card.dark .out{border-top-color:rgba(255,255,255,.12);color:var(--amber);}
+.qs{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-bottom:16px;}
+.q{background:var(--navy);color:#fff;border-left:3px solid var(--amber);border-radius:10px;padding:14px 16px;font-size:14px;font-style:italic;line-height:1.5;}
+.q small{display:block;font-style:normal;font-size:11px;color:rgba(255,255,255,.55);margin-top:6px;}
+.dels{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px;}
+.del{font-size:11px;padding:4px 11px;border-radius:100px;background:var(--cream-dark);color:var(--ts);}
+.del.out{background:var(--green-bg);color:var(--green);font-weight:600;}
+table{width:100%;border-collapse:collapse;background:var(--white);border:1px solid var(--border);border-radius:14px;overflow:hidden;font-size:13px;}
+th{text-align:left;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--tm);font-weight:600;padding:12px 16px;background:var(--cream-dark);}
+td{padding:12px 16px;border-top:1px solid var(--border);color:var(--ts);vertical-align:top;line-height:1.5;}
+td:first-child{color:var(--navy);font-weight:600;white-space:nowrap;}
+.tier{display:grid;grid-template-columns:1fr 40px 1fr;gap:10px;align-items:center;margin-bottom:10px;}
+.tier .side{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:14px 16px;}
+.tier .side b{display:block;font-size:13px;margin-bottom:3px;}
+.tier .side span{font-size:12px;color:var(--ts);line-height:1.5;}
+.tier .arrow{text-align:center;color:var(--amber);font-size:20px;}
+.tier-label{font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--amber);margin:18px 0 8px;}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.timeline{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;}
+.tl{background:var(--white);border:1px solid var(--border);border-top:3px solid var(--amber);border-radius:12px;padding:14px;}
+.tl b{display:block;font-size:13px;margin-bottom:4px;}
+.tl span{font-size:12px;color:var(--ts);line-height:1.5;}
+.tl em{display:block;font-style:normal;font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--tm);margin-bottom:6px;}
+.loop{margin-top:16px;background:var(--amber-light);border-radius:12px;padding:14px 18px;font-size:13.5px;color:var(--navy);line-height:1.6;}
+footer{background:var(--navy);padding:18px 48px;margin-top:40px;}
+footer span{font-size:12px;color:rgba(255,255,255,.4);}
+@media(max-width:760px){
+  nav{padding:0 16px;} .wrap{padding:0 16px;} footer{padding:18px 16px;}
+  .split,.timeline{grid-template-columns:1fr;}
+  .tier{grid-template-columns:1fr;} .tier .arrow{transform:rotate(90deg);}
+  table{display:block;overflow-x:auto;} td:first-child{white-space:normal;}
 }
 </style>
 </head>
 <body>
+<nav>
+  <a href="index.html" class="logo">Alana Williams</a>
+  <a href="index.html#frameworks">&larr; Back to portfolio</a>
+</nav>
 
-<div class="top-bar">
-  <a href="index.html" class="top-bar-name">Alana Williams</a>
-  <span class="fw-label">Framework</span>
-  <a href="index.html#frameworks" class="top-bar-back">← Back to portfolio</a>
-</div>
-
-<div class="hero">
-  <div class="hero-inner">
-    <div class="hero-eyebrow">Implementation Framework</div>
-    <h1 class="hero-title">Enterprise Implementation Kickoff Framework</h1>
-    <p class="hero-sub">Process sets the foundation. Relationships follow execution. Speed to value is the measure of both.</p>
-    <div class="hero-rule">🔒 First 30 days: lock scope, then get a win on the board</div>
+<div class="wrap">
+<header>
+  <div class="eyebrow">Implementation Framework</div>
+  <h1>Enterprise Implementation <em>Kickoff</em> Framework</h1>
+  <p class="lede">Process sets the foundation. Relationships follow execution. Speed to value is the measure of both. This is how I take an enterprise customer from signed contract to a first win &mdash; and set up what comes after.</p>
+  <div class="banner">🔒 First 30 days: lock scope, then get a win on the board</div>
+  <p class="source">Built from kickoffs and business reviews I ran for enterprise AI customers in retail, financial services, legal services, and healthcare. Names, numbers, and details are anonymized.</p>
+  <div class="flow">
+    <a href="#s1"><span>Step 1</span>Intro call</a>
+    <a href="#s2"><span>Step 2</span>Kickoff</a>
+    <a href="#s3"><span>Step 3</span>Stakeholder map</a>
+    <a href="#s4"><span>Step 4</span>Readiness &amp; scope lock</a>
+    <a href="#s5"><span>Step 5</span>Milestones &amp; gates</a>
+    <a href="#s6"><span>Step 6</span>First value</a>
   </div>
+</header>
+
+<!-- STEP 1 -->
+<section class="step key" id="s1">
+  <div class="step-head"><div class="num">1</div><div><h2>Intro call: find out where they&rsquo;re headed</h2><div class="when">Before kickoff &middot; usually the sponsor or champion</div></div></div>
+  <p class="why">You can&rsquo;t build something that grows with a customer if you don&rsquo;t know what growth looks like to them. I read the sales notes first so I don&rsquo;t ask what&rsquo;s already been answered. Then I ask three questions.</p>
+  <div class="qs">
+    <div class="q">What does this mean a year from now?<small>Sets the horizon past go-live</small></div>
+    <div class="q">What impact would this have?<small>Follow-up: how will we know, and where are we today?</small></div>
+    <div class="q">What would need to be true to take this to the next level?<small>Surfaces dependencies and risks early</small></div>
+  </div>
+  <div class="dels"><span class="del">Sales notes reviewed</span><span class="del out">Draft goals</span><span class="del out">Kickoff agenda</span></div>
+</section>
+
+<!-- STEP 2 -->
+<section class="step" id="s2">
+  <div class="step-head"><div class="num">2</div><div><h2>Kickoff: confirm the goals with everyone in the room</h2><div class="when">Week 1 &middot; full customer and delivery team</div></div></div>
+  <p class="why">I play the intro call answers back to the wider group. Confirm them, fill the gaps, and surface disagreement now &mdash; not at go-live. One person&rsquo;s &ldquo;a year from now&rdquo; isn&rsquo;t the whole picture.</p>
+  <div class="grid">
+    <div class="card"><h3>1. Introductions &amp; roles</h3><p>Who&rsquo;s on each team, and what each role owns: success manager, engineer, partner, customer product owner.</p></div>
+    <div class="card"><h3>2. Vision &amp; objectives</h3><p>Current state, challenges, and opportunities. What this project needs to change.</p></div>
+    <div class="card"><h3>3. Defining success</h3><p>The measures we&rsquo;ll be judged on, agreed out loud. Accuracy, stability, maintainability, business KPIs.</p></div>
+    <div class="card"><h3>4. Scope &amp; architecture</h3><p>What&rsquo;s in, what&rsquo;s out. Current state to future state, on one page.</p></div>
+    <div class="card"><h3>5. How we work together</h3><ul><li>Weekly or bi-weekly check-ins (more often during onboarding)</li><li>Quarterly business reviews</li><li>One support channel with clear response times</li></ul></div>
+    <div class="card dark"><h3>6. Next steps</h3><p>Every next step has an owner and a stated outcome &mdash; so everyone leaves knowing what &ldquo;done&rdquo; looks like.</p></div>
+  </div>
+  <div class="dels"><span class="del">Kickoff deck</span><span class="del out">Confirmed goals</span><span class="del out">Success measures</span><span class="del">Meeting cadence</span></div>
+</section>
+
+<!-- STEP 3 -->
+<section class="step" id="s3">
+  <div class="step-head"><div class="num">3</div><div><h2>Stakeholder map: who to engage, and when</h2><div class="when">Week 1&ndash;2 &middot; living document</div></div></div>
+  <p class="why">I map every customer contact to a counterpart on our side, in three tiers. Then I map who talks at each stage, so nobody gets surprised and escalations go to the right person the first time.</p>
+  <div class="tier-label">Executive tier &middot; contract, scope, outcomes</div>
+  <div class="tier"><div class="side"><b>Customer executives</b><span>Founder/President, COO, CTO, CRO</span></div><div class="arrow">&harr;</div><div class="side"><b>Our executives</b><span>CEO, CPO, CTO, CRO &mdash; matched by function</span></div></div>
+  <div class="tier-label">Technical lead tier &middot; day-to-day delivery</div>
+  <div class="tier"><div class="side"><b>Customer leads</b><span>Technical lead, lead software engineer</span></div><div class="arrow">&harr;</div><div class="side"><b>Success manager + success engineer</b><span>Day-to-day project leadership</span></div></div>
+  <div class="tier-label">Influencer tier &middot; feedback and adoption</div>
+  <div class="tier"><div class="side"><b>Customer builders</b><span>Engineers and developers using the product</span></div><div class="arrow">&harr;</div><div class="side"><b>Success engineer</b><span>Technical support, testing, QA</span></div></div>
+  <table style="margin-top:22px;">
+    <tr><th>Stage</th><th>Customer side</th><th>Our side</th></tr>
+    <tr><td>Contract &amp; sign-off</td><td>Founder / President</td><td>CEO</td></tr>
+    <tr><td>Project kickoff</td><td>CTO</td><td>CTO + CRO</td></tr>
+    <tr><td>Product planning</td><td>COO</td><td>CPO</td></tr>
+    <tr><td>Implementation</td><td>Technical leads</td><td>Success manager + engineer</td></tr>
+    <tr><td>Testing &amp; QA</td><td>Engineers</td><td>Success engineer</td></tr>
+    <tr><td>Escalation</td><td>CTO</td><td>CTO + success manager</td></tr>
+    <tr><td>Ongoing success</td><td>CRO</td><td>CRO + success manager</td></tr>
+  </table>
+  <div class="dels"><span class="del out">Stakeholder map</span><span class="del out">Communication journey</span><span class="del">Escalation path</span></div>
+</section>
+
+<!-- STEP 4 -->
+<section class="step key" id="s4">
+  <div class="step-head"><div class="num">4</div><div><h2>Readiness &amp; scope lock</h2><div class="when">Weeks 2&ndash;4 &middot; before any build starts</div></div></div>
+  <p class="why">Most enterprise delays come from access and alignment, not the build. I close these four before work begins &mdash; each with a stated outcome.</p>
+  <div class="grid two">
+    <div class="card"><h3>Access approval</h3><ul><li>SSO / user provisioning</li><li>Code and config repos</li><li>Environment and secrets access</li><li>VPN, if needed</li><li>Who approves and audits access</li></ul><div class="out">Outcome: our team can see the current setup and validate the plan before design starts.</div></div>
+    <div class="card"><h3>Infrastructure plan</h3><ul><li>What gets built, changed, or retired</li><li>Sizing, monitoring, and logging</li><li>Resiliency and failover expectations</li></ul><div class="out">Outcome: everyone agrees how the new environment is built and maintained.</div></div>
+    <div class="card"><h3>Design workshop agenda</h3><ul><li>Architecture walkthrough</li><li>Migration and consolidation plan</li><li>Open questions and risk review</li></ul><div class="out">Outcome: the customer walks in knowing exactly what will be covered.</div></div>
+    <div class="card"><h3>Resource alignment</h3><ul><li>Hours and availability, every team</li><li>Customer IT, security, product owners</li><li>Escalation paths and meeting cadence</li></ul><div class="out">Outcome: no surprises. Everyone knows who&rsquo;s involved, what&rsquo;s expected, and how much time they have.</div></div>
+  </div>
+  <div class="split" style="margin-top:14px;">
+    <div class="card dark"><h3>Goes live now</h3><p>The scope we commit to for this phase. Small enough to deliver a real win in the first 30&ndash;90 days.</p><p style="margin-top:8px;"><em>Example: upgrade six existing assistants to the current version, no functional changes.</em></p></div>
+    <div class="card"><h3>Growth path (captured, not committed)</h3><p>The bigger goals from the intro call. Written down so today&rsquo;s build doesn&rsquo;t block them &mdash; scoped as a later phase.</p><p style="margin-top:8px;"><em>Example: consolidate six assistants into one, plus a managed services contract for ongoing upgrades.</em></p></div>
+  </div>
+  <div class="dels"><span class="del out">Scope document</span><span class="del">RACI</span><span class="del">Risk register</span><span class="del out">Growth path</span></div>
+</section>
+
+<!-- STEP 5 -->
+<section class="step" id="s5">
+  <div class="step-head"><div class="num">5</div><div><h2>Milestones &amp; go/no-go gates</h2><div class="when">Delivery &middot; each gate is a clear yes or no</div></div></div>
+  <p class="why">A sample plan from a multi-team migration. Each stage has one owner, and the next stage doesn&rsquo;t start until the gate is passed.</p>
+  <div class="timeline">
+    <div class="tl"><em>Month 1</em><b>Design workshops</b><span>Conversation and system architecture</span></div>
+    <div class="tl"><em>Month 1</em><b>Environment build</b><span>Partner sets up configs, monitoring, tracing</span></div>
+    <div class="tl"><em>Month 2</em><b>Migration</b><span>Many assistants into one</span></div>
+    <div class="tl"><em>Month 3</em><b>Enablement</b><span>Hands-on training, not slides</span></div>
+    <div class="tl"><em>Month 3+</em><b>Hypercare</b><span>Stability support after go-live</span></div>
+  </div>
+  <table style="margin-top:16px;">
+    <tr><th>Team</th><th>Owns</th></tr>
+    <tr><td>Our team</td><td>Architecture, migration, design sessions, AI integration, hypercare</td></tr>
+    <tr><td>Infrastructure partner</td><td>Environment setup, monitoring, deployments</td></tr>
+    <tr><td>Customer</td><td>Access, data alignment, analytics decisions, internal governance</td></tr>
+  </table>
+  <div class="dels"><span class="del out">Milestone plan</span><span class="del">Go/no-go checklist</span><span class="del">Roles &amp; responsibilities</span></div>
+</section>
+
+<!-- STEP 6 -->
+<section class="step key" id="s6">
+  <div class="step-head"><div class="num">6</div><div><h2>First value &amp; business kickoff</h2><div class="when">30&ndash;90 days &middot; executive sponsors on both sides</div></div></div>
+  <p class="why">The first business review checks results against the goals from step 1 &mdash; not against bot traffic or ticket counts. Executives on both sides agree on what&rsquo;s working and what&rsquo;s next.</p>
+  <div class="grid">
+    <div class="card"><h3>Measure what leadership cares about</h3><p>Tie results to the customer&rsquo;s own priority. In healthcare, that was clinician inbox volume &mdash; not how many patients used the assistant.</p></div>
+    <div class="card"><h3>Be honest about what slipped</h3><p>Name delays plainly, with who owns the fix. Trust holds when bad news comes early.</p></div>
+    <div class="card"><h3>Flag risks before they land</h3><p>Usage near the license limit, a blocked dependency, a stalled team. Raise it with a fix attached.</p></div>
+  </div>
+  <div class="loop">↺ The intro call answers come back here. They become the starting point for the next phase &mdash; and the next growth conversation.</div>
+  <div class="dels"><span class="del out">First business review</span><span class="del">Adoption metrics</span><span class="del out">Next-phase plan</span></div>
+</section>
 </div>
 
-<div style="max-width:860px;margin:0 auto;padding:0 32px;">
-
-<div style="padding-top:32px;">
-  <div class="ms-track" id="track"></div>
-  <div class="ms-nav" id="nav"></div>
-  <div id="panels"></div>
-</div>
-
-</div>
-
-<div class="page-footer">
-  <p><a href="index.html">Alana Williams</a> · Customer Success Leadership · lana_christiana@yahoo.com</p>
-</div>
-
-<script>
-const BLUE="#185FA5",AMBER="#BA7517";
-const milestones=[
-  {id:1,name:"Scope Lock",short:"Scope Lock",color:"#185FA5",bg:"#E6F1FB",icon:"🔒",critical:true,
-   desc:"Scope gets locked before anything else gets built, agreed, or communicated. Every delay I've seen traces back to this not happening fast enough.",
-   win:"The win here isn't a document. It's a room full of stakeholders who all say the same thing when asked what success looks like.",
-   cols:[
-     {label:"What I establish first",items:[{t:"The exact business problem being solved"},{t:"Who has authority to change scope, and who doesn't"},{t:"What 'done' looks like at 30, 60, 90 days"},{t:"Every dependency that could block delivery"},{t:"Where the real risk is hiding"}]},
-     {label:"What gets produced",items:[{t:"Signed scope document"},{t:"Stakeholder map with decision rights"},{t:"Risk register, live from day one"},{t:"Measurable success criteria"},{t:"Communication cadence, agreed upfront"}]}
-   ]},
-  {id:2,name:"Quick Win",short:"Quick Win",color:"#0F6E56",bg:"#E1F5EE",icon:"🚀",critical:true,
-   desc:"The fastest path to a healthy implementation is proof of forward motion. I find the smallest high-visibility deliverable and get it done.",
-   win:"A quick win isn't about impressing anyone. It changes the client's internal story from 'this is complex' to 'this is moving.'",
-   cols:[
-     {label:"How I find the quick win",items:[{t:"What is the client already anxious about?"},{t:"What can be delivered in the first two weeks?"},{t:"What would make the executive sponsor look good internally?"},{t:"Where is the technical team blocked right now?"}]},
-     {label:"What gets built",items:[{t:"KPI framework with baseline"},{t:"Implementation timeline, visible to everyone"},{t:"Confirmed deployment model"},{t:"RACI with no ambiguity"}]}
-   ]},
-  {id:3,name:"Build",short:"Build",color:"#854F0B",bg:"#FAEEDA",icon:"🔨",critical:false,
-   desc:"Weekly cadence, tracked against scope. Every meeting has a purpose. Every risk has an owner. Nothing waits until it becomes a problem.",
-   cols:[
-     {label:"How I run delivery",items:[{t:"Weekly standups: progress, blockers, next actions"},{t:"Technical reviews stay separate from status updates"},{t:"Risk register reviewed every week, not just at kickoff"},{t:"Escalation path defined before it's ever needed"}]},
-     {label:"What I watch for",items:[{t:"Scope creep disguised as 'small asks'"},{t:"Stakeholder drift: contacts who go quiet"},{t:"Technical blockers that don't surface until too late"},{t:"Timeline compression without scope reduction"}]}
-   ]},
-  {id:4,name:"Go / No-Go",short:"Go / No-Go",color:"#D85A30",bg:"#FAECE7",icon:"✓",critical:false,
-   desc:"Go-live is a decision, not a date. I run a structured readiness check across three dimensions before anything moves to production.",
-   type:"checklist"},
-  {id:5,name:"Launch",short:"Launch",color:"#993556",bg:"#FBEAF0",icon:"▶",critical:false,
-   desc:"Launch is the beginning of the value story, not the end of the project. I measure what matters and make sure the client can see it.",
-   type:"metrics"},
-  {id:6,name:"Stakeholder Map",short:"Contacts",color:"#185FA5",bg:"#E6F1FB",icon:"⬡",critical:false,
-   desc:"The right contact at the right moment. Every engagement level mapped and owned.",type:"stakeholder"},
-  {id:7,name:"Relationship Tiers",short:"Tiers",color:"#993C1D",bg:"#FAECE7",icon:"⬡",critical:false,
-   desc:"Three tiers. Each one has a different job. I don't mix them.",type:"hierarchy"},
-  {id:8,name:"Communication Journey",short:"Journey",color:"#3B6D11",bg:"#EAF3DE",icon:"→",critical:false,
-   desc:"Who I contact at each stage. No gaps, no overlaps.",type:"journey"},
-  {id:9,name:"Key Contacts",short:"Key Contacts",color:"#533489",bg:"#EEEDFE",icon:"⊡",critical:false,
-   desc:"Primary points of contact with role and area of ownership.",type:"contacts"},
-];
-
-const contactMap=[
-  {cust:"President / Founder",rasa:"CEO"},{cust:"Chief Operating Officer",rasa:"CPO"},
-  {cust:"Chief Technology Officer",rasa:"CTO / Co-Founder"},{cust:"Chief Revenue Officer",rasa:"CRO"},
-  {cust:"Technical Lead",rasa:"CSM / CSE"},{cust:"Lead Software Engineer",rasa:"CSM / CSE"},
-  {cust:"Software Engineer",rasa:"CSE"},{cust:"Software Developer",rasa:"CSE"},
-];
-const tiers=[
-  {name:"Executive tier",desc:"Contract, scope, outcomes & program ownership",bg:"#FAEEDA",color:AMBER,tc:"#633806",
-   al:["President / Founder","Chief Operating Officer","Chief Technology Officer","Chief Revenue Officer"],
-   rasa:["CEO","CPO","CTO / Co-Founder","CRO"]},
-  {name:"Technical lead tier",desc:"Day-to-day implementation leadership",bg:"#E6F1FB",color:BLUE,tc:"#0C447C",
-   al:["Technical Lead","Lead Software Engineer"],rasa:["Customer Success Manager","Customer Success Engineer"]},
-  {name:"Influencer tier",desc:"Implementation feedback & adoption",bg:"#F1EFE8",color:"#5F5E5A",tc:"#444441",
-   al:["Software Engineer","Software Developer"],rasa:["Customer Success Manager","Customer Success Engineer"]},
-];
-const journey=[
-  {n:1,stage:"Contract & sign-off",al:"President / Founder",rasa:"CEO"},
-  {n:2,stage:"Project kickoff",al:"Chief Technology Officer",rasa:"CTO + CRO"},
-  {n:3,stage:"Product planning",al:"Chief Operating Officer",rasa:"CPO"},
-  {n:4,stage:"Revenue alignment",al:"Chief Revenue Officer",rasa:"CRO"},
-  {n:5,stage:"Implementation",al:"Technical Lead + Lead Engineer",rasa:"CSM + CSE"},
-  {n:6,stage:"Testing & QA",al:"Software Engineer + Developer",rasa:"CSE"},
-  {n:7,stage:"Escalation",al:"Chief Technology Officer",rasa:"CTO + CSM"},
-  {n:8,stage:"Ongoing success",al:"Chief Revenue Officer",rasa:"CRO + CSM"},
-];
-const keyContacts=[
-  {role:"CEO",email:"ceo@company.com",desc:"Contract signer, final executive authority"},
-  {role:"CPO",email:"cpo@company.com",desc:"Product accuracy, scope & roadmap decisions"},
-  {role:"CTO / Co-Founder",email:"cto@company.com",desc:"Program ownership & technical escalation"},
-  {role:"CRO",email:"cro@company.com",desc:"Project outcomes, KPIs & revenue alignment"},
-  {role:"Customer Success Manager",email:"csm@company.com",desc:"Day-to-day lead for technical contacts"},
-  {role:"Customer Success Engineer",email:"cse@company.com",desc:"Technical implementation support & QA"},
-];
-
-function li(text){return`<li><span style="color:#8A8F9E;flex-shrink:0">›</span>${text}</li>`;}
-
-function buildPanel(p){
-  const critPill=p.critical?`<div class="critical-pill">🔒 Critical — first 30 days</div>`:'';
-  const hdr=`<div class="ms-header"><div class="ms-badge" style="background:${p.bg};font-size:18px">${p.icon}</div><div><div class="ms-title">Milestone ${p.id}: ${p.name}</div><div class="ms-desc">${p.desc}</div>${critPill}</div></div>`;
-  const win=p.win?`<div class="win-card" style="border-left-color:${p.color}"><div class="win-label" style="color:${p.color}">How I think about this milestone</div><div class="win-text">${p.win}</div></div>`:'';
-
-  if(p.type==='checklist') return hdr+`<div class="panel-card"><div class="card-label">Go / no-go gates</div><div class="check-grid"><div><div class="check-lbl">🏢 Business</div><ul class="check-items"><li>✓ Executive sponsor confirmed</li><li>✓ Success metrics signed off</li><li>✓ Adoption plan in place</li></ul></div><div><div class="check-lbl">🖥 Technical</div><ul class="check-items"><li>✓ Infrastructure validated</li><li>✓ Integrations confirmed</li><li>✓ Security review done</li></ul></div><div><div class="check-lbl">⚙️ Operational</div><ul class="check-items"><li>✓ Support process built</li><li>✓ Training complete</li><li>✓ Escalation paths documented</li></ul></div></div></div>`;
-
-  if(p.type==='metrics') return hdr+`<div class="panel-card" style="margin-bottom:12px"><div class="card-label">What I measure</div><div class="metrics-grid">${[['⏱','Time to first value'],['📈','Adoption rate'],['📊','User engagement'],['🎯','Business outcomes'],['❤️','Customer health']].map(m=>`<div class="m-card"><div style="font-size:22px">${m[0]}</div><div class="m-name">${m[1]}</div></div>`).join('')}</div></div><div class="win-card" style="border-left-color:${p.color}"><div class="win-label" style="color:${p.color}">How I think about launch</div><div class="win-text">Launch is the start of the value story. If the client can't see progress in the first two weeks after launch, something got missed earlier. I make sure the metrics are visible before go-live, not after.</div></div>`;
-
-  if(p.type==='stakeholder') return hdr+`<div style="border:0.5px solid #E2DDD4;border-radius:12px;overflow:hidden;background:#fff"><div class="map-header"><span>Customer</span><span style="width:36px;flex-shrink:0"></span><span style="color:${BLUE}">Vendor contact</span></div>${contactMap.map(r=>`<div class="map-row"><div class="map-cell bold">${r.cust}</div><div class="map-arrow"><div class="arr-box">→</div></div><div class="map-cell blue">${r.rasa}</div></div>`).join('')}</div>`;
-
-  if(p.type==='hierarchy') return hdr+`<div class="tier-wrap">${tiers.map(t=>`<div class="tier-card"><div class="tier-hdr" style="background:${t.bg}"><div class="tier-name" style="color:${t.tc}">${t.name}</div><div class="tier-desc" style="color:${t.tc}">${t.desc}</div></div><div class="tier-body"><div class="tier-col"><div class="tier-col-lbl">Customer</div>${t.al.map(r=>`<div class="tier-person">${r}</div>`).join('')}</div><div class="tier-arr" style="color:${AMBER};font-size:18px">→</div><div class="tier-col"><div class="tier-col-lbl" style="color:${BLUE}">Vendor</div>${t.rasa.map(r=>`<div class="tier-person blue">${r}</div>`).join('')}</div></div></div>`).join('')}</div>`;
-
-  if(p.type==='journey') return hdr+`<div class="journey-grid">${journey.map(j=>`<div class="j-card"><div class="j-num">${j.n}</div><div><div class="j-stage">${j.stage}</div><div class="j-al">Customer: ${j.al}</div><div class="j-rasa">Vendor: ${j.rasa}</div></div></div>`).join('')}</div>`;
-
-  if(p.type==='contacts') return hdr+`<div class="contacts-grid">${keyContacts.map(c=>`<div class="c-card"><div class="c-bar"></div><div class="c-body"><div class="c-role">${c.role}</div><div class="c-email">${c.email}</div><div class="c-desc">${c.desc}</div></div></div>`).join('')}</div>`;
-
-  const cols=p.cols.map(col=>`<div class="panel-card"><div class="card-label">${col.label}</div><ul class="items">${col.items.map(it=>li(it.t)).join('')}</ul></div>`).join('');
-  return hdr+win+`<div class="two-col">${cols}</div>`;
-}
-
-const trackEl=document.getElementById('track');
-const navEl=document.getElementById('nav');
-const panelsEl=document.getElementById('panels');
-
-milestones.forEach((p,i)=>{
-  const t=document.createElement('div');
-  t.className='ms-step'+(i===0?' active':'')+(p.critical?' critical':'');
-  t.innerHTML=`<div class="ms-num">M${p.id}</div><div class="ms-name">${p.short}</div>`;
-  t.onclick=()=>activate(i);
-  trackEl.appendChild(t);
-
-  const btn=document.createElement('button');
-  btn.className='ms-btn'+(i===0?' active':'');
-  btn.innerHTML=`<span class="ms-dot" style="background:${p.color}"></span>${p.name}`;
-  btn.onclick=()=>activate(i);
-  navEl.appendChild(btn);
-
-  const panel=document.createElement('div');
-  panel.className='ms-panel'+(i===0?' active':'');
-  panel.innerHTML=buildPanel(p);
-  panelsEl.appendChild(panel);
-});
-
-function activate(i){
-  document.querySelectorAll('.ms-step').forEach((el,j)=>el.classList.toggle('active',j===i));
-  document.querySelectorAll('.ms-btn').forEach((el,j)=>el.classList.toggle('active',j===i));
-  document.querySelectorAll('.ms-panel').forEach((el,j)=>el.classList.toggle('active',j===i));
-}
-</script>
+<footer><span>Alana Williams &middot; Customer Success Leadership &amp; Operating Framework &middot; lana_christiana@yahoo.com</span></footer>
 </body>
 </html>
