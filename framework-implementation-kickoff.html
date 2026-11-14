@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enterprise Implementation Kickoff Framework — Alana Williams</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#F7F5F0;--cream-dark:#EDE9E1;--navy:#1A1F2E;--navy-mid:#2C3347;--amber:#C8963A;--amber-light:#F5E9D3;--border:#E2DDD4;--white:#FFFFFF;--ts:#5A5F72;--tm:#8A8F9E;--green:#3B6D11;--green-bg:#EAF3DE;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--navy);-webkit-font-smoothing:antialiased;}
+nav{position:sticky;top:0;z-index:100;background:rgba(247,245,240,0.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:60px;}
+nav a{font-size:13px;color:var(--ts);text-decoration:none;}
+nav a.logo{font-weight:600;font-size:16px;color:var(--navy);}
+.wrap{max-width:1080px;margin:0 auto;padding:0 48px;}
+header{padding:64px 0 40px;}
+.eyebrow{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--amber);margin-bottom:10px;}
+h1{font-size:clamp(30px,4vw,46px);font-weight:600;letter-spacing:-0.03em;line-height:1.1;margin-bottom:14px;}
+h1 em{font-family:"Playfair Display",serif;font-style:italic;color:var(--amber);}
+.lede{font-size:16px;color:var(--ts);line-height:1.7;max-width:680px;margin-bottom:22px;}
+.banner{display:inline-block;background:var(--navy);color:#fff;font-size:13px;font-weight:500;border-radius:100px;padding:9px 18px;}
+.source{margin-top:18px;font-size:12px;color:var(--tm);max-width:680px;line-height:1.6;}
+.flow{display:flex;gap:8px;flex-wrap:wrap;margin:36px 0 8px;}
+.flow a{flex:1 1 140px;text-decoration:none;background:var(--white);border:1px solid var(--border);border-radius:12px;padding:12px 14px;color:var(--navy);font-size:13px;font-weight:600;}
+.flow a span{display:block;font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--amber);margin-bottom:3px;}
+section.step{padding:48px 0;border-top:1px solid var(--border);}
+.step-head{display:flex;gap:16px;align-items:flex-start;margin-bottom:20px;}
+.num{width:38px;height:38px;flex-shrink:0;border-radius:50%;background:var(--white);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;color:var(--ts);}
+.step.key .num{background:var(--amber);border-color:var(--amber);color:#fff;}
+h2{font-size:clamp(21px,2.4vw,27px);font-weight:600;letter-spacing:-0.02em;line-height:1.2;}
+.when{font-size:12px;color:var(--tm);margin-top:4px;}
+.why{font-size:15px;color:var(--ts);line-height:1.7;max-width:720px;margin-bottom:22px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;}
+.grid.two{grid-template-columns:repeat(2,1fr);}
+@media(max-width:760px){.grid.two{grid-template-columns:1fr;}}
+.card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:18px 20px;}
+.card.dark{background:var(--navy);border-color:var(--navy);color:#fff;}
+.card h3{font-size:14px;font-weight:600;margin-bottom:8px;}
+.card p,.card li{font-size:13px;color:var(--ts);line-height:1.6;}
+.card.dark p,.card.dark li{color:rgba(255,255,255,.75);}
+.card ul{padding-left:18px;}
+.card .out{margin-top:10px;padding-top:10px;border-top:1px solid var(--border);font-size:12.5px;font-weight:500;color:var(--navy);}
+.card.dark .out{border-top-color:rgba(255,255,255,.12);color:var(--amber);}
+.qs{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-bottom:16px;}
+.q{background:var(--navy);color:#fff;border-left:3px solid var(--amber);border-radius:10px;padding:14px 16px;font-size:14px;font-style:italic;line-height:1.5;}
+.q small{display:block;font-style:normal;font-size:11px;color:rgba(255,255,255,.55);margin-top:6px;}
+.dels{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px;}
+.del{font-size:11px;padding:4px 11px;border-radius:100px;background:var(--cream-dark);color:var(--ts);}
+.del.out{background:var(--green-bg);color:var(--green);font-weight:600;}
+table{width:100%;border-collapse:collapse;background:var(--white);border:1px solid var(--border);border-radius:14px;overflow:hidden;font-size:13px;}
+th{text-align:left;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--tm);font-weight:600;padding:12px 16px;background:var(--cream-dark);}
+td{padding:12px 16px;border-top:1px solid var(--border);color:var(--ts);vertical-align:top;line-height:1.5;}
+td:first-child{color:var(--navy);font-weight:600;white-space:nowrap;}
+.tier{display:grid;grid-template-columns:1fr 40px 1fr;gap:10px;align-items:center;margin-bottom:10px;}
+.tier .side{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:14px 16px;}
+.tier .side b{display:block;font-size:13px;margin-bottom:3px;}
+.tier .side span{font-size:12px;color:var(--ts);line-height:1.5;}
+.tier .arrow{text-align:center;color:var(--amber);font-size:20px;}
+.tier-label{font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--amber);margin:18px 0 8px;}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.timeline{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;}
+.tl{background:var(--white);border:1px solid var(--border);border-top:3px solid var(--amber);border-radius:12px;padding:14px;}
+.tl b{display:block;font-size:13px;margin-bottom:4px;}
+.tl span{font-size:12px;color:var(--ts);line-height:1.5;}
+.tl em{display:block;font-style:normal;font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--tm);margin-bottom:6px;}
+.loop{margin-top:16px;background:var(--amber-light);border-radius:12px;padding:14px 18px;font-size:13.5px;color:var(--navy);line-height:1.6;}
+footer{background:var(--navy);padding:18px 48px;margin-top:40px;}
+footer span{font-size:12px;color:rgba(255,255,255,.4);}
+@media(max-width:760px){
+  nav{padding:0 16px;} .wrap{padding:0 16px;} footer{padding:18px 16px;}
+  .split,.timeline{grid-template-columns:1fr;}
+  .tier{grid-template-columns:1fr;} .tier .arrow{transform:rotate(90deg);}
+  table{display:block;overflow-x:auto;} td:first-child{white-space:normal;}
+}
+</style>
+<style id="aw-watermark">
+body::after{content:"\00A9  Alana Williams";position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-30deg);font-family:"DM Sans",Helvetica,Arial,sans-serif;font-weight:700;font-size:clamp(40px,9vw,120px);color:rgba(26,31,46,0.05);white-space:nowrap;pointer-events:none;user-select:none;z-index:9999;}
+@media print{body::after{color:rgba(26,31,46,0.08);}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="logo">Alana Williams</a>
+  <a href="index.html#frameworks">&larr; Back to portfolio</a>
+</nav>
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">Implementation Framework</div>
+  <h1>Enterprise Implementation <em>Kickoff</em> Framework</h1>
+  <p class="lede">Process sets the foundation. Relationships follow execution. Speed to value is the measure of both. This is how I take an enterprise customer from signed contract to a first win &mdash; and set up what comes after.</p>
+  <div class="banner">🔒 First 30 days: lock scope, then get a win on the board</div>
+  <p class="source">Built from kickoffs and business reviews I ran for enterprise AI customers in retail, financial services, legal services, and healthcare. Names, numbers, and details are anonymized.</p>
+  <div class="flow">
+    <a href="#s1"><span>Step 1</span>Intro call</a>
+    <a href="#s2"><span>Step 2</span>Kickoff</a>
+    <a href="#s3"><span>Step 3</span>Stakeholder map</a>
+    <a href="#s4"><span>Step 4</span>Readiness &amp; scope lock</a>
+    <a href="#s5"><span>Step 5</span>Milestones &amp; gates</a>
+    <a href="#s6"><span>Step 6</span>First value</a>
+  </div>
+</header>
+
+<!-- STEP 1 -->
+<section class="step key" id="s1">
+  <div class="step-head"><div class="num">1</div><div><h2>Intro call: find out where they&rsquo;re headed</h2><div class="when">Before kickoff &middot; usually the sponsor or champion</div></div></div>
+  <p class="why">You can&rsquo;t build something that grows with a customer if you don&rsquo;t know what growth looks like to them. I read the sales notes first so I don&rsquo;t ask what&rsquo;s already been answered. Then I ask three questions.</p>
+  <div class="qs">
+    <div class="q">What does this mean a year from now?<small>Sets the horizon past go-live</small></div>
+    <div class="q">What impact would this have?<small>Follow-up: how will we know, and where are we today?</small></div>
+    <div class="q">What would need to be true to take this to the next level?<small>Surfaces dependencies and risks early</small></div>
+  </div>
+  <div class="dels"><span class="del">Sales notes reviewed</span><span class="del out">Draft goals</span><span class="del out">Kickoff agenda</span></div>
+</section>
+
+<!-- STEP 2 -->
+<section class="step" id="s2">
+  <div class="step-head"><div class="num">2</div><div><h2>Kickoff: confirm the goals with everyone in the room</h2><div class="when">Week 1 &middot; full customer and delivery team</div></div></div>
+  <p class="why">I play the intro call answers back to the wider group. Confirm them, fill the gaps, and surface disagreement now &mdash; not at go-live. One person&rsquo;s &ldquo;a year from now&rdquo; isn&rsquo;t the whole picture.</p>
+  <div class="grid">
+    <div class="card"><h3>1. Introductions &amp; roles</h3><p>Who&rsquo;s on each team, and what each role owns: success manager, engineer, partner, customer product owner.</p></div>
+    <div class="card"><h3>2. Vision &amp; objectives</h3><p>Current state, challenges, and opportunities. What this project needs to change.</p></div>
+    <div class="card"><h3>3. Defining success</h3><p>The measures we&rsquo;ll be judged on, agreed out loud. Accuracy, stability, maintainability, business KPIs.</p></div>
+    <div class="card"><h3>4. Scope &amp; architecture</h3><p>What&rsquo;s in, what&rsquo;s out. Current state to future state, on one page.</p></div>
+    <div class="card"><h3>5. How we work together</h3><ul><li>Weekly or bi-weekly check-ins (more often during onboarding)</li><li>Quarterly business reviews</li><li>One support channel with clear response times</li></ul></div>
+    <div class="card dark"><h3>6. Next steps</h3><p>Every next step has an owner and a stated outcome &mdash; so everyone leaves knowing what &ldquo;done&rdquo; looks like.</p></div>
+  </div>
+  <div class="dels"><span class="del">Kickoff deck</span><span class="del out">Confirmed goals</span><span class="del out">Success measures</span><span class="del">Meeting cadence</span></div>
+</section>
+
+<!-- STEP 3 -->
+<section class="step" id="s3">
+  <div class="step-head"><div class="num">3</div><div><h2>Stakeholder map: who to engage, and when</h2><div class="when">Week 1&ndash;2 &middot; living document</div></div></div>
+  <p class="why">I map every customer contact to a counterpart on our side, in three tiers. Then I map who talks at each stage, so nobody gets surprised and escalations go to the right person the first time.</p>
+  <div class="tier-label">Executive tier &middot; contract, scope, outcomes</div>
+  <div class="tier"><div class="side"><b>Customer executives</b><span>Founder/President, COO, CTO, CRO</span></div><div class="arrow">&harr;</div><div class="side"><b>Our executives</b><span>CEO, CPO, CTO, CRO &mdash; matched by function</span></div></div>
+  <div class="tier-label">Technical lead tier &middot; day-to-day delivery</div>
+  <div class="tier"><div class="side"><b>Customer leads</b><span>Technical lead, lead software engineer</span></div><div class="arrow">&harr;</div><div class="side"><b>Success manager + success engineer</b><span>Day-to-day project leadership</span></div></div>
+  <div class="tier-label">Influencer tier &middot; feedback and adoption</div>
+  <div class="tier"><div class="side"><b>Customer builders</b><span>Engineers and developers using the product</span></div><div class="arrow">&harr;</div><div class="side"><b>Success engineer</b><span>Technical support, testing, QA</span></div></div>
+  <table style="margin-top:22px;">
+    <tr><th>Stage</th><th>Customer side</th><th>Our side</th></tr>
+    <tr><td>Contract &amp; sign-off</td><td>Founder / President</td><td>CEO</td></tr>
+    <tr><td>Project kickoff</td><td>CTO</td><td>CTO + CRO</td></tr>
+    <tr><td>Product planning</td><td>COO</td><td>CPO</td></tr>
+    <tr><td>Implementation</td><td>Technical leads</td><td>Success manager + engineer</td></tr>
+    <tr><td>Testing &amp; QA</td><td>Engineers</td><td>Success engineer</td></tr>
+    <tr><td>Escalation</td><td>CTO</td><td>CTO + success manager</td></tr>
+    <tr><td>Ongoing success</td><td>CRO</td><td>CRO + success manager</td></tr>
+  </table>
+  <div class="dels"><span class="del out">Stakeholder map</span><span class="del out">Communication journey</span><span class="del">Escalation path</span></div>
+</section>
+
+<!-- STEP 4 -->
+<section class="step key" id="s4">
+  <div class="step-head"><div class="num">4</div><div><h2>Readiness &amp; scope lock</h2><div class="when">Weeks 2&ndash;4 &middot; before any build starts</div></div></div>
+  <p class="why">Most enterprise delays come from access and alignment, not the build. I close these four before work begins &mdash; each with a stated outcome.</p>
+  <div class="grid two">
+    <div class="card"><h3>Access approval</h3><ul><li>SSO / user provisioning</li><li>Code and config repos</li><li>Environment and secrets access</li><li>VPN, if needed</li><li>Who approves and audits access</li></ul><div class="out">Outcome: our team can see the current setup and validate the plan before design starts.</div></div>
+    <div class="card"><h3>Infrastructure plan</h3><ul><li>What gets built, changed, or retired</li><li>Sizing, monitoring, and logging</li><li>Resiliency and failover expectations</li></ul><div class="out">Outcome: everyone agrees how the new environment is built and maintained.</div></div>
+    <div class="card"><h3>Design workshop agenda</h3><ul><li>Architecture walkthrough</li><li>Migration and consolidation plan</li><li>Open questions and risk review</li></ul><div class="out">Outcome: the customer walks in knowing exactly what will be covered.</div></div>
+    <div class="card"><h3>Resource alignment</h3><ul><li>Hours and availability, every team</li><li>Customer IT, security, product owners</li><li>Escalation paths and meeting cadence</li></ul><div class="out">Outcome: no surprises. Everyone knows who&rsquo;s involved, what&rsquo;s expected, and how much time they have.</div></div>
+  </div>
+  <div class="split" style="margin-top:14px;">
+    <div class="card dark"><h3>Goes live now</h3><p>The scope we commit to for this phase. Small enough to deliver a real win in the first 30&ndash;90 days.</p><p style="margin-top:8px;"><em>Example: upgrade six existing assistants to the current version, no functional changes.</em></p></div>
+    <div class="card"><h3>Growth path (captured, not committed)</h3><p>The bigger goals from the intro call. Written down so today&rsquo;s build doesn&rsquo;t block them &mdash; scoped as a later phase.</p><p style="margin-top:8px;"><em>Example: consolidate six assistants into one, plus a managed services contract for ongoing upgrades.</em></p></div>
+  </div>
+  <div class="dels"><span class="del out">Scope document</span><span class="del">RACI</span><span class="del">Risk register</span><span class="del out">Growth path</span></div>
+</section>
+
+<!-- STEP 5 -->
+<section class="step" id="s5">
+  <div class="step-head"><div class="num">5</div><div><h2>Milestones &amp; go/no-go gates</h2><div class="when">Delivery &middot; each gate is a clear yes or no</div></div></div>
+  <p class="why">A sample plan from a multi-team migration. Each stage has one owner, and the next stage doesn&rsquo;t start until the gate is passed.</p>
+  <div class="timeline">
+    <div class="tl"><em>Month 1</em><b>Design workshops</b><span>Conversation and system architecture</span></div>
+    <div class="tl"><em>Month 1</em><b>Environment build</b><span>Partner sets up configs, monitoring, tracing</span></div>
+    <div class="tl"><em>Month 2</em><b>Migration</b><span>Many assistants into one</span></div>
+    <div class="tl"><em>Month 3</em><b>Enablement</b><span>Hands-on training, not slides</span></div>
+    <div class="tl"><em>Month 3+</em><b>Hypercare</b><span>Stability support after go-live</span></div>
+  </div>
+  <table style="margin-top:16px;">
+    <tr><th>Team</th><th>Owns</th></tr>
+    <tr><td>Our team</td><td>Architecture, migration, design sessions, AI integration, hypercare</td></tr>
+    <tr><td>Infrastructure partner</td><td>Environment setup, monitoring, deployments</td></tr>
+    <tr><td>Customer</td><td>Access, data alignment, analytics decisions, internal governance</td></tr>
+  </table>
+  <div class="dels"><span class="del out">Milestone plan</span><span class="del">Go/no-go checklist</span><span class="del">Roles &amp; responsibilities</span></div>
+</section>
+
+<!-- STEP 6 -->
+<section class="step key" id="s6">
+  <div class="step-head"><div class="num">6</div><div><h2>First value &amp; business kickoff</h2><div class="when">30&ndash;90 days &middot; executive sponsors on both sides</div></div></div>
+  <p class="why">The first business review checks results against the goals from step 1 &mdash; not against bot traffic or ticket counts. Executives on both sides agree on what&rsquo;s working and what&rsquo;s next.</p>
+  <div class="grid">
+    <div class="card"><h3>Measure what leadership cares about</h3><p>Tie results to the customer&rsquo;s own priority. In healthcare, that was clinician inbox volume &mdash; not how many patients used the assistant.</p></div>
+    <div class="card"><h3>Be honest about what slipped</h3><p>Name delays plainly, with who owns the fix. Trust holds when bad news comes early.</p></div>
+    <div class="card"><h3>Flag risks before they land</h3><p>Usage near the license limit, a blocked dependency, a stalled team. Raise it with a fix attached.</p></div>
+  </div>
+  <div class="loop">↺ The intro call answers come back here. They become the starting point for the next phase &mdash; and the next growth conversation.</div>
+  <div class="dels"><span class="del out">First business review</span><span class="del">Adoption metrics</span><span class="del out">Next-phase plan</span></div>
+</section>
+</div>
+
+<footer><span>Alana Williams &middot; Customer Success Leadership &amp; Operating Framework &middot; lana_christiana@yahoo.com</span></footer>
+</body>
+</html>
